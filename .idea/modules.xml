@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BuzzwordGame/BuzzwordGame.iml" filepath="$PROJECT_DIR$/BuzzwordGame/BuzzwordGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BuzzwordProject.iml" filepath="$PROJECT_DIR$/BuzzwordProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JFLAG/JFLAG.iml" filepath="$PROJECT_DIR$/JFLAG/JFLAG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XMLUtils/XMLUtils.iml" filepath="$PROJECT_DIR$/XMLUtils/XMLUtils.iml" />
+    </modules>
+  </component>
+</project>
