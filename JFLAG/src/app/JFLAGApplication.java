@@ -6,6 +6,7 @@ import controller.FileController;
 import data.ProfileManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import propertymanager.PropertyManager;
 import ui.AppGUI;
 import ui.AppMessageDialogSingleton;
@@ -88,6 +89,7 @@ public abstract class JFLAGApplication extends Application{
     public void start(Stage primaryStage) {
         AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
         YesNoCancelDialogSingleton yesNoDialog   = YesNoCancelDialogSingleton.getSingleton();
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
         messageDialog.init(primaryStage);
         yesNoDialog.init(primaryStage);
 
@@ -142,6 +144,7 @@ public abstract class JFLAGApplication extends Application{
         /*URL cssResource = getClass().getClassLoader().getResource(propertyManager.getPropertyValue(APP_PATH_CSS) +
                                                                   File.separator +
                                                                   propertyManager.getPropertyValue(APP_CSS));*/
+
         URL cssResource = getClass().getClassLoader().getResource("css/framework_style.css");
         assert cssResource != null;
 

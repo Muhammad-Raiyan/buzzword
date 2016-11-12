@@ -10,5 +10,6 @@ import java.util.Observable;
 public abstract class JFLAGScene extends Observable{
 
     public abstract void initializeHandlers();
+    public abstract void layout();
 
 }
