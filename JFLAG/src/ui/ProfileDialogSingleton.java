@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,22 +13,23 @@ import javafx.stage.StageStyle;
 /**
  * Created by ishmam on 10/30/2016.
  */
-public class ProfileCreatorSingleton extends JFLAGScene {
+public class ProfileDialogSingleton extends JFLAGScene {
 
-    private static ProfileCreatorSingleton singleton = null;
+    private static ProfileDialogSingleton singleton = null;
 
     private static Stage primaryStage;
     private Scene primaryScene;
     private GridPane grid;
-    private Button create, login, cancel;
+    private static Button create, login, cancel;
+    private static HBox buttonHolder;
 
-    private ProfileCreatorSingleton(){
+    private ProfileDialogSingleton(){
 
 
     }
 
-    public static ProfileCreatorSingleton getProfileCreator(){
-        return singleton == null? new ProfileCreatorSingleton() : singleton;
+    public static ProfileDialogSingleton getProfileCreator(){
+        return singleton == null? new ProfileDialogSingleton() : singleton;
     }
 
     public void init(Stage owner) {
@@ -47,14 +47,12 @@ public class ProfileCreatorSingleton extends JFLAGScene {
 
 
         create = new Button("Sign Up");
-        create.setOnAction(event -> primaryStage.close());
-        create.setVisible(false);
+        //create.setVisible(false);
         login = new Button("Login");
-        login.setOnAction(event -> primaryStage.close());
         //login.setVisible(false);
         cancel = new Button("Cancel");
-        cancel.setOnAction(event -> primaryStage.close());
-        HBox buttonHolder = new HBox(login, create, cancel);
+
+        buttonHolder = new HBox(create, cancel);
         buttonHolder.setAlignment(Pos.CENTER);
         grid.add(buttonHolder, 1, 2);
 
@@ -64,12 +62,23 @@ public class ProfileCreatorSingleton extends JFLAGScene {
         primaryStage.setScene(primaryScene);
         primaryStage.initModality(Modality.WINDOW_MODAL);
         primaryStage.initOwner(owner);
+        initializeHandlers();
         initializeStyle();
     }
 
     @Override
     public void initializeHandlers() {
+        create.setOnAction(event -> primaryStage.close());
+        login.setOnAction(event -> primaryStage.close());
+        cancel.setOnAction(event -> primaryStage.close());
+    }
 
+    public static void changeToLogin(){
+        buttonHolder.getChildren().set(0, ProfileDialogSingleton.login);
+    }
+
+    public void changeToSignup(){
+        buttonHolder.getChildren().set(0, ProfileDialogSingleton.create);
     }
 
     @Override

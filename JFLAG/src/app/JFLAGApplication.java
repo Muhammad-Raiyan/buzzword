@@ -1,12 +1,10 @@
 package app;
 
 import components.*;
-import controller.AppFileController;
 import controller.FileController;
 import data.ProfileManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import propertymanager.PropertyManager;
 import ui.*;
 import observer.ButtonObserver;
@@ -87,7 +85,7 @@ public abstract class JFLAGApplication extends Application{
     public void start(Stage primaryStage) {
         AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
         YesNoCancelDialogSingleton yesNoDialog   = YesNoCancelDialogSingleton.getSingleton();
-        ProfileCreatorSingleton profileCreator = ProfileCreatorSingleton.getProfileCreator();
+        ProfileDialogSingleton profileCreator = ProfileDialogSingleton.getProfileCreator();
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         messageDialog.init(primaryStage);
         yesNoDialog.init(primaryStage);

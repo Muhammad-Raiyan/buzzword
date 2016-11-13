@@ -3,7 +3,6 @@ package ui;
 import app.JFLAGApplication;
 import components.JFLAGStyleArbiter;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -18,7 +17,7 @@ public class TestGUI implements JFLAGStyleArbiter{
     private Scene primaryScene;
     private SceneTracker currentScene;
     private String appTitle;
-    ProfileCreatorSingleton p;
+    ProfileDialogSingleton p;
     private HashMap<SceneTracker, Scene> sceneMap;
     public SceneTracker observerID;
 

@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -42,13 +41,17 @@ public class InitialSceneSingleton extends JFLAGScene{
         Region filler = new Region();
         filler.setPrefSize(leftBar.getPrefWidth(), 120);
 
+        ProfileDialogSingleton s = ProfileDialogSingleton.getProfileCreator();
         createProfile = new Button("Create New Profile");
         createProfile.setOnAction(event -> {
-            ProfileCreatorSingleton s = ProfileCreatorSingleton.getProfileCreator();
+            s.changeToSignup();
             s.show();
         });
         login = new Button("Login");
-        login.setOnAction(e -> System.out.println("Login"));
+        login.setOnAction(event -> {
+            s.changeToLogin();
+            s.show();
+        });
         help = new Button("Help");
         help.setOnAction(event -> System.out.println("Help"));
 
