@@ -93,6 +93,7 @@ public abstract class JFLAGApplication extends Application{
 
         JFLAGComponentsBuilder builder = makeAppBuilderHook();
 
+        gui = new TestGUI(this, primaryStage, "Buzzword");
         try {
             settingsComponent = builder.buildSettingComponent();
             propertyManager = PropertyManager.getManager();
@@ -103,7 +104,7 @@ public abstract class JFLAGApplication extends Application{
             /*gui = new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this,
                     Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_WIDTH)),
                     Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_HEIGHT)));*/
-            gui = new TestGUI(this, primaryStage, "Buzzword");
+
             guiObserver = new ButtonObserver(this);
             //gui.addObserver(guiObserver);
             workspaceComponent = builder.buildWorkspaceComponent();

@@ -6,8 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import state.ButtonState;
+
+import java.util.logging.Level;
 
 /**
  * Created by ishmam on 11/11/2016.
@@ -22,9 +24,11 @@ public class HomeSceneSingleton extends JFLAGScene {
     private ChoiceBox<String> selectMode;
     private BorderPane pane;
     private ButtonState buttonState;
+    private VBox rightBar;
 
     public HomeSceneSingleton(){
         layout();
+        initializeHandlers();
         initializeStyle();
     }
     @Override
@@ -40,6 +44,19 @@ public class HomeSceneSingleton extends JFLAGScene {
             }
         });*/
         //selectMode.setPrefWidth(180);
+        startPlaying.setOnAction(event -> {
+
+        });
+        selectLevel.setOnAction(event -> {
+
+            LevelPane lp = new LevelPane(selectMode.getValue());
+            rightBar.getChildren().set(1, lp.getPrimaryPane());
+        });
+
+        home.setOnAction(event -> {
+            rightBar.getChildren().set(1, new VBox());
+        });
+
     }
 
     public static HomeSceneSingleton getHomeSceneSingleton(){
@@ -80,15 +97,15 @@ public class HomeSceneSingleton extends JFLAGScene {
 
         leftBar.getChildren().addAll(filler, startPlaying, selectLevel, selectMode, home);
 
-        VBox rightBar = new VBox();
+        rightBar = new VBox();
         rightBar.setId("right-bar");
 
         HBox topPane = new HBox();
         topPane.setAlignment(Pos.CENTER);
         Label title = new Label("!! Buzzword !!");
         topPane.getChildren().add(title);
-
-        rightBar.getChildren().addAll(topPane);
+        Pane rightPane = new Pane();
+        rightBar.getChildren().addAll(topPane, rightPane);
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);

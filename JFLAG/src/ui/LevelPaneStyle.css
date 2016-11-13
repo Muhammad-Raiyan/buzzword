@@ -1,0 +1,33 @@
+
+.root {
+    -fx-background-insets: 10;
+    -fx-padding: 10;
+
+}
+
+
+#grid{
+    -fx-alignment: center;
+    -fx-pref-height: 300;
+    -fx-vgap: 30;
+    -fx-hgap: 30;
+}
+
+
+.label {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-underline: true;
+    -fx-padding: 10;
+    -fx-text-fill: linear-gradient(white, #95a8d0);
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.button .circle {
+    -fx-background-radius: 15;
+}
+
