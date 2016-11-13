@@ -11,7 +11,17 @@ public class MenuScene extends JFLAGScene {
     public void initializeHandlers() {
 
     }
-    
+
+    @Override
+    public void initializeStyle() {
+
+    }
+
+    @Override
+    public void layout() {
+
+    }
+
     public Scene getScene() {
         return null;
     }

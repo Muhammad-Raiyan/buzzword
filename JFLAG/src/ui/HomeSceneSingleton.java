@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.scene.Scene;
+
 import java.util.Observable;
 
 /**
@@ -14,7 +16,17 @@ public class HomeSceneSingleton extends JFLAGScene {
     }
 
     @Override
+    public void initializeStyle() {
+
+    }
+
+    @Override
     public void layout() {
 
+    }
+
+    @Override
+    public Scene getScene() {
+        return null;
     }
 }

@@ -52,7 +52,7 @@ public class AppFileController implements FileController {
     }
 
     private void ensureActivatedWorkspace() {
-        appTemplate.getWorkspaceComponent().activateWorkspace(appTemplate.getGUI().getAppPane());
+        //appTemplate.getWorkspaceComponent().activateWorkspace(appTemplate.getGUI().getAppPane());
     }
 
     /**
@@ -123,7 +123,7 @@ public class AppFileController implements FileController {
                                propertyManager.getPropertyValue(SAVE_UNSAVED_WORK_MESSAGE));
 
         if (yesNoCancelDialog.getSelection().equals(YesNoCancelDialogSingleton.YES)) {
-            if (currentWorkFile != null)
+            /*if (currentWorkFile != null)
                 saveWork(currentWorkFile);
             else {
                 FileChooser filechooser = new FileChooser();
@@ -143,7 +143,7 @@ public class AppFileController implements FileController {
                 File selectedFile = filechooser.showSaveDialog(appTemplate.getGUI().getWindow());
                 if (selectedFile != null)
                     saveWork(selectedFile);
-            }
+            }*/
         }
 
         return !yesNoCancelDialog.getSelection().equals(YesNoCancelDialogSingleton.CANCEL);

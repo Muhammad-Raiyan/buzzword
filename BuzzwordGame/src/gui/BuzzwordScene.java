@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.scene.Scene;
 import ui.JFLAGScene;
 
 /**
@@ -9,5 +10,20 @@ public class BuzzwordScene extends JFLAGScene{
     @Override
     public void initializeHandlers() {
 
+    }
+
+    @Override
+    public void initializeStyle() {
+
+    }
+
+    @Override
+    public void layout() {
+
+    }
+
+    @Override
+    public Scene getScene() {
+        return null;
     }
 }

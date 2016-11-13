@@ -8,10 +8,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import propertymanager.PropertyManager;
-import ui.AppGUI;
-import ui.AppMessageDialogSingleton;
+import ui.*;
 import observer.ButtonObserver;
-import ui.YesNoCancelDialogSingleton;
 
 import java.net.URL;
 
@@ -29,7 +27,7 @@ public abstract class JFLAGApplication extends Application{
     private JFLAGSettingsComponent settingsComponent;
     private ProfileManager profileManager;
     private FileController gameController;
-    private AppGUI                gui;
+    private TestGUI                gui;
     private ButtonObserver guiObserver;
 
     public String getFileControllerClass() {
@@ -81,7 +79,7 @@ public abstract class JFLAGApplication extends Application{
         return workspaceComponent;
     }
 
-    public AppGUI getGUI() {
+    public TestGUI getGUI() {
         return gui;
     }
 
@@ -89,25 +87,27 @@ public abstract class JFLAGApplication extends Application{
     public void start(Stage primaryStage) {
         AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
         YesNoCancelDialogSingleton yesNoDialog   = YesNoCancelDialogSingleton.getSingleton();
+        ProfileCreatorSingleton profileCreator = ProfileCreatorSingleton.getProfileCreator();
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         messageDialog.init(primaryStage);
         yesNoDialog.init(primaryStage);
+        profileCreator.init(primaryStage);
 
         JFLAGComponentsBuilder builder = makeAppBuilderHook();
-        System.out.println(builder.getClass().getName());
 
         try {
             settingsComponent = builder.buildSettingComponent();
             propertyManager = PropertyManager.getManager();
 
-            gameController = builder.buildGameController();
-            dataComponent = builder.buildDataComponent();
-            fileComponent = builder.buildFileComponent();
-            gui = new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this,
+           // gameController = builder.buildGameController();
+            //dataComponent = builder.buildDataComponent();
+            //fileComponent = builder.buildFileComponent();
+            /*gui = new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this,
                     Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_WIDTH)),
-                    Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_HEIGHT)));
+                    Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_HEIGHT)));*/
+            gui = new TestGUI(this, primaryStage, "Buzzword");
             guiObserver = new ButtonObserver(this);
-            gui.addObserver(guiObserver);
+            //gui.addObserver(guiObserver);
             workspaceComponent = builder.buildWorkspaceComponent();
             profileManager = new ProfileManager(this);
             initStylesheet();
@@ -154,9 +154,9 @@ public abstract class JFLAGApplication extends Application{
     public void initStyle() {
         PropertyManager propertyManager = PropertyManager.getManager();
 
-        gui.getAppPane().setId(propertyManager.getPropertyValue(ROOT_BORDERPANE_ID));
+        /*gui.getAppPane().setId(propertyManager.getPropertyValue(ROOT_BORDERPANE_ID));
         gui.getToolbarPane().getStyleClass().setAll(propertyManager.getPropertyValue(SEGMENTED_BUTTON_BAR));
-        gui.getToolbarPane().setId(propertyManager.getPropertyValue(TOP_TOOLBAR_ID));
+        gui.getToolbarPane().setId(propertyManager.getPropertyValue(TOP_TOOLBAR_ID));*/
 
 
     }

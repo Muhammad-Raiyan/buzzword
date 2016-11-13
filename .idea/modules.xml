@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/BuzzwordGame/BuzzwordGame.iml" filepath="$PROJECT_DIR$/BuzzwordGame/BuzzwordGame.iml" />
       <module fileurl="file://$PROJECT_DIR$/BuzzwordProject.iml" filepath="$PROJECT_DIR$/BuzzwordProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/JFLAG/JFLAG.iml" filepath="$PROJECT_DIR$/JFLAG/JFLAG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Test/Test.iml" filepath="$PROJECT_DIR$/Test/Test.iml" />
       <module fileurl="file://$PROJECT_DIR$/XMLUtils/XMLUtils.iml" filepath="$PROJECT_DIR$/XMLUtils/XMLUtils.iml" />
     </modules>
   </component>
