@@ -1,0 +1,24 @@
+
+#title {
+    -fx-text-fill: linear-gradient(white, #b5b6d0);
+    -fx-underline: true;
+}
+
+#topPane {
+    -fx-padding: 10;
+    -fx-background-insets: 10;
+}
+#timer {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: #dddddd;
+    -fx-alignment: center-right;
+    -fx-pref-width: 180;
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+}
+#timer .label{
+    -fx-font-size: 12px;
+    -fx-alignment: center-right;
+    -fx-text-fill: red;
+}

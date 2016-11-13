@@ -44,7 +44,8 @@ public class HomeSceneSingleton extends JFLAGScene {
         });*/
         //selectMode.setPrefWidth(180);
         startPlaying.setOnAction(event -> {
-
+            BuzzwordScene gameScene = new BuzzwordScene(selectMode.getValue());
+            rightBar.getChildren().set(1, gameScene.getPrimaryPane());
         });
         selectLevel.setOnAction(event -> {
             LevelPane lp = new LevelPane(selectMode.getValue());
@@ -89,8 +90,8 @@ public class HomeSceneSingleton extends JFLAGScene {
         selectMode = new ChoiceBox<>();
         selectMode.getStylesheets().add("gui/ChoiceBoxStyle.css");
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
-        selectMode.setValue("Dictionary");
-        selectMode.getItems().addAll("Dictionary", "Famous People", "Places", "Science");
+        selectMode.setValue("Dictionary Words");
+        selectMode.getItems().addAll("Dictionary Words", "Famous People", "Places", "Science");
 
 
         leftBar.getChildren().addAll(filler, startPlaying, selectLevel, selectMode, home);

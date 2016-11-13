@@ -18,7 +18,6 @@ public class TestGUI implements JFLAGStyleArbiter{
     private Stage primaryStage;
     private Scene primaryScene;
     private String appTitle;
-    ProfileDialogSingleton p;
     private HashMap<ButtonState, Scene> sceneMap;
     public static ButtonState buttonState;
     public ButtonObserver buttonObserver;

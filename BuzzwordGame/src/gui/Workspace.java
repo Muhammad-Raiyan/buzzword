@@ -12,6 +12,7 @@ import ui.TestGUI;
 public class Workspace extends JFLAGWorkspaceComponent{
     private TestGUI gui;
     private Stage primaryStage;
+    private Scene primaryScene;
     HomeSceneSingleton homeSceneSingleton;
     public Workspace(JFLAGApplication app){
         gui = app.getGUI();
@@ -29,6 +30,7 @@ public class Workspace extends JFLAGWorkspaceComponent{
     }
 
     public void startBuzzword(){
-        primaryStage.setScene(homeSceneSingleton.getScene());
+        primaryScene = homeSceneSingleton.getScene();
+        primaryStage.setScene(primaryScene);
     }
 }
