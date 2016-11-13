@@ -1,12 +1,20 @@
-
+.root {
+    -fx-padding: 10;
+    -fx-background-insets: 10;
+}
+.label{
+    -fx-font-size: 12px;
+}
 #title {
     -fx-text-fill: linear-gradient(white, #b5b6d0);
     -fx-underline: true;
+    -fx-font-size: 20px;
 }
 
 #topPane {
     -fx-padding: 10;
     -fx-background-insets: 10;
+    -fx-alignment: center;
 }
 #timer {
     -fx-padding: 0;
@@ -18,7 +26,26 @@
     -fx-background-insets: 0,1,2,0;
 }
 #timer .label{
-    -fx-font-size: 12px;
     -fx-alignment: center-right;
     -fx-text-fill: red;
 }
+
+#rightPane {
+
+}
+
+#rightPane .label {
+    -fx-background-color: darkslategray;
+    -fx-text-fill: white;
+}
+
+#progressBox {
+    -fx-background-color: darkslategrey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+#progressBox > * {
+    -fx-border-color: black;
+}
+

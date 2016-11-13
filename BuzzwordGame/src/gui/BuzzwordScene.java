@@ -4,14 +4,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import state.ButtonState;
 import ui.JFLAGScene;
@@ -23,6 +20,8 @@ public class BuzzwordScene extends JFLAGScene{
 
     private String mode;
     private BorderPane primaryPane;
+    private HBox topPane;
+    private VBox rightPane;
     private Button play;
     private Timeline timeLine;
     private int sec = 10;
@@ -40,7 +39,17 @@ public class BuzzwordScene extends JFLAGScene{
 
     @Override
     public void layout() {
-        HBox topPane = new HBox();
+        topLayout();
+        rightLayout();
+        play = new Button("Play");
+        primaryPane = new BorderPane();
+        primaryPane.setTop(topPane);
+        primaryPane.setCenter(play);
+        primaryPane.setRight(rightPane);
+    }
+
+    public void topLayout(){
+        topPane = new HBox();
         topPane.setId("topPane");
         topPane.setAlignment(Pos.CENTER_LEFT);
         Label title = new Label(mode);
@@ -56,10 +65,48 @@ public class BuzzwordScene extends JFLAGScene{
         Region region = new Region();
         region.setPrefWidth(170);
         topPane.getChildren().addAll(region, title, box);
-        play = new Button("Play");
-        primaryPane = new BorderPane();
-        primaryPane.setTop(topPane);
-        primaryPane.setBottom(play);
+    }
+
+    public void rightLayout(){
+        rightPane = new VBox(10);
+        rightPane.setId("rightPane");
+        Label currentGuess = new Label("B U ");
+
+        /*TableView guessedWords = new TableView();
+        guessedWords.setId("table");
+        guessedWords.setEditable(false);
+        TableColumn word = new TableColumn();
+        word.setPrefWidth(120);
+        TableColumn score = new TableColumn();
+        guessedWords.getColumns().addAll(word, score);*/
+
+        HBox progress = new HBox();
+        progress.setId("progressBox");
+        progress.setMinWidth(200);
+
+        BorderPane wordProgress = new BorderPane();
+        wordProgress.setMinWidth(120);
+        wordProgress.setMinHeight(300);
+        Label totalScoreLabel = new Label("TOTAL SCORE: ");
+        wordProgress.setBottom(totalScoreLabel);
+
+        BorderPane scoreProgress = new BorderPane();
+        scoreProgress.setMinWidth(80);
+        scoreProgress.setMinHeight(300);
+        Label totalScore = new Label("30");
+        scoreProgress.setBottom(totalScore);
+
+        progress.getChildren().addAll(wordProgress, scoreProgress);
+
+        VBox targetBox = new VBox(10);
+        targetBox.setId("targetBox");
+        Label target = new Label("Target Score: ");
+        //target.setMinWidth(150);
+        Label points = new Label("75");
+        points.setMinWidth(80);
+        targetBox.getChildren().addAll(target, points);
+
+        rightPane.getChildren().addAll(currentGuess, progress, targetBox);
     }
     @Override
     public void initializeHandlers() {
