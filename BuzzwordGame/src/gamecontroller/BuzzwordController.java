@@ -3,6 +3,8 @@ package gamecontroller;
 import app.JFLAGApplication;
 import controller.AppFileController;
 import controller.FileController;
+import gui.Workspace;
+import ui.ProfileDialogSingleton;
 
 import java.io.IOException;
 
@@ -11,6 +13,7 @@ import java.io.IOException;
  */
 public class BuzzwordController extends AppFileController{
 
+    public Workspace workspace;
 
     /**
      * Constructor to just store the reference to the application.
@@ -19,12 +22,18 @@ public class BuzzwordController extends AppFileController{
      */
     public BuzzwordController(JFLAGApplication appTemplate){
         super(appTemplate);
-
+        workspace = (Workspace) appTemplate.getWorkspaceComponent();
     }
 
+    public void handleLoginRequest() throws IOException {
+        try{
+            super.handleLoginRequest();
+        }
+        catch (IOException e){
 
-    public void handleCreateRequest() {
-        System.out.println("Hello");
+        }
+        workspace.startBuzzword();
+
     }
 
 }

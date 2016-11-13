@@ -7,11 +7,11 @@ import java.io.IOException;
  */
 public interface FileController {
 
-    void handleNewRequest();
-
-    void handleSaveRequest() throws IOException;
-
-    void handleLoadRequest() throws IOException;
-
     void handleExitRequest();
+
+    void handleCreateRequest() throws IOException;
+
+    void handleLoginRequest() throws IOException;
+
+    void handleHelpRequest() throws IOException;
 }

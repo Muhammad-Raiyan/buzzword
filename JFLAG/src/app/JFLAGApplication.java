@@ -32,35 +32,7 @@ public abstract class JFLAGApplication extends Application{
         return "AppFileController";
     }
 
-    public JFLAGComponentsBuilder makeAppBuilderHook() {
-        return new JFLAGComponentsBuilder() {
-            @Override
-            public JFLAGDataComponent buildDataComponent() throws Exception {
-                return null;
-            }
-
-            @Override
-            public JFLAGFileComponent buildFileComponent() throws Exception {
-                return null;
-            }
-
-            @Override
-            public FileController buildGameController() throws Exception {
-                return null;
-            }
-
-            @Override
-            public JFLAGSettingsComponent buildSettingComponent() throws Exception {
-                return null;
-            }
-
-            @Override
-            public JFLAGWorkspaceComponent buildWorkspaceComponent() throws Exception {
-                return null;
-            }
-        };
-    }
-
+    public abstract JFLAGComponentsBuilder makeAppBuilderHook();
     public FileController getGameController(){
         return gameController;
     }
@@ -90,24 +62,25 @@ public abstract class JFLAGApplication extends Application{
         messageDialog.init(primaryStage);
         yesNoDialog.init(primaryStage);
         profileCreator.init(primaryStage);
-
         JFLAGComponentsBuilder builder = makeAppBuilderHook();
 
-        gui = new TestGUI(this, primaryStage, "Buzzword");
         try {
             settingsComponent = builder.buildSettingComponent();
             propertyManager = PropertyManager.getManager();
 
-           // gameController = builder.buildGameController();
+            gui = new TestGUI(this, primaryStage, "Buzzword");
+            workspaceComponent = builder.buildWorkspaceComponent();
+            gameController = builder.buildGameController();
             //dataComponent = builder.buildDataComponent();
             //fileComponent = builder.buildFileComponent();
+
             /*gui = new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this,
                     Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_WIDTH)),
                     Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_HEIGHT)));*/
 
             guiObserver = new ButtonObserver(this);
             //gui.addObserver(guiObserver);
-            workspaceComponent = builder.buildWorkspaceComponent();
+
             profileManager = new ProfileManager(this);
             initStylesheet();
             gui.initStyle();

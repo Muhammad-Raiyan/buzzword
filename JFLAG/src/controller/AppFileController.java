@@ -7,6 +7,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import propertymanager.PropertyManager;
 import ui.AppMessageDialogSingleton;
+import ui.ProfileDialogSingleton;
 import ui.YesNoCancelDialogSingleton;
 
 import java.io.File;
@@ -100,6 +101,25 @@ public class AppFileController implements FileController {
             PropertyManager props  = PropertyManager.getManager();
             dialog.show(props.getPropertyValue(SAVE_ERROR_TITLE), props.getPropertyValue(SAVE_ERROR_MESSAGE));
         }
+    }
+
+    @Override
+    public void handleCreateRequest() throws IOException {
+        ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
+        profileDialogSingleton.changeToSignup();
+        profileDialogSingleton.show();
+    }
+
+    @Override
+    public void handleLoginRequest() throws IOException {
+        ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
+        profileDialogSingleton.changeToLogin();
+        profileDialogSingleton.show();
+    }
+
+    @Override
+    public void handleHelpRequest() throws IOException {
+        System.out.println("Help");
     }
 
     /**

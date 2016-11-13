@@ -1,4 +1,4 @@
-package ui;
+package gui;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,8 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.*;
 import state.ButtonState;
-
-import java.util.logging.Level;
+import ui.JFLAGScene;
 
 /**
  * Created by ishmam on 11/11/2016.
@@ -48,7 +47,6 @@ public class HomeSceneSingleton extends JFLAGScene {
 
         });
         selectLevel.setOnAction(event -> {
-
             LevelPane lp = new LevelPane(selectMode.getValue());
             rightBar.getChildren().set(1, lp.getPrimaryPane());
         });
@@ -89,7 +87,7 @@ public class HomeSceneSingleton extends JFLAGScene {
         home = new Button("Home");
 
         selectMode = new ChoiceBox<>();
-        selectMode.getStylesheets().add("ui/ChoiceBoxStyle.css");
+        selectMode.getStylesheets().add("gui/ChoiceBoxStyle.css");
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
         selectMode.setValue("Dictionary");
         selectMode.getItems().addAll("Dictionary", "Famous People", "Places", "Science");

@@ -77,12 +77,14 @@ public class InitialSceneSingleton extends JFLAGScene{
     public void initializeHandlers() {
         ProfileDialogSingleton s = ProfileDialogSingleton.getProfileCreator();
         createProfile.setOnAction(event -> {
-            s.changeToSignup();
-            s.show();
+            TestGUI.buttonState = ButtonState.CREATE;
+            setChanged();
+            notifyObservers();
         });
         login.setOnAction(event -> {
-            s.changeToLogin();
-            s.show();
+            TestGUI.buttonState = ButtonState.LOGIN;
+            setChanged();
+            notifyObservers();
         });
         help.setOnAction(event -> System.out.println("Help"));
     }

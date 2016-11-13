@@ -22,22 +22,27 @@ public class ButtonObserver implements Observer {
         fileController = app.getGameController();
         String ID = app.getGUI().buttonState.toString();
         switch (ID){
-            case "SAVE" :
+            case "CREATE" :
                 try {
-                    fileController.handleSaveRequest();
+                    fileController.handleCreateRequest();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
-            case "LOAD" :
+            case "LOGIN" :
                 try {
-                    fileController.handleLoadRequest();
+                    fileController.handleLoginRequest();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
-            case "NEW" :
-                fileController.handleNewRequest(); break;
+            case "HELP" :
+                try {
+                    fileController.handleHelpRequest();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
             case "EXIT" :
                 fileController.handleExitRequest(); break;
         }

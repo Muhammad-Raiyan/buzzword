@@ -1,4 +1,4 @@
-package ui;
+package gui;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,13 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import state.ButtonState;
+import ui.JFLAGScene;
 
 import java.util.ArrayList;
 
 /**
  * Created by ishmam on 10/31/2016.
  */
-public class LevelPane extends JFLAGScene{
+public class LevelPane extends JFLAGScene {
 
     private String mode;
     private VBox primaryPane;
@@ -75,7 +76,7 @@ public class LevelPane extends JFLAGScene{
 
     @Override
     public void initializeStyle() {
-        primaryPane.getStylesheets().add("ui/LevelPaneStyle.css");
+        primaryPane.getStylesheets().add("gui/LevelPaneStyle.css");
     }
 
     @Override

@@ -7,6 +7,7 @@ import gamecontroller.BuzzwordController;
 import gamedata.BuzzwordData;
 import gamedata.BuzzwordDataFile;
 import gamesettings.BuzzwordSettings;
+import gui.Workspace;
 
 import static java.lang.Thread.sleep;
 
@@ -44,7 +45,7 @@ public class Buzzword extends JFLAGApplication {
 
             @Override
             public JFLAGWorkspaceComponent buildWorkspaceComponent() throws Exception {
-                return null;
+                return new Workspace(Buzzword.this);
             }
         };
     }
