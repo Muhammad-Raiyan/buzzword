@@ -12,7 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import propertymanager.PropertyManager;
-import state.ButtonTracker;
+import state.ButtonState;
 import state.GUITracker;
 
 import java.io.FileNotFoundException;
@@ -45,7 +45,7 @@ public class AppGUI extends Observable implements JFLAGStyleArbiter {
     protected Button         loadButton;       // button to load a saved game from (json) file
     protected Button         exitButton;       // button to exit application
     protected String         applicationTitle; // the application title
-    public ButtonTracker observerID;
+    public ButtonState observerID;
     public GUITracker sceneID;
 
     private int appWindowWidth;  // optional parameter for window width that can be set by the application
@@ -109,29 +109,29 @@ public class AppGUI extends Observable implements JFLAGStyleArbiter {
 
     private void initializeToolbarHandlers(JFLAGApplication app) throws InstantiationException {
 
-        newButton.setOnAction(e -> {
-            observerID = ButtonTracker.NEW;
+       /* newButton.setOnAction(e -> {
+            observerID = ButtonState.NEW;
             setChanged();
             notifyObservers();
         });
         saveButton.setOnAction(e -> {
-                observerID = ButtonTracker.SAVE;
+                observerID = ButtonState.SAVE;
                 setChanged();
                 notifyObservers();
 
         });
         loadButton.setOnAction(e -> {
 
-                observerID = ButtonTracker.LOAD;
+                observerID = ButtonState.LOAD;
                 setChanged();
                 notifyObservers();
 
         });
         exitButton.setOnAction(e -> {
-            observerID = ButtonTracker.EXIT;
+            observerID = ButtonState.EXIT;
             setChanged();
             notifyObservers();
-        });
+        });*/
     }
 
     public void updateWorkspaceToolbar(boolean savable) {

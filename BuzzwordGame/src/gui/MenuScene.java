@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.scene.Scene;
+import state.ButtonState;
 import ui.JFLAGScene;
 
 /**
@@ -14,6 +15,11 @@ public class MenuScene extends JFLAGScene {
 
     @Override
     public void initializeStyle() {
+
+    }
+
+    @Override
+    public void init(ButtonState buttonState) {
 
     }
 

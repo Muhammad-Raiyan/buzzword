@@ -20,7 +20,7 @@ public class ButtonObserver implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         fileController = app.getGameController();
-        String ID = app.getGUI().observerID.toString();
+        String ID = app.getGUI().buttonState.toString();
         switch (ID){
             case "SAVE" :
                 try {

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import state.ButtonState;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -15,19 +16,20 @@ public class InitialSceneSingleton extends JFLAGScene{
     private static Scene scene;
     private BorderPane pane;
     private Button createProfile, login, help;
+    private ButtonState buttonState;
 
     private InitialSceneSingleton(){
         layout();
-        scene = new Scene(pane);
+        initializeHandlers();
         initializeStyle();
     }
 
 
 
-    public static Scene getInitialSceneSingleton(){
-        if(scene == null)
+    public static InitialSceneSingleton getInitialSceneSingleton(){
+        if(initialScene == null)
             initialScene = new InitialSceneSingleton();
-        return scene;
+        return initialScene;
     }
 
     @Override
@@ -41,20 +43,11 @@ public class InitialSceneSingleton extends JFLAGScene{
         Region filler = new Region();
         filler.setPrefSize(leftBar.getPrefWidth(), 120);
 
-        ProfileDialogSingleton s = ProfileDialogSingleton.getProfileCreator();
         createProfile = new Button("Create New Profile");
-        createProfile.setOnAction(event -> {
-            s.changeToSignup();
-            s.show();
-        });
-        login = new Button("Login");
-        login.setOnAction(event -> {
-            s.changeToLogin();
-            s.show();
-        });
-        help = new Button("Help");
-        help.setOnAction(event -> System.out.println("Help"));
 
+        login = new Button("Login");
+
+        help = new Button("Help");
 
         leftBar.getChildren().addAll(filler, createProfile, login, help);
 
@@ -68,11 +61,12 @@ public class InitialSceneSingleton extends JFLAGScene{
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);
+        scene = new Scene(pane);
     }
 
     @Override
     public Scene getScene() {
-        return null;
+        return scene;
     }
 
     public Pane getPane(){
@@ -81,13 +75,26 @@ public class InitialSceneSingleton extends JFLAGScene{
 
     @Override
     public void initializeHandlers() {
-
+        ProfileDialogSingleton s = ProfileDialogSingleton.getProfileCreator();
+        createProfile.setOnAction(event -> {
+            s.changeToSignup();
+            s.show();
+        });
+        login.setOnAction(event -> {
+            s.changeToLogin();
+            s.show();
+        });
+        help.setOnAction(event -> System.out.println("Help"));
     }
 
     public void initializeStyle() {
         scene.getStylesheets().add("ui/SceneStyle.css");
     }
 
+    @Override
+    public void init(ButtonState buttonState) {
+        this.buttonState = buttonState;
+    }
 
 
 }

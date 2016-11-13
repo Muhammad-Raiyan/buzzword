@@ -4,6 +4,7 @@ import app.JFLAGApplication;
 import components.JFLAGStyleArbiter;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import state.ButtonState;
 
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class TestGUI implements JFLAGStyleArbiter{
     private String appTitle;
     ProfileDialogSingleton p;
     private HashMap<SceneTracker, Scene> sceneMap;
-    public SceneTracker observerID;
+    public ButtonState buttonState;
 
 
     public TestGUI(JFLAGApplication app, Stage primaryStage, String appTitle){
@@ -27,7 +28,10 @@ public class TestGUI implements JFLAGStyleArbiter{
         this.primaryStage = primaryStage;
         this.appTitle = appTitle;
         sceneMap = new HashMap<>();
-        primaryScene = InitialSceneSingleton.getInitialSceneSingleton();
+        InitialSceneSingleton initialSceneSingleton = InitialSceneSingleton.getInitialSceneSingleton();
+        HomeSceneSingleton homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
+
+        primaryScene = homeSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
         primaryStage.show();
 

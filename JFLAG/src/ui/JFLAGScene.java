@@ -1,6 +1,7 @@
 package ui;
 
 import javafx.scene.Scene;
+import state.ButtonState;
 
 import java.util.Observable;
 
@@ -13,4 +14,5 @@ public abstract class JFLAGScene extends Observable{
     public abstract Scene getScene();
     public abstract void initializeHandlers();
     public abstract void initializeStyle();
+    public abstract void init(ButtonState buttonState);
 }

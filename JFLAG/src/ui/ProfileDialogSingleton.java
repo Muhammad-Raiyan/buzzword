@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
 /**
  * Created by ishmam on 10/30/2016.
  */
-public class ProfileDialogSingleton extends JFLAGScene {
+public class ProfileDialogSingleton {
 
     private static ProfileDialogSingleton singleton = null;
 
@@ -66,7 +66,6 @@ public class ProfileDialogSingleton extends JFLAGScene {
         initializeStyle();
     }
 
-    @Override
     public void initializeHandlers() {
         create.setOnAction(event -> primaryStage.close());
         login.setOnAction(event -> primaryStage.close());
@@ -81,17 +80,14 @@ public class ProfileDialogSingleton extends JFLAGScene {
         buttonHolder.getChildren().set(0, ProfileDialogSingleton.create);
     }
 
-    @Override
     public void initializeStyle() {
         primaryScene.getStylesheets().add("ui/DialogStyle.css");
     }
 
-    @Override
     public void layout() {
 
     }
 
-    @Override
     public Scene getScene() {
         return primaryScene;
     }
