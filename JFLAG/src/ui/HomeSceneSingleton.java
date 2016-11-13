@@ -29,7 +29,17 @@ public class HomeSceneSingleton extends JFLAGScene {
     }
     @Override
     public void initializeHandlers() {
-
+        /*selectMode.setOnMouseEntered(event -> {
+            if(!selectMode.isShowing()){
+                selectMode.show();
+            }
+        });
+        selectMode.setOnMouseExited(event -> {
+            if(selectMode.isShowing()){
+                selectMode.hide();
+            }
+        });*/
+        //selectMode.setPrefWidth(180);
     }
 
     public static HomeSceneSingleton getHomeSceneSingleton(){
@@ -66,17 +76,7 @@ public class HomeSceneSingleton extends JFLAGScene {
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
         selectMode.setValue("Dictionary");
         selectMode.getItems().addAll("Dictionary", "Famous People", "Places", "Science");
-        /*selectMode.setOnMouseEntered(event -> {
-            if(!selectMode.isShowing()){
-                selectMode.show();
-            }
-        });
-        selectMode.setOnMouseExited(event -> {
-            if(selectMode.isShowing()){
-                selectMode.hide();
-            }
-        });*/
-        //selectMode.setPrefWidth(180);
+
 
         leftBar.getChildren().addAll(filler, startPlaying, selectLevel, selectMode, home);
 
