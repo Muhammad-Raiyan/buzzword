@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.print.Collation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,6 +21,7 @@ import state.ButtonState;
 import ui.JFLAGScene;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -32,14 +34,12 @@ public class BuzzwordScene extends JFLAGScene{
     private VBox rightPane, centerPane;
     private Button play;
     private GridPane buttonGrid;
+    public StackPane gridStack;
     private Timeline timeLine;
     private ArrayList<Button> buttonList;
     private int sec = 10;
     private SimpleIntegerProperty secProperty;
-    private int[][] helper = new int[16][]{
-
-
-    }
+    private ArrayList<Line> lineList;
     public BuzzwordScene() {
         this("Dictionary Words");
     }
@@ -47,6 +47,7 @@ public class BuzzwordScene extends JFLAGScene{
     public BuzzwordScene(String mode) {
         this.mode = mode;
         buttonList = new ArrayList<>();
+        lineList = new ArrayList<>();
         layout();
         initializeHandlers();
         initializeStyle();
@@ -69,7 +70,11 @@ public class BuzzwordScene extends JFLAGScene{
         buildGrid();
         play = new Button("Play");
         Label level = new Label("Level 1");
-        centerPane.getChildren().addAll(buttonGrid, level, play);
+        gridStack = new StackPane();
+        gridStack.getChildren().addAll(buttonGrid);
+        gridStack.getChildren().addAll(lineList);
+        centerPane.getChildren().addAll(gridStack, level, play);
+        centerPane.getChildren().addAll(lineList);
     }
 
     private void buildGrid() {
@@ -98,10 +103,17 @@ public class BuzzwordScene extends JFLAGScene{
         buttonList.forEach(node ->{
             for(Button target : buttonList){
                 if(target != node){
-
+                    int diff = Math.abs(buttonList.indexOf(target)-buttonList.indexOf(node));
+                    if(diff == 1 || diff == 4) link(node, target);
                 }
             }
         });
+    }
+
+    public void link(Node from, Node to){
+        Line l = new Line(from.getLayoutX(), from.getLayoutY(), to.getLayoutX(), to.getLayoutY());
+        System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
+        lineList.add(l);
     }
 
     public void topLayout(){
