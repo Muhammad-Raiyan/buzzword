@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -71,21 +72,24 @@ public class BuzzwordScene extends JFLAGScene{
         gridStack = new StackPane();
         gridStack.getChildren().addAll(buttonGrid);
         gridStack.getChildren().addAll(lineList);
-        centerPane.getChildren().addAll(gridStack, level, play);
+        Region r = new Region();
+        r.setPrefHeight(30);
+        centerPane.getChildren().addAll(gridStack, r, level, play);
         //centerPane.getChildren().addAll(lineList);
     }
 
     private void buildGrid() {
         buttonGrid = new GridPane();
         buttonGrid.setAlignment(Pos.CENTER);
-        buttonGrid.setVgap(30);
-        buttonGrid.setHgap(30);
+        buttonGrid.setVgap(25);
+        buttonGrid.setHgap(25);
 
         for(int i = 0; i< 4; i++){
             for(int j = 0; j<4; j++){
                 Button gameButton = new Button("a");
-                gameButton.setShape(new Circle(30, Color.DARKSLATEGREY));
-                gameButton.setMinSize(30, 30);
+                gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
+                gameButton.setPrefSize(40, 40);
+                gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
                 gameButton.setOnMousePressed(event -> {
                     gameButton.setEffect(new Glow(0.8));
                 });
@@ -136,6 +140,7 @@ public class BuzzwordScene extends JFLAGScene{
         rightPane = new VBox(10);
         rightPane.setId("rightPane");
         Label currentGuess = new Label("B U ");
+        currentGuess.setPrefWidth(200);
 
         HBox progress = new HBox();
         progress.setId("progressBox");
@@ -170,7 +175,7 @@ public class BuzzwordScene extends JFLAGScene{
     @Override
     public void initializeHandlers() {
         play.setOnAction(event -> {
-            centerPane.getChildren().set(2, pause);
+            centerPane.getChildren().set(3, pause);
             if(timeLine == null) {
                 timeLine = new Timeline(new KeyFrame(
                         Duration.seconds(sec),
@@ -182,7 +187,7 @@ public class BuzzwordScene extends JFLAGScene{
         });
 
         pause.setOnAction(event -> {
-            centerPane.getChildren().set(2, play);
+            centerPane.getChildren().set(3, play);
             timeLine.pause();
         });
     }
