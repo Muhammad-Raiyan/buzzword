@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -65,7 +67,9 @@ public class BuzzwordScene extends JFLAGScene{
         centerPane = new VBox();
         centerPane.setAlignment(Pos.CENTER);
         buildGrid();
+
         play = new Button("Play");
+        //play.setGraphic(new ImageView(playImage));
         pause = new Button("Pause");
         Label level = new Label("Level 1");
         level.setStyle("-fx-text-fill: white");

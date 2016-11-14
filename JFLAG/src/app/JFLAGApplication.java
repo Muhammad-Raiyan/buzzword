@@ -25,7 +25,7 @@ public abstract class JFLAGApplication extends Application{
     private JFLAGSettingsComponent settingsComponent;
     private ProfileManager profileManager;
     private FileController gameController;
-    private TestGUI                gui;
+    private AppGUI gui;
     private ButtonObserver guiObserver;
 
     public String getFileControllerClass() {
@@ -49,7 +49,7 @@ public abstract class JFLAGApplication extends Application{
         return workspaceComponent;
     }
 
-    public TestGUI getGUI() {
+    public AppGUI getGUI() {
         return gui;
     }
 
@@ -68,18 +68,15 @@ public abstract class JFLAGApplication extends Application{
             settingsComponent = builder.buildSettingComponent();
             propertyManager = PropertyManager.getManager();
 
-            gui = new TestGUI(this, primaryStage, "Buzzword");
+            gui = new AppGUI(this, primaryStage, "Buzzword");
             workspaceComponent = builder.buildWorkspaceComponent();
             gameController = builder.buildGameController();
             //dataComponent = builder.buildDataComponent();
             //fileComponent = builder.buildFileComponent();
 
-            /*gui = new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this,
-                    Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_WIDTH)),
-                    Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_HEIGHT)));*/
 
             guiObserver = new ButtonObserver(this);
-            //gui.addObserver(guiObserver);
+
 
             profileManager = new ProfileManager(this);
             initStylesheet();
@@ -90,26 +87,7 @@ public abstract class JFLAGApplication extends Application{
             dialog.show(propertyManager.getPropertyValue(PROPERTIES_LOAD_ERROR_TITLE.toString()),
                     propertyManager.getPropertyValue(PROPERTIES_LOAD_ERROR_MESSAGE.toString()));
         }
-        /*try {
-            if (loadProperties(APP_PROPERTIES_XML) && loadProperties(WORKSPACE_PROPERTIES_XML)) {
-                JFLAGComponentsBuilder builder = makeAppBuilderHook();
-                //fileComponent = builder.buildFileComponent();
-               // dataComponent = builder.buildDataComponent();
-                gui = (propertyManager.hasProperty(APP_WINDOW_WIDTH) && propertyManager.hasProperty(APP_WINDOW_HEIGHT))
-                      ? new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this,
-                                   Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_WIDTH)),
-                                   Integer.parseInt(propertyManager.getPropertyValue(APP_WINDOW_HEIGHT)))
-                      : new AppGUI(primaryStage, propertyManager.getPropertyValue(APP_TITLE.toString()), this);
-                //workspaceComponent = builder.buildWorkspaceComponent();
-                initStylesheet();
-                gui.initStyle();
-                //workspaceComponent.initStyle();
-            }
-        } catch (Exception e) {
-            AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
-            dialog.show(propertyManager.getPropertyValue(PROPERTIES_LOAD_ERROR_TITLE.toString()),
-                        propertyManager.getPropertyValue(PROPERTIES_LOAD_ERROR_MESSAGE.toString()));
-        }*/
+
     }
 
     public void initStylesheet() {

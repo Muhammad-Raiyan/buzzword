@@ -3,9 +3,6 @@ package gui;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -37,17 +34,6 @@ public class HomeSceneSingleton extends JFLAGScene {
     }
     @Override
     public void initializeHandlers() {
-        /*selectMode.setOnMouseEntered(event -> {
-            if(!selectMode.isShowing()){
-                selectMode.show();
-            }
-        });
-        selectMode.setOnMouseExited(event -> {
-            if(selectMode.isShowing()){
-                selectMode.hide();
-            }
-        });*/
-        //selectMode.setPrefWidth(180);
         startPlaying.setOnAction(event -> {
             BuzzwordScene gameScene = new BuzzwordScene(selectMode.getValue());
             rightBar.getChildren().set(1, gameScene.getPrimaryPane());
@@ -77,7 +63,7 @@ public class HomeSceneSingleton extends JFLAGScene {
 
     @Override
     public void init(ButtonState buttonState) {
-
+        rightBar.getChildren().set(1, new VBox(r, buttonGrid));
     }
 
 
@@ -125,7 +111,7 @@ public class HomeSceneSingleton extends JFLAGScene {
         primaryScene = new Scene(pane);
     }
 
-    private void buildGrid() {
+    public void buildGrid() {
         buttonGrid = new GridPane();
         buttonGrid.setAlignment(Pos.CENTER);
         buttonGrid.setVgap(20);
@@ -148,6 +134,10 @@ public class HomeSceneSingleton extends JFLAGScene {
         }
     }
 
+
+    public GridPane getButtonGrid(){
+        return buttonGrid;
+    }
     @Override
     public Scene getScene() {
         return primaryScene;

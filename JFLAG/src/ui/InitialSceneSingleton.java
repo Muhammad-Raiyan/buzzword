@@ -20,6 +20,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     private BorderPane pane;
     private Button createProfile, login, help;
     private ButtonState buttonState;
+    private VBox rightBar;
     private GridPane buttonGrid;
 
     private InitialSceneSingleton(){
@@ -27,8 +28,6 @@ public class InitialSceneSingleton extends JFLAGScene{
         initializeHandlers();
         initializeStyle();
     }
-
-
 
     public static InitialSceneSingleton getInitialSceneSingleton(){
         if(initialScene == null)
@@ -55,62 +54,40 @@ public class InitialSceneSingleton extends JFLAGScene{
 
         leftBar.getChildren().addAll(filler, createProfile, login, help);
 
-        VBox rightBar = new VBox();
+        rightBar = new VBox();
         rightBar.setId("right-bar");
         HBox topPane = new HBox();
         topPane.setAlignment(Pos.CENTER);
         Label title = new Label("!! Buzzword !!");
         topPane.getChildren().add(title);
-        buttonGrid = new GridPane();
-        buildGrid();
         Region r = new Region();
         r.setPrefHeight(150);
-        rightBar.getChildren().addAll(topPane, r, buttonGrid);
+        rightBar.getChildren().addAll(topPane, r);
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);
         scene = new Scene(pane);
     }
 
-    private void buildGrid() {
-        buttonGrid = new GridPane();
-        buttonGrid.setAlignment(Pos.CENTER);
-        buttonGrid.setVgap(20);
-        buttonGrid.setHgap(20);
-        String s = "BUZZWORD";
-        int pos = 0;
-        for(int i = 0; i< 4; i++){
-            for(int j = 0; j<4; j++){
-                Circle gameButton = new Circle(20);
-                gameButton.setFill(Color.DARKSLATEGRAY);
-                Text t = new Text();
-                if(pos < s.length()) t.setText(Character.toString(s.charAt(pos)));
-                pos++;
-                t.setFill(Color.WHITE);
-                StackPane st = new StackPane(gameButton, t);
-                buttonGrid.add(st, i, j);
-            }
-        }
-    }
     @Override
     public Scene getScene() {
         return scene;
     }
 
-    public Pane getPane(){
-        return pane;
+    public void setRightPane(Pane pane){
+        rightBar.getChildren().add(pane);
     }
 
     @Override
     public void initializeHandlers() {
         ProfileDialogSingleton s = ProfileDialogSingleton.getProfileCreator();
         createProfile.setOnAction(event -> {
-            TestGUI.buttonState = ButtonState.CREATE;
+            AppGUI.buttonState = ButtonState.CREATE;
             setChanged();
             notifyObservers();
         });
         login.setOnAction(event -> {
-            TestGUI.buttonState = ButtonState.LOGIN;
+            AppGUI.buttonState = ButtonState.LOGIN;
             setChanged();
             notifyObservers();
         });
