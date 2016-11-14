@@ -4,14 +4,22 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.Glow;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import state.ButtonState;
 import ui.JFLAGScene;
+
+import java.util.ArrayList;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -21,17 +29,24 @@ public class BuzzwordScene extends JFLAGScene{
     private String mode;
     private BorderPane primaryPane;
     private HBox topPane;
-    private VBox rightPane;
+    private VBox rightPane, centerPane;
     private Button play;
+    private GridPane buttonGrid;
     private Timeline timeLine;
+    private ArrayList<Button> buttonList;
     private int sec = 10;
     private SimpleIntegerProperty secProperty;
+    private int[][] helper = new int[16][]{
+
+
+    }
     public BuzzwordScene() {
         this("Dictionary Words");
     }
 
     public BuzzwordScene(String mode) {
         this.mode = mode;
+        buttonList = new ArrayList<>();
         layout();
         initializeHandlers();
         initializeStyle();
@@ -41,11 +56,52 @@ public class BuzzwordScene extends JFLAGScene{
     public void layout() {
         topLayout();
         rightLayout();
-        play = new Button("Play");
+        centerLayout();
         primaryPane = new BorderPane();
         primaryPane.setTop(topPane);
-        primaryPane.setCenter(play);
+        primaryPane.setCenter(centerPane);
         primaryPane.setRight(rightPane);
+    }
+
+    private void centerLayout() {
+        centerPane = new VBox();
+        centerPane.setAlignment(Pos.CENTER);
+        buildGrid();
+        play = new Button("Play");
+        Label level = new Label("Level 1");
+        centerPane.getChildren().addAll(buttonGrid, level, play);
+    }
+
+    private void buildGrid() {
+        buttonGrid = new GridPane();
+        buttonGrid.setAlignment(Pos.CENTER);
+        buttonGrid.setVgap(30);
+        buttonGrid.setHgap(30);
+
+        for(int i = 0; i< 4; i++){
+            for(int j = 0; j<4; j++){
+                Button gameButton = new Button("a");
+                gameButton.setId("gameButton");
+                gameButton.setShape(new Circle(30, Color.DARKSLATEGREY));
+                gameButton.setMinSize(30, 30);
+                gameButton.setOnMousePressed(event -> {
+                    gameButton.setEffect(new Glow(0.8));
+                });
+                buttonGrid.add(gameButton, i, j);
+                buttonList.add(gameButton);
+            }
+        }
+        buildPath();
+    }
+
+    public void buildPath(){
+        buttonList.forEach(node ->{
+            for(Button target : buttonList){
+                if(target != node){
+
+                }
+            }
+        });
     }
 
     public void topLayout(){
@@ -72,14 +128,6 @@ public class BuzzwordScene extends JFLAGScene{
         rightPane.setId("rightPane");
         Label currentGuess = new Label("B U ");
 
-        /*TableView guessedWords = new TableView();
-        guessedWords.setId("table");
-        guessedWords.setEditable(false);
-        TableColumn word = new TableColumn();
-        word.setPrefWidth(120);
-        TableColumn score = new TableColumn();
-        guessedWords.getColumns().addAll(word, score);*/
-
         HBox progress = new HBox();
         progress.setId("progressBox");
         progress.setMinWidth(200);
@@ -88,6 +136,7 @@ public class BuzzwordScene extends JFLAGScene{
         wordProgress.setMinWidth(120);
         wordProgress.setMinHeight(300);
         Label totalScoreLabel = new Label("TOTAL SCORE: ");
+        totalScoreLabel.setMinWidth(wordProgress.getPrefWidth());
         wordProgress.setBottom(totalScoreLabel);
 
         BorderPane scoreProgress = new BorderPane();
@@ -98,11 +147,12 @@ public class BuzzwordScene extends JFLAGScene{
 
         progress.getChildren().addAll(wordProgress, scoreProgress);
 
-        VBox targetBox = new VBox(10);
+        VBox targetBox = new VBox();
         targetBox.setId("targetBox");
-        Label target = new Label("Target Score: ");
+        Label target = new Label("TARGET: ");
+        target.setStyle("-fx-underline: true");
         //target.setMinWidth(150);
-        Label points = new Label("75");
+        Label points = new Label("75 Points");
         points.setMinWidth(80);
         targetBox.getChildren().addAll(target, points);
 

@@ -19,6 +19,7 @@ public class LevelPane extends JFLAGScene {
     private String mode;
     private VBox primaryPane;
     private GridPane levelGrid;
+    private int selectedLevel;
     private ArrayList<Button> buttons;
 
     public LevelPane(){
@@ -27,6 +28,7 @@ public class LevelPane extends JFLAGScene {
 
     public LevelPane(String mode){
         this.mode = mode;
+        selectedLevel = 1;
         layout();
         initializeStyle();
     }
@@ -51,6 +53,9 @@ public class LevelPane extends JFLAGScene {
             for(int j = 1; j< 5; j++){
                 String l = Integer.toString(count++);
                 Button button = new Button(l);
+                button.setOnAction(event -> {
+                    selectedLevel = Integer.parseInt(button.getText());
+                });
                 button.setShape(new Circle(20));
                 button.setDisable(true);
                 buttons.add(button);
@@ -64,6 +69,9 @@ public class LevelPane extends JFLAGScene {
         primaryPane.getChildren().addAll(seperator, topPane, levelGrid);
     }
 
+    public int getSelectedLevel(){
+        return selectedLevel;
+    }
     @Override
     public Scene getScene() {
         return null;

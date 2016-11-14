@@ -21,7 +21,7 @@
     -fx-background-insets: 0;
     -fx-background-color: #dddddd;
     -fx-alignment: center-right;
-    -fx-pref-width: 180;
+    -fx-pref-width: 170;
     -fx-background-radius: 5,4,3,5;
     -fx-background-insets: 0,1,2,0;
 }
@@ -40,7 +40,7 @@
 }
 
 #progressBox {
-    -fx-background-color: darkslategrey;
+    -fx-background-color: grey;
     -fx-padding: 0;
     -fx-background-insets: 0;
 }
@@ -49,3 +49,10 @@
     -fx-border-color: black;
 }
 
+#targetBox {
+    -fx-background-color:darkslategrey;
+}
+
+#gameButton:hover {
+
+}
