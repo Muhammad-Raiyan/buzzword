@@ -81,7 +81,7 @@ public class ProfileDialogSingleton {
     }
 
     public void initializeStyle() {
-        primaryScene.getStylesheets().add("ui/DialogStyle.css");
+        primaryScene.getStylesheets().add("css/DialogStyle.css");
     }
 
     public void layout() {

@@ -7,6 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import state.ButtonState;
 import ui.JFLAGScene;
 
@@ -19,11 +22,13 @@ public class HomeSceneSingleton extends JFLAGScene {
 
     public static HomeSceneSingleton homeSceneSingleton;
     private static Scene primaryScene;
-    private Button startPlaying, selectLevel, home;
+    private Button startPlaying, selectLevel, home, user;
     private ChoiceBox<String> selectMode;
     private BorderPane pane;
+    private GridPane buttonGrid;
     private ButtonState buttonState;
     private VBox rightBar;
+    Region r;
 
     public HomeSceneSingleton(){
         layout();
@@ -53,6 +58,10 @@ public class HomeSceneSingleton extends JFLAGScene {
         });
 
         home.setOnAction(event -> {
+            rightBar.getChildren().set(1, new VBox(r, buttonGrid));
+        });
+
+        user.setOnAction(event -> {
             rightBar.getChildren().set(1, new VBox());
         });
 
@@ -63,7 +72,7 @@ public class HomeSceneSingleton extends JFLAGScene {
     }
     @Override
     public void initializeStyle() {
-        primaryScene.getStylesheets().add("ui/SceneStyle.css");
+        primaryScene.getStylesheets().add("css/SceneStyle.css");
     }
 
     @Override
@@ -86,15 +95,15 @@ public class HomeSceneSingleton extends JFLAGScene {
         startPlaying = new Button("New Game");
         selectLevel = new Button("Select Level");
         home = new Button("Home");
-
+        user = new Button("USER");
         selectMode = new ChoiceBox<>();
-        selectMode.getStylesheets().add("gui/ChoiceBoxStyle.css");
+        selectMode.getStylesheets().add("css/ChoiceBoxStyle.css");
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
         selectMode.setValue("Dictionary Words");
         selectMode.getItems().addAll("Dictionary Words", "Famous People", "Places", "Science");
 
 
-        leftBar.getChildren().addAll(filler, startPlaying, selectLevel, selectMode, home);
+        leftBar.getChildren().addAll(filler, startPlaying, selectLevel, selectMode, home, user);
 
         rightBar = new VBox();
         rightBar.setId("right-bar");
@@ -103,12 +112,40 @@ public class HomeSceneSingleton extends JFLAGScene {
         topPane.setAlignment(Pos.CENTER);
         Label title = new Label("!! Buzzword !!");
         topPane.getChildren().add(title);
-        Pane rightPane = new Pane();
+        buttonGrid = new GridPane();
+        buildGrid();
+        r = new Region();
+        r.setPrefHeight(150);
+        VBox rightPane = new VBox(r, buttonGrid);
+        rightPane.setAlignment(Pos.CENTER);
         rightBar.getChildren().addAll(topPane, rightPane);
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);
         primaryScene = new Scene(pane);
+    }
+
+    private void buildGrid() {
+        buttonGrid = new GridPane();
+        buttonGrid.setAlignment(Pos.CENTER);
+        buttonGrid.setVgap(20);
+        buttonGrid.setHgap(20);
+
+        String s = "BUZZWORD";
+        int pos = 0;
+        for(int i = 0; i< 4; i++){
+            for(int j = 0; j<4; j++){
+
+                Circle gameButton = new Circle(20);
+                gameButton.setFill(Color.DARKSLATEGRAY);
+                Text t = new Text();
+                if(pos < s.length()) t.setText(Character.toString(s.charAt(pos)));
+                pos++;
+                t.setFill(Color.WHITE);
+                StackPane st = new StackPane(gameButton, t);
+                buttonGrid.add(st, i, j);
+            }
+        }
     }
 
     @Override

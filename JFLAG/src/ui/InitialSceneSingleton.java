@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import state.ButtonState;
 
 /**
@@ -17,6 +20,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     private BorderPane pane;
     private Button createProfile, login, help;
     private ButtonState buttonState;
+    private GridPane buttonGrid;
 
     private InitialSceneSingleton(){
         layout();
@@ -57,13 +61,37 @@ public class InitialSceneSingleton extends JFLAGScene{
         topPane.setAlignment(Pos.CENTER);
         Label title = new Label("!! Buzzword !!");
         topPane.getChildren().add(title);
-        rightBar.getChildren().addAll(topPane);
+        buttonGrid = new GridPane();
+        buildGrid();
+        Region r = new Region();
+        r.setPrefHeight(150);
+        rightBar.getChildren().addAll(topPane, r, buttonGrid);
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);
         scene = new Scene(pane);
     }
 
+    private void buildGrid() {
+        buttonGrid = new GridPane();
+        buttonGrid.setAlignment(Pos.CENTER);
+        buttonGrid.setVgap(20);
+        buttonGrid.setHgap(20);
+        String s = "BUZZWORD";
+        int pos = 0;
+        for(int i = 0; i< 4; i++){
+            for(int j = 0; j<4; j++){
+                Circle gameButton = new Circle(20);
+                gameButton.setFill(Color.DARKSLATEGRAY);
+                Text t = new Text();
+                if(pos < s.length()) t.setText(Character.toString(s.charAt(pos)));
+                pos++;
+                t.setFill(Color.WHITE);
+                StackPane st = new StackPane(gameButton, t);
+                buttonGrid.add(st, i, j);
+            }
+        }
+    }
     @Override
     public Scene getScene() {
         return scene;
@@ -90,7 +118,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     }
 
     public void initializeStyle() {
-        scene.getStylesheets().add("ui/SceneStyle.css");
+        scene.getStylesheets().add("css/SceneStyle.css");
     }
 
     @Override

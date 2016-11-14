@@ -4,10 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.print.Collation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,7 +18,6 @@ import state.ButtonState;
 import ui.JFLAGScene;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -32,7 +28,7 @@ public class BuzzwordScene extends JFLAGScene{
     private BorderPane primaryPane;
     private HBox topPane;
     private VBox rightPane, centerPane;
-    private Button play;
+    private Button play, pause;
     private GridPane buttonGrid;
     public StackPane gridStack;
     private Timeline timeLine;
@@ -69,12 +65,14 @@ public class BuzzwordScene extends JFLAGScene{
         centerPane.setAlignment(Pos.CENTER);
         buildGrid();
         play = new Button("Play");
+        pause = new Button("Pause");
         Label level = new Label("Level 1");
+        level.setStyle("-fx-text-fill: white");
         gridStack = new StackPane();
         gridStack.getChildren().addAll(buttonGrid);
         gridStack.getChildren().addAll(lineList);
         centerPane.getChildren().addAll(gridStack, level, play);
-        centerPane.getChildren().addAll(lineList);
+        //centerPane.getChildren().addAll(lineList);
     }
 
     private void buildGrid() {
@@ -86,7 +84,6 @@ public class BuzzwordScene extends JFLAGScene{
         for(int i = 0; i< 4; i++){
             for(int j = 0; j<4; j++){
                 Button gameButton = new Button("a");
-                gameButton.setId("gameButton");
                 gameButton.setShape(new Circle(30, Color.DARKSLATEGREY));
                 gameButton.setMinSize(30, 30);
                 gameButton.setOnMousePressed(event -> {
@@ -112,7 +109,7 @@ public class BuzzwordScene extends JFLAGScene{
 
     public void link(Node from, Node to){
         Line l = new Line(from.getLayoutX(), from.getLayoutY(), to.getLayoutX(), to.getLayoutY());
-        System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
+        //System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
         lineList.add(l);
     }
 
@@ -173,18 +170,26 @@ public class BuzzwordScene extends JFLAGScene{
     @Override
     public void initializeHandlers() {
         play.setOnAction(event -> {
-            timeLine = new Timeline(new KeyFrame(
-                    Duration.seconds(sec),
-                    ae -> System.out.println("Hello"),
-                    new KeyValue(secProperty, 0)
-            ));
+            centerPane.getChildren().set(2, pause);
+            if(timeLine == null) {
+                timeLine = new Timeline(new KeyFrame(
+                        Duration.seconds(sec),
+                        ae -> System.out.println("Hello"),
+                        new KeyValue(secProperty, 0)
+                ));
+            }
             timeLine.play();
+        });
+
+        pause.setOnAction(event -> {
+            centerPane.getChildren().set(2, play);
+            timeLine.pause();
         });
     }
 
     @Override
     public void initializeStyle() {
-        primaryPane.getStylesheets().add("gui/GameScene.css");
+        primaryPane.getStylesheets().add("css/GameScene.css");
     }
 
     @Override

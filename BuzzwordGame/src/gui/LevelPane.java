@@ -84,7 +84,7 @@ public class LevelPane extends JFLAGScene {
 
     @Override
     public void initializeStyle() {
-        primaryPane.getStylesheets().add("gui/LevelPaneStyle.css");
+        primaryPane.getStylesheets().add("css/LevelPaneStyle.css");
     }
 
     @Override

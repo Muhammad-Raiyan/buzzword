@@ -4,6 +4,7 @@ import app.JFLAGApplication;
 import components.JFLAGStyleArbiter;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import observer.ButtonObserver;
 import state.ButtonState;
 
@@ -36,6 +37,7 @@ public class TestGUI implements JFLAGStyleArbiter{
         initialSceneSingleton.addObserver(buttonObserver);
         primaryScene = initialSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
+        primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.show();
 
     }
