@@ -29,6 +29,7 @@
         <property name="LOAD_ICON" value="Load.png"/>
         <property name="SAVE_ICON" value="Save.png"/>
         <property name="EXIT_ICON" value="Exit.png"/>
+        <property name="PLAY_ICON" value="PlayIcon.png"/>
 
         <!-- TOOLTIPS FOR BUTTONS -->
         <property name="NEW_TOOLTIP" value="Start a new game"/>

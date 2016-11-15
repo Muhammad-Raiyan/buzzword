@@ -23,6 +23,10 @@
     -fx-text-fill: black;
 }
 
+.choice-box .label:hover{
+    -fx-text-fill: black;
+}
+
 .choice-box .context-menu {
     -fx-background-color:
             #090a0c,
@@ -32,9 +36,9 @@
     -fx-pref-width: 180;
 }
 
+
 .choice-box .label {
     -fx-font-family: "Arial";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 10px;
-
 }

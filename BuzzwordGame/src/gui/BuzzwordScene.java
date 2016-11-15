@@ -4,7 +4,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -37,14 +36,17 @@ public class BuzzwordScene extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList;
     private int sec = 10;
+    private Label level;
     private SimpleIntegerProperty secProperty;
     private ArrayList<Line> lineList;
+
     public BuzzwordScene() {
-        this("Dictionary Words");
+        this("Dictionary Words", "1");
     }
 
-    public BuzzwordScene(String mode) {
+    public BuzzwordScene(String mode, String level) {
         this.mode = mode;
+        this.level = new Label("LEVEL " + level);
         buttonList = new ArrayList<>();
         lineList = new ArrayList<>();
         layout();
@@ -69,9 +71,12 @@ public class BuzzwordScene extends JFLAGScene{
         buildGrid();
 
         play = new Button("Play");
-        //play.setGraphic(new ImageView(playImage));
+        Image playImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PlayIcon.png"));
+        play.setGraphic(new ImageView(playImage));
         pause = new Button("Pause");
-        Label level = new Label("Level 1");
+        Image pauseImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PauseIcon.png"));
+        pause.setGraphic(new ImageView(pauseImage));
+
         level.setStyle("-fx-text-fill: white");
         gridStack = new StackPane();
         gridStack.getChildren().addAll(buttonGrid);
@@ -94,6 +99,7 @@ public class BuzzwordScene extends JFLAGScene{
                 gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
                 gameButton.setPrefSize(40, 40);
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
+                gameButton.setId("gameButton");
                 gameButton.setOnMousePressed(event -> {
                     gameButton.setEffect(new Glow(0.8));
                 });

@@ -24,7 +24,11 @@ public class HomeSceneSingleton extends JFLAGScene {
     private BorderPane pane;
     private GridPane buttonGrid;
     private ButtonState buttonState;
+    private BuzzwordScene gameScene;
+    private LevelPane lp;
     private VBox rightBar;
+    private int currentLevel;
+
     Region r;
 
     public HomeSceneSingleton(){
@@ -35,11 +39,12 @@ public class HomeSceneSingleton extends JFLAGScene {
     @Override
     public void initializeHandlers() {
         startPlaying.setOnAction(event -> {
-            BuzzwordScene gameScene = new BuzzwordScene(selectMode.getValue());
+            if(lp == null) gameScene = new BuzzwordScene(selectMode.getValue(), "1");
+            else gameScene =  new BuzzwordScene(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
             rightBar.getChildren().set(1, gameScene.getPrimaryPane());
         });
         selectLevel.setOnAction(event -> {
-            LevelPane lp = new LevelPane(selectMode.getValue());
+            lp = new LevelPane(selectMode.getValue());
             rightBar.getChildren().set(1, lp.getPrimaryPane());
         });
 
@@ -50,6 +55,7 @@ public class HomeSceneSingleton extends JFLAGScene {
         user.setOnAction(event -> {
             rightBar.getChildren().set(1, new VBox());
         });
+
 
     }
 

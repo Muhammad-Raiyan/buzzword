@@ -33,6 +33,7 @@ public class LevelPane extends JFLAGScene {
         initializeStyle();
     }
 
+
     @Override
     public void layout() {
         Region seperator = new Region();
@@ -63,6 +64,8 @@ public class LevelPane extends JFLAGScene {
             }
         }
         buttons.get(0).setDisable(false);
+        buttons.get(1).setDisable(false);
+        buttons.get(2).setDisable(false);
 
         primaryPane = new VBox(10);
         primaryPane.setId("levelPane");
