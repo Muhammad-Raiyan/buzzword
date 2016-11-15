@@ -13,7 +13,7 @@ public interface JFLAGStyleArbiter {
     String CLASS_BORDERED_PANE = "bordered_pane";
 
     enum BUTTON_TYPE {
-        NEW, SAVE, LOAD, EXIT;
+        NEW, SAVE, LOAD, EXIT
     }
     
     void initStyle();

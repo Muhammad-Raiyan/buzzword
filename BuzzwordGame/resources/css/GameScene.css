@@ -18,7 +18,7 @@
 }
 #timer {
     -fx-padding: 0;
-    -fx-background-insets: 0;
+    //-fx-background-insets: 0;
     -fx-background-color: #dddddd;
     -fx-alignment: center-right;
     -fx-pref-width: 170;

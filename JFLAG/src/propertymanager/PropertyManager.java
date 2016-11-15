@@ -83,7 +83,7 @@ public class PropertyManager {
     }
 
     public boolean isInitialized(){
-        return singleton == null? false : true;
+        return singleton != null;
     }
     
     public void loadProperties(Class klass, String xmlfilename, String schemafilename) throws InvalidXMLFileFormatException {
