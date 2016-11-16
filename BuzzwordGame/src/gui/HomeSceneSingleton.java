@@ -39,8 +39,8 @@ public class HomeSceneSingleton extends JFLAGScene {
     @Override
     public void initializeHandlers() {
         startPlaying.setOnAction(event -> {
-            if(lp == null) gameScene = new BuzzwordScene(selectMode.getValue(), "1");
-            else gameScene =  new BuzzwordScene(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
+            gameScene = (lp == null) ? new BuzzwordScene(selectMode.getValue(), "1")
+                    : new BuzzwordScene(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
             rightBar.getChildren().set(1, gameScene.getPrimaryPane());
         });
         selectLevel.setOnAction(event -> {

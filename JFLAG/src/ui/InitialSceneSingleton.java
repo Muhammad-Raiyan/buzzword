@@ -5,9 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import state.ButtonState;
 
 /**
@@ -15,13 +12,12 @@ import state.ButtonState;
  */
 public class InitialSceneSingleton extends JFLAGScene{
 
-    public static InitialSceneSingleton initialScene = null;
+    public static InitialSceneSingleton initialSceneSingleton = null;
     private static Scene scene;
     private BorderPane pane;
     private Button createProfile, login, help;
     private ButtonState buttonState;
     private VBox rightBar;
-    private GridPane buttonGrid;
 
     private InitialSceneSingleton(){
         layout();
@@ -30,9 +26,9 @@ public class InitialSceneSingleton extends JFLAGScene{
     }
 
     public static InitialSceneSingleton getInitialSceneSingleton(){
-        if(initialScene == null)
-            initialScene = new InitialSceneSingleton();
-        return initialScene;
+        if(initialSceneSingleton == null)
+            initialSceneSingleton = new InitialSceneSingleton();
+        return initialSceneSingleton;
     }
 
     @Override
@@ -102,6 +98,5 @@ public class InitialSceneSingleton extends JFLAGScene{
     public void init(ButtonState buttonState) {
         this.buttonState = buttonState;
     }
-
 
 }

@@ -20,9 +20,14 @@ public class Workspace extends JFLAGWorkspaceComponent{
         gui = app.getGUI();
         primaryStage = gui.getPrimaryStage();
         homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
-        InitialSceneSingleton singleton = InitialSceneSingleton.getInitialSceneSingleton();
-        singleton.setRightPane(homeSceneSingleton.getButtonGrid());
+        setBuzzwordGrid();
     }
+
+    private void setBuzzwordGrid() {
+        InitialSceneSingleton initialSceneSingleton = InitialSceneSingleton.getInitialSceneSingleton();
+        initialSceneSingleton.setRightPane(homeSceneSingleton.getButtonGrid());
+    }
+
     @Override
     public void initStyle() {
 

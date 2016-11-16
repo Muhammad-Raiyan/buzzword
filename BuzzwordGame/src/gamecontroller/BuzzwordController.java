@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class BuzzwordController extends AppFileController{
 
-    public Workspace workspace;
+    private Workspace workspace;
 
     /**
      * Constructor to just store the reference to the application.

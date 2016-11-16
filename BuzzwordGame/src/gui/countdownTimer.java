@@ -38,4 +38,12 @@ public class countdownTimer implements Runnable {
     public void run() {
         timer.play();
     }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 }

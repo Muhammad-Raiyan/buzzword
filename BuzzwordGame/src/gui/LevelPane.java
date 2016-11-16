@@ -20,7 +20,7 @@ public class LevelPane extends JFLAGScene {
     private VBox primaryPane;
     private GridPane levelGrid;
     private int selectedLevel;
-    private ArrayList<Button> buttons;
+    private ArrayList<Button> buttonArrayList;
 
     public LevelPane(){
         this("Dictionary");
@@ -36,8 +36,8 @@ public class LevelPane extends JFLAGScene {
 
     @Override
     public void layout() {
-        Region seperator = new Region();
-        seperator.setPrefHeight(50);
+        Region separator = new Region();
+        separator.setPrefHeight(50);
 
         HBox topPane = new HBox();
         topPane.setAlignment(Pos.CENTER);
@@ -46,9 +46,7 @@ public class LevelPane extends JFLAGScene {
 
         levelGrid = new GridPane();
         levelGrid.setId("grid");
-        //levelGrid.setAlignment(Pos.CENTER);
-        //levelGrid.setHgap(10);
-        buttons = new ArrayList<>(8);
+        buttonArrayList = new ArrayList<>(8);
         int count = 1;
         for(int i = 1; i< 3; i++){
             for(int j = 1; j< 5; j++){
@@ -59,17 +57,17 @@ public class LevelPane extends JFLAGScene {
                 });
                 button.setShape(new Circle(20));
                 button.setDisable(true);
-                buttons.add(button);
+                buttonArrayList.add(button);
                 levelGrid.add(button, j-1, i-1);
             }
         }
-        buttons.get(0).setDisable(false);
-        buttons.get(1).setDisable(false);
-        buttons.get(2).setDisable(false);
+        buttonArrayList.get(0).setDisable(false);
+        buttonArrayList.get(1).setDisable(false);
+        buttonArrayList.get(2).setDisable(false);
 
         primaryPane = new VBox(10);
         primaryPane.setId("levelPane");
-        primaryPane.getChildren().addAll(seperator, topPane, levelGrid);
+        primaryPane.getChildren().addAll(separator, topPane, levelGrid);
     }
 
     public int getSelectedLevel(){

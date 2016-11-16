@@ -5,6 +5,7 @@ import controller.FileController;
 import data.ProfileManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import propertymanager.PropertyManager;
 import ui.*;
 import observer.ButtonObserver;
