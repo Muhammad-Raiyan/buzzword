@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import state.ButtonState;
+import ui.InitialSceneSingleton;
 import ui.JFLAGScene;
 
 /**
@@ -100,10 +101,10 @@ public class HomeSceneSingleton extends JFLAGScene {
         rightBar = new VBox();
         rightBar.setId("right-bar");
 
-        HBox topPane = new HBox();
-        topPane.setAlignment(Pos.CENTER);
+        HBox topPane = InitialSceneSingleton.getInitialSceneSingleton().createTopPane();
+        /*topPane.setAlignment(Pos.CENTER);
         Label title = new Label("!! Buzzword !!");
-        topPane.getChildren().add(title);
+        topPane.getChildren().add(title);*/
         buttonGrid = new GridPane();
         buildGrid();
         r = new Region();

@@ -36,4 +36,8 @@ public class BuzzwordController extends AppFileController{
 
     }
 
+    @Override
+    public void handleExitRequest() {
+        super.handleExitRequest();
+    }
 }

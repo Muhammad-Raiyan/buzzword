@@ -90,7 +90,16 @@ public class AppFileController implements FileController {
     
     /** This method will exit the application. If work is unsaved, it will first prompt the user. */
     public void handleExitRequest() {
+        YesNoCancelDialogSingleton yesNoCancelDialog = YesNoCancelDialogSingleton.getSingleton();
+        yesNoCancelDialog.show("EXIT CONFIRMATION", "DO YOU WANT TO EXIT?");
         try {
+            if(yesNoCancelDialog.getSelection().equals(YesNoCancelDialogSingleton.YES)){
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        /*try {
             boolean continueToExit = true;
             if (!saved.getValue())
                 continueToExit = promptToSave();
@@ -100,7 +109,7 @@ public class AppFileController implements FileController {
             AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
             PropertyManager props  = PropertyManager.getManager();
             dialog.show(props.getPropertyValue(SAVE_ERROR_TITLE), props.getPropertyValue(SAVE_ERROR_MESSAGE));
-        }
+        }*/
     }
 
     @Override

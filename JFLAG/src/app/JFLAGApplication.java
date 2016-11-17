@@ -59,7 +59,7 @@ public abstract class JFLAGApplication extends Application{
         AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
         YesNoCancelDialogSingleton yesNoDialog   = YesNoCancelDialogSingleton.getSingleton();
         ProfileDialogSingleton profileCreator = ProfileDialogSingleton.getProfileCreator();
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         messageDialog.init(primaryStage);
         yesNoDialog.init(primaryStage);
         profileCreator.init(primaryStage);

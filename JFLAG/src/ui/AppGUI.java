@@ -38,7 +38,7 @@ public class AppGUI implements JFLAGStyleArbiter{
         initialSceneSingleton.addObserver(buttonObserver);
         primaryScene = initialSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
-        primaryStage.initStyle(StageStyle.UNIFIED);
+        //primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.show();
 
     }

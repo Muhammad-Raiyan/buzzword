@@ -15,7 +15,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     public static InitialSceneSingleton initialSceneSingleton = null;
     private static Scene scene;
     private BorderPane pane;
-    private Button createProfile, login, help;
+    private Button createProfile, login, help, exit;
     private ButtonState buttonState;
     private VBox rightBar;
 
@@ -52,17 +52,32 @@ public class InitialSceneSingleton extends JFLAGScene{
 
         rightBar = new VBox();
         rightBar.setId("right-bar");
-        HBox topPane = new HBox();
-        topPane.setAlignment(Pos.CENTER);
-        Label title = new Label("!! Buzzword !!");
-        topPane.getChildren().add(title);
+
         Region r = new Region();
         r.setPrefHeight(150);
-        rightBar.getChildren().addAll(topPane, r);
+        rightBar.getChildren().addAll(createTopPane(), r);
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);
         scene = new Scene(pane);
+    }
+
+    public  HBox createTopPane(){
+        HBox topPane = new HBox();
+        topPane.setAlignment(Pos.CENTER_LEFT);
+        Label title = new Label("!! Buzzword !!");
+        Region leftRegion = new Region();
+        leftRegion.setPrefWidth(200);
+        Region rightRegion = new Region();
+        rightRegion.setPrefWidth(150);
+        exit = new Button("X");
+        exit.setOnAction(event -> {
+            AppGUI.buttonState = ButtonState.EXIT;
+            setChanged();
+            notifyObservers();
+        });
+        topPane.getChildren().addAll(leftRegion, title, rightRegion, exit);
+        return topPane;
     }
 
     @Override
@@ -88,6 +103,7 @@ public class InitialSceneSingleton extends JFLAGScene{
             notifyObservers();
         });
         help.setOnAction(event -> System.out.println("Help"));
+
     }
 
     public void initializeStyle() {

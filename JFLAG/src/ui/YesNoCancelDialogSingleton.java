@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * @author Ritwik Banerjee
@@ -20,13 +21,13 @@ public class YesNoCancelDialogSingleton extends Stage {
     static YesNoCancelDialogSingleton singleton;
 
     // GUI CONTROLS FOR OUR DIALOG
-    VBox   messagePane;
-    Scene  messageScene;
-    Label  messageLabel;
-    Button yesButton;
-    Button noButton;
-    Button cancelButton;
-    String selection;
+    private VBox   messagePane;
+    private Scene  messageScene;
+    private Label  messageLabel;
+    private Button yesButton;
+    private Button noButton;
+    private Button cancelButton;
+    private String selection;
 
     // CONSTANT CHOICES
     public static final String YES    = "Yes";
@@ -58,39 +59,40 @@ public class YesNoCancelDialogSingleton extends Stage {
     public void init(Stage primaryStage) {
         // MAKE THIS DIALOG MODAL, MEANING OTHERS WILL WAIT
         // FOR IT WHEN IT IS DISPLAYED
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
         initModality(Modality.WINDOW_MODAL);
         initOwner(primaryStage);
 
         // LABEL TO DISPLAY THE CUSTOM MESSAGE
-        messageLabel = new Label();
+        setMessageLabel(new Label());
 
         // YES, NO, AND CANCEL BUTTONS
-        yesButton = new Button(YES);
-        noButton = new Button(NO);
-        cancelButton = new Button(CANCEL);
+        setYesButton(new Button(YES));
+        setNoButton(new Button(NO));
+        setCancelButton(new Button(CANCEL));
 
         // MAKE THE EVENT HANDLER FOR THESE BUTTONS
         EventHandler<ActionEvent> yesNoCancelHandler = event -> {
-            YesNoCancelDialogSingleton.this.selection = ((Button) event.getSource()).getText();
+            YesNoCancelDialogSingleton.this.setSelection(((Button) event.getSource()).getText());
             YesNoCancelDialogSingleton.this.hide();
         };
 
 
         // AND THEN REGISTER THEM TO RESPOND TO INTERACTIONS
-        yesButton.setOnAction(yesNoCancelHandler);
-        noButton.setOnAction(yesNoCancelHandler);
-        cancelButton.setOnAction(yesNoCancelHandler);
+        getYesButton().setOnAction(yesNoCancelHandler);
+        getNoButton().setOnAction(yesNoCancelHandler);
+        getCancelButton().setOnAction(yesNoCancelHandler);
 
         // NOW ORGANIZE OUR BUTTONS
         HBox buttonBox = new HBox();
-        buttonBox.getChildren().add(yesButton);
-        buttonBox.getChildren().add(noButton);
-        buttonBox.getChildren().add(cancelButton);
+        buttonBox.getChildren().add(getYesButton());
+        buttonBox.getChildren().add(getNoButton());
+        buttonBox.getChildren().add(getCancelButton());
 
         // WE'LL PUT EVERYTHING HERE
         messagePane = new VBox();
         messagePane.setAlignment(Pos.CENTER);
-        messagePane.getChildren().add(messageLabel);
+        messagePane.getChildren().add(getMessageLabel());
         messagePane.getChildren().add(buttonBox);
 
         // MAKE IT LOOK NICE
@@ -98,8 +100,9 @@ public class YesNoCancelDialogSingleton extends Stage {
         messagePane.setSpacing(10);
 
         // AND PUT IT IN THE WINDOW
-        messageScene = new Scene(messagePane);
-        this.setScene(messageScene);
+        setMessageScene(new Scene(messagePane));
+        this.setScene(getMessageScene());
+        getMessageScene().getStylesheets().add("css/DialogStyle.css");
     }
 
     /**
@@ -124,12 +127,55 @@ public class YesNoCancelDialogSingleton extends Stage {
         setTitle(title);
 
         // SET THE MESSAGE TO DISPLAY TO THE USER
-        messageLabel.setText(message);
+        getMessageLabel().setText(message);
 
         // AND OPEN UP THIS DIALOG, MAKING SURE THE APPLICATION
         // WAITS FOR IT TO BE RESOLVED BEFORE LETTING THE USER
         // DO MORE WORK.
         showAndWait();
     }
-    
+
+    public Scene getMessageScene() {
+        return messageScene;
+    }
+
+    public void setMessageScene(Scene messageScene) {
+        this.messageScene = messageScene;
+    }
+
+    public Label getMessageLabel() {
+        return messageLabel;
+    }
+
+    public void setMessageLabel(Label messageLabel) {
+        this.messageLabel = messageLabel;
+    }
+
+    public Button getYesButton() {
+        return yesButton;
+    }
+
+    public void setYesButton(Button yesButton) {
+        this.yesButton = yesButton;
+    }
+
+    public Button getNoButton() {
+        return noButton;
+    }
+
+    public void setNoButton(Button noButton) {
+        this.noButton = noButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(Button cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public void setSelection(String selection) {
+        this.selection = selection;
+    }
 }

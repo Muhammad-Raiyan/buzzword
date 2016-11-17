@@ -12,5 +12,6 @@ public enum ButtonState {
     LEVEL,
     MODE,
     HOME,
-    PROFILE
+    PROFILE,
+    EXIT
 }
