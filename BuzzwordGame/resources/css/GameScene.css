@@ -12,22 +12,22 @@
 }
 
 #topPane {
-    -fx-padding: 10;
-    -fx-background-insets: 10;
-    -fx-alignment: center;
+    /*-fx-padding: 10;
+    -fx-background-insets: 10;*/
 }
 #timer {
-    -fx-padding: 0;
-    //-fx-background-insets: 0;
+    //-fx-padding: 0;
     -fx-background-color: #dddddd;
     -fx-alignment: center-right;
-    -fx-pref-width: 170;
+    -fx-min-width: 200;
     -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
+    //-fx-background-insets: 0,1,2,0;
 }
 #timer .label{
-    -fx-alignment: center-right;
+    -fx-alignment: center-left;
     -fx-text-fill: red;
+    -fx-padding: 5;
+    -fx-background-insets: 5;
 }
 
 #rightPane {

@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -28,7 +29,7 @@ public class BuzzwordScene extends JFLAGScene{
 
     private String mode;
     private BorderPane primaryPane;
-    private HBox topPane;
+    private BorderPane topPane;
     private VBox rightPane, centerPane;
     private Button play, pause;
     private GridPane buttonGrid;
@@ -128,22 +129,27 @@ public class BuzzwordScene extends JFLAGScene{
     }
 
     public void topLayout(){
-        topPane = new HBox();
+        topPane = new BorderPane();
         topPane.setId("topPane");
-        topPane.setAlignment(Pos.CENTER_LEFT);
+
         Label title = new Label(mode);
         title.setId("title");
-        Label remainingTime = new Label("TIME REMAINING:");
+
+        Label remainingTime = new Label("TIME REMAINING: ");
         remainingTime.setStyle("-fx-underline: true; -fx-font-weight: bold");
         Label seconds = new Label();
         secProperty = new SimpleIntegerProperty(sec);
         seconds.textProperty().bind(secProperty.asString());
-        HBox box = new HBox(remainingTime, seconds);
-        //box.setPrefWidth(150);
+        HBox box = new HBox(remainingTime, seconds, new Label(" seconds"));
+        box.setPadding(new Insets(0));
+        //box.setMinWidth(200);
         box.setId("timer");
-        Region region = new Region();
-        region.setPrefWidth(170);
-        topPane.getChildren().addAll(region, title, box);
+        Region leftRegion = new Region();
+        leftRegion.setPrefWidth(50);
+
+        topPane.setRight(box);
+        topPane.setCenter(title);
+        topPane.setLeft(leftRegion);
     }
 
     public void rightLayout(){

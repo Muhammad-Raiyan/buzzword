@@ -67,7 +67,7 @@ public class InitialSceneSingleton extends JFLAGScene{
         topPane.setAlignment(Pos.CENTER_LEFT);
         Label title = new Label("!! Buzzword !!");
         Region leftRegion = new Region();
-        leftRegion.setPrefWidth(200);
+        leftRegion.setPrefWidth(150);
         Region rightRegion = new Region();
         rightRegion.setPrefWidth(150);
         exit = new Button("X");
