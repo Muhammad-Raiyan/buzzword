@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by ishmam on 10/30/2016.
  */
-public class BuzzwordScene extends JFLAGScene{
+public class BuzzwordPane extends JFLAGScene{
 
     private String mode;
     private BorderPane primaryPane;
@@ -41,11 +41,11 @@ public class BuzzwordScene extends JFLAGScene{
     private SimpleIntegerProperty secProperty;
     private ArrayList<Line> lineList;
 
-    public BuzzwordScene() {
+    public BuzzwordPane() {
         this("Dictionary Words", "1");
     }
 
-    public BuzzwordScene(String mode, String level) {
+    public BuzzwordPane(String mode, String level) {
         this.mode = mode;
         this.level = new Label("LEVEL " + level);
         buttonList = new ArrayList<>();

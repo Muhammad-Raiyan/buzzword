@@ -25,7 +25,8 @@ public class HomeSceneSingleton extends JFLAGScene {
     private BorderPane pane;
     private GridPane buttonGrid;
     private ButtonState buttonState;
-    private BuzzwordScene gameScene;
+    private BuzzwordPane gamePane;
+    private UserPane userPane;
     private LevelPane lp;
     private VBox rightBar;
     private int currentLevel;
@@ -40,9 +41,9 @@ public class HomeSceneSingleton extends JFLAGScene {
     @Override
     public void initializeHandlers() {
         startPlaying.setOnAction(event -> {
-            gameScene = (lp == null) ? new BuzzwordScene(selectMode.getValue(), "1")
-                    : new BuzzwordScene(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
-            rightBar.getChildren().set(1, gameScene.getPrimaryPane());
+            gamePane = (lp == null) ? new BuzzwordPane(selectMode.getValue(), "1")
+                    : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
+            rightBar.getChildren().set(1, gamePane.getPrimaryPane());
         });
         selectLevel.setOnAction(event -> {
             lp = new LevelPane(selectMode.getValue());
@@ -54,7 +55,8 @@ public class HomeSceneSingleton extends JFLAGScene {
         });
 
         user.setOnAction(event -> {
-            rightBar.getChildren().set(1, new VBox());
+            userPane = new UserPane();
+            rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
 
 
@@ -101,10 +103,7 @@ public class HomeSceneSingleton extends JFLAGScene {
         rightBar = new VBox();
         rightBar.setId("right-bar");
 
-        HBox topPane = InitialSceneSingleton.getInitialSceneSingleton().createTopPane();
-        /*topPane.setAlignment(Pos.CENTER);
-        Label title = new Label("!! Buzzword !!");
-        topPane.getChildren().add(title);*/
+        BorderPane topPane = InitialSceneSingleton.getInitialSceneSingleton().createTopPane();
         buttonGrid = new GridPane();
         buildGrid();
         r = new Region();

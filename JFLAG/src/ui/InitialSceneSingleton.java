@@ -62,21 +62,17 @@ public class InitialSceneSingleton extends JFLAGScene{
         scene = new Scene(pane);
     }
 
-    public  HBox createTopPane(){
-        HBox topPane = new HBox();
-        topPane.setAlignment(Pos.CENTER_LEFT);
+    public  BorderPane createTopPane(){
+        BorderPane topPane = new BorderPane();
         Label title = new Label("!! Buzzword !!");
-        Region leftRegion = new Region();
-        leftRegion.setPrefWidth(150);
-        Region rightRegion = new Region();
-        rightRegion.setPrefWidth(150);
         exit = new Button("X");
         exit.setOnAction(event -> {
             AppGUI.buttonState = ButtonState.EXIT;
             setChanged();
             notifyObservers();
         });
-        topPane.getChildren().addAll(leftRegion, title, rightRegion, exit);
+        topPane.setRight(exit);
+        topPane.setCenter(title);
         return topPane;
     }
 
