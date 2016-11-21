@@ -25,6 +25,12 @@ public class UserData implements JFLAGDataComponent{
         jsonFile = generateJsonFileName(userName);
     }
 
+    public UserData(String userName, String password, Path jsonFile) {
+        this.userName = userName;
+        this.password = password;
+        this.jsonFile = jsonFile;
+    }
+
     private String encryptPass(String input){
         return input;
     }
@@ -52,6 +58,7 @@ public class UserData implements JFLAGDataComponent{
 
     public void setUserName(String userName) {
         this.userName = userName;
+        this.jsonFile = generateJsonFileName(userName);
     }
 
     public String getPassword() {
@@ -66,7 +73,16 @@ public class UserData implements JFLAGDataComponent{
         return jsonFile;
     }
 
-    public void setJsonFile(Path jsonFile) {
-        this.jsonFile = jsonFile;
+    public void setJsonFile(String jsonFile) {
+        this.jsonFile = Paths.get(jsonFile).toAbsolutePath();
+    }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", jsonFile=" + jsonFile +
+                '}';
     }
 }

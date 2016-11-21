@@ -13,9 +13,9 @@ import java.nio.file.Path;
  */
 public interface JFLAGFileComponent {
 
-    void saveData(JFLAGDataComponent data, Path filePath) throws IOException;
+    void saveData(Path filePath) throws IOException;
 
-    void loadData(JFLAGDataComponent data, Path filePath) throws IOException;
+    void loadData(Path filePath) throws IOException;
 
     void exportData(JFLAGDataComponent data, Path filePath) throws IOException;
 }

@@ -82,7 +82,7 @@ public abstract class JFLAGApplication extends Application{
             //guiObserver = new ButtonObserver(this);
 
 
-            profileManager = new ProfileManager(this);
+            //profileManager = new ProfileManager(this);
             initStylesheet();
             gui.initStyle();
             //workspaceComponent.initStyle();

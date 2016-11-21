@@ -18,12 +18,10 @@ public class BuzzwordDataFile extends ProfileManager {
 
     }
 
-    @Override
-    public void saveData(JFLAGDataComponent data, Path filePath) throws IOException {
+    public void saveProgress(JFLAGDataComponent data, Path filePath) throws IOException {
 
     }
 
-    @Override
     public void loadData(JFLAGDataComponent data, Path filePath) throws IOException {
 
     }

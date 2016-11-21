@@ -1,12 +1,17 @@
 {
-  "ishaas" : {
-    "userName" : "ishaas",
-    "password" : "gfsg",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/ishaas.json"
+  "ghrd" : {
+    "userName" : "ghrd",
+    "password" : "hgfdj",
+    "jsonFile" : "file:///C:/resources/profiledata/ghrd.json"
   },
-  "dfsg" : {
-    "userName" : "dfsg",
-    "password" : "trewt",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/dfsg.json"
+  "bnvfdnb" : {
+    "userName" : "bnvfdnb",
+    "password" : "hbgfdhn",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/bnvfdnb.json"
+  },
+  "ish" : {
+    "userName" : "ish",
+    "password" : "Ishmam",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/ish.json"
   }
 }

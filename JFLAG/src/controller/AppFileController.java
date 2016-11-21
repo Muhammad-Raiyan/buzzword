@@ -69,7 +69,7 @@ public class AppFileController implements FileController {
      * @throws IOException
      */
     private void saveWork(File selectedFile) throws IOException {
-        appTemplate.getFileComponent()
+       /* appTemplate.getFileComponent()
                    .saveData(appTemplate.getDataComponent(), Paths.get(selectedFile.getAbsolutePath()));
 
         currentWorkFile = selectedFile;
@@ -77,7 +77,7 @@ public class AppFileController implements FileController {
 
         AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
         PropertyManager props  = PropertyManager.getManager();
-        dialog.show(props.getPropertyValue(SAVE_COMPLETED_TITLE), props.getPropertyValue(SAVE_COMPLETED_MESSAGE));
+        dialog.show(props.getPropertyValue(SAVE_COMPLETED_TITLE), props.getPropertyValue(SAVE_COMPLETED_MESSAGE));*/
     }
     
     /** This method will exit the application. If work is unsaved, it will first prompt the user. */
@@ -128,9 +128,9 @@ public class AppFileController implements FileController {
         appTemplate.setCurrentUser(userProfile);
 
         Path target = Paths.get("JFLAG\\resources\\profiledata\\users.json");
-        ProfileManager profileManager = appTemplate.getProfileManager();
+        ProfileManager profileManager = (ProfileManager) appTemplate.getFileComponent();
         profileManager.addUser(userProfile);
-        profileManager.saveData(userProfile, target);
+        profileManager.saveData(target);
 
         profileDialogSingleton.close();
 
