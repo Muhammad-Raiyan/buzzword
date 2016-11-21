@@ -2,10 +2,6 @@
   <library name="samples">
     <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/Downloads/FXGL-0.2.0.zip!/FXGL-0.2.0/samples" />
-      <root url="jar://$USER_HOME$/Downloads/FXGL-0.2.0.zip!/FXGL-0.2.0/src/main/java" />
-      <root url="jar://$USER_HOME$/Downloads/FXGL-0.2.0.zip!/FXGL-0.2.0/src/test/java" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

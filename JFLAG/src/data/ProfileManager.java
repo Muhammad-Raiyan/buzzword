@@ -3,6 +3,7 @@ package data;
 import app.JFLAGApplication;
 import components.JFLAGDataComponent;
 import components.JFLAGFileComponent;
+import sun.security.util.Password;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,15 +14,20 @@ import java.util.HashMap;
  * Created by ishmam on 10/30/2016.
  */
 public class ProfileManager implements JFLAGFileComponent{
-    private static ProfileManager singleton = null;
     private HashMap<String, UserData> UserList;
     private UserData user;
-    private UserBuilder userBuilder;
+
     private enum JsonTag {
-        USERNAME
+        USERNAME,
+        PASSWORD,
+        FILENAME
     }
 
     public ProfileManager(JFLAGApplication app){
+
+    }
+
+    public void addUser(UserData newUser){
 
     }
 
@@ -30,12 +36,6 @@ public class ProfileManager implements JFLAGFileComponent{
     }
 
     private void loadToList(){
-
-    }
-
-    public void createProfile(String user, String pass){
-        userBuilder = new UserBuilder(user);
-
 
     }
 

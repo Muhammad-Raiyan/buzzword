@@ -2,6 +2,8 @@ package controller;
 
 import app.JFLAGApplication;
 import components.JFLAGDataComponent;
+import data.ProfileManager;
+import data.UserData;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -119,6 +121,13 @@ public class AppFileController implements FileController {
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
         System.out.println("User: " + profileDialogSingleton.getUserName());
         System.out.println("Password: " + profileDialogSingleton.getPassword());
+
+        UserData userProfile = new UserData();
+        userProfile.createUser(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword());
+        appTemplate.setCurrentUser(userProfile);
+        ProfileManager profileManager = (ProfileManager) appTemplate.getFileComponent();
+        profileManager.addUser(userProfile);
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package app;
 import components.*;
 import controller.FileController;
 import data.ProfileManager;
+import data.UserData;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,7 +28,8 @@ public abstract class JFLAGApplication extends Application{
     private ProfileManager profileManager;
     private FileController gameController;
     private AppGUI gui;
-    private ButtonObserver guiObserver;
+    private UserData currentUser;
+    //private ButtonObserver guiObserver;
 
     public String getFileControllerClass() {
         return "AppFileController";
@@ -73,14 +75,14 @@ public abstract class JFLAGApplication extends Application{
             gui = new AppGUI(this, primaryStage, "Buzzword");
             workspaceComponent = builder.buildWorkspaceComponent();
             gameController = builder.buildGameController();
-            //dataComponent = builder.buildDataComponent();
-            //fileComponent = builder.buildFileComponent();
+            dataComponent = builder.buildDataComponent();
+            fileComponent = builder.buildFileComponent();
 
 
-            guiObserver = new ButtonObserver(this);
+            //guiObserver = new ButtonObserver(this);
 
 
-            profileManager = new ProfileManager(this);
+            //profileManager = new ProfileManager(this);
             initStylesheet();
             gui.initStyle();
             //workspaceComponent.initStyle();
@@ -113,4 +115,12 @@ public abstract class JFLAGApplication extends Application{
 
     }
 
+
+    public UserData getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserData currentUser) {
+        this.currentUser = currentUser;
+    }
 }
