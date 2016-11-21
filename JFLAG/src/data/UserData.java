@@ -2,9 +2,13 @@ package data;
 
 import app.JFLAGApplication;
 import components.JFLAGDataComponent;
+import sun.misc.BASE64Encoder;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by ishmam on 10/29/2016.
@@ -31,8 +35,21 @@ public class UserData implements JFLAGDataComponent{
         this.jsonFile = jsonFile;
     }
 
-    private String encryptPass(String input){
-        return input;
+    public static String encryptPass(String input){
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        try {
+            md.update(input.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        byte raw[] = md.digest();
+        String hash = (new BASE64Encoder()).encode(raw);
+        return hash;
     }
 
     private Path generateJsonFileName(String input){

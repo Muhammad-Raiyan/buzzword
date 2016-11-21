@@ -1,12 +1,17 @@
 {
   "asd" : {
     "userName" : "asd",
-    "password" : "qwe",
+    "password" : "4vxxTEcn7pOV8yTNLn8zHw==",
     "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/asd.json"
   },
-  "ish" : {
-    "userName" : "ish",
-    "password" : "Ishmam",
-    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/ish.json"
+  "json" : {
+    "userName" : "json",
+    "password" : "tBd5aQuD8YKsxn1jiMe6yQ==",
+    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/json.json"
+  },
+  "Ish" : {
+    "userName" : "Ish",
+    "password" : "AlGJStDf4WvCNmswi305nA==",
+    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/Ish.json"
   }
 }
