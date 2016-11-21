@@ -103,6 +103,7 @@ public class YesNoCancelDialogSingleton extends Stage {
         setMessageScene(new Scene(messagePane));
         this.setScene(getMessageScene());
         getMessageScene().getStylesheets().add("css/DialogStyle.css");
+        this.initStyle(StageStyle.UNDECORATED);
     }
 
     /**
