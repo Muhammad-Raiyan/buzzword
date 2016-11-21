@@ -67,7 +67,7 @@ public class HomeSceneSingleton {
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
         selectMode.setValue("Dictionary Words");
         selectMode.getItems().addAll("Dictionary Words", "Famous People", "Places", "Science");
-
+        System.out.println("hello");
 
         leftBar.getChildren().addAll(filler, startPlaying, selectMode, selectLevel, home, user);
 
