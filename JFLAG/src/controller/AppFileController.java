@@ -113,7 +113,7 @@ public class AppFileController implements FileController {
         ProfileManager profileManager = (ProfileManager) appTemplate.getFileComponent();
         if(profileDialogSingleton.getSelection().equals("cancel")) return;
         if(!profileManager.validate(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword())){
-            throw new IOException("Incorrect");
+            throw new IOException("Incorrect Buzzwordcontroller 42");
         }
         else {
             appTemplate.setCurrentUser(profileManager.getUser(profileDialogSingleton.getUserName()));

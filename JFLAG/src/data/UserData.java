@@ -53,7 +53,7 @@ public class UserData implements JFLAGDataComponent{
     }
 
     private Path generateJsonFileName(String input){
-        Path target = Paths.get("JFLAG\\resources\\profiledata\\" + input + ".json").toAbsolutePath();
+        Path target = Paths.get("BuzzwordGame\\resources\\profiledata\\" + input + ".json").toAbsolutePath();
         return target;
     }
 

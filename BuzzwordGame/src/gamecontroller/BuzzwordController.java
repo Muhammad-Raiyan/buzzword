@@ -2,10 +2,13 @@ package gamecontroller;
 
 import app.JFLAGApplication;
 import controller.AppFileController;
+import gamedata.BuzzwordData;
+import gamedata.BuzzwordDataFile;
 import gui.Workspace;
 import ui.ProfileDialogSingleton;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -13,7 +16,7 @@ import java.io.IOException;
 public class BuzzwordController extends AppFileController{
 
     private Workspace workspace;
-
+    private JFLAGApplication appTemplate;
     /**
      * Constructor to just store the reference to the application.
      *
@@ -21,19 +24,22 @@ public class BuzzwordController extends AppFileController{
      */
     public BuzzwordController(JFLAGApplication appTemplate){
         super(appTemplate);
+        this.appTemplate = appTemplate;
         workspace = (Workspace) appTemplate.getWorkspaceComponent();
     }
 
     public void handleSignInRequest() throws IOException {
         Boolean success = false;
-
+        BuzzwordDataFile gameFile = (BuzzwordDataFile) appTemplate.getFileComponent();
+        BuzzwordData gameData = (BuzzwordData) appTemplate.getDataComponent();
         while(!success){
             try{
                 super.handleSignInRequest();
                 success = true;
+                gameFile.loadGameData(gameData, appTemplate.getCurrentUser().getJsonFile());
             }
             catch (IOException e){
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
 

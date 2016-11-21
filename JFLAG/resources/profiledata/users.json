@@ -1,17 +1,12 @@
 {
   "asd" : {
     "userName" : "asd",
-    "password" : "4vxxTEcn7pOV8yTNLn8zHw==",
-    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/asd.json"
-  },
-  "json" : {
-    "userName" : "json",
-    "password" : "tBd5aQuD8YKsxn1jiMe6yQ==",
-    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/json.json"
+    "password" : "NvF8OTmsPnsvyTlvqOlT6g==",
+    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/BuzzwordGame/resources/profiledata/asd.json"
   },
   "Ish" : {
     "userName" : "Ish",
-    "password" : "AlGJStDf4WvCNmswi305nA==",
-    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/Ish.json"
+    "password" : "4vxxTEcn7pOV8yTNLn8zHw==",
+    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/BuzzwordGame/resources/profiledata/Ish.json"
   }
 }

@@ -48,13 +48,13 @@ public class ProfileManager implements JFLAGFileComponent{
         return userList.get(userName);
     }
 
-    private void init(File file){
+    /*private void init(File file){
 
     }
 
     public boolean login(String user, String pass){
         return true;
-    }
+    }*/
 
     @Override
     public void saveData(Path target) throws IOException {
