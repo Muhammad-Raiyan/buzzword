@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static settings.AppPropertyType.*;
@@ -125,8 +126,13 @@ public class AppFileController implements FileController {
         UserData userProfile = new UserData();
         userProfile.createUser(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword());
         appTemplate.setCurrentUser(userProfile);
-        ProfileManager profileManager = (ProfileManager) appTemplate.getFileComponent();
+
+        Path target = Paths.get("JFLAG\\resources\\profiledata\\users.json");
+        ProfileManager profileManager = appTemplate.getProfileManager();
         profileManager.addUser(userProfile);
+        profileManager.saveData(userProfile, target);
+
+        profileDialogSingleton.close();
 
     }
 

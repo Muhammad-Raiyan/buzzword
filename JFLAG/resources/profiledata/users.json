@@ -1,0 +1,12 @@
+{
+  "ishaas" : {
+    "userName" : "ishaas",
+    "password" : "gfsg",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/ishaas.json"
+  },
+  "dfsg" : {
+    "userName" : "dfsg",
+    "password" : "trewt",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/dfsg.json"
+  }
+}

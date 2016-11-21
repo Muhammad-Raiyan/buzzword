@@ -54,7 +54,6 @@ public class ProfileDialogSingleton extends JFLAGScene{
             AppGUI.buttonState = ButtonState.SIGNUP;
             setChanged();
             notifyObservers();
-            //this.setSelection("Sign Up");
         });
         login.setOnAction(event -> primaryStage.close());
         cancel.setOnAction(event -> primaryStage.close());
@@ -112,7 +111,8 @@ public class ProfileDialogSingleton extends JFLAGScene{
     }
 
     public void close(){
-        //singleton = new ProfileDialogSingleton();
+        userName.clear();
+        password.clear();
         primaryStage.close();
     }
 
