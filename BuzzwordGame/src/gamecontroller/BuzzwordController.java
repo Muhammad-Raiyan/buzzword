@@ -33,7 +33,7 @@ public class BuzzwordController extends AppFileController{
                 success = true;
             }
             catch (IOException e){
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
