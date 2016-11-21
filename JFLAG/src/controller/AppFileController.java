@@ -115,6 +115,9 @@ public class AppFileController implements FileController {
         if(!profileManager.validate(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword())){
             throw new IOException("Incorrect");
         }
+        else {
+            appTemplate.setCurrentUser(profileManager.getUser(profileDialogSingleton.getUserName()));
+        }
     }
 
     public void handleSignUpRequest() throws IOException {
@@ -124,7 +127,7 @@ public class AppFileController implements FileController {
 
         UserData userProfile = new UserData();
         userProfile.createUser(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword());
-        appTemplate.setCurrentUser(userProfile);
+
 
         Path target = Paths.get("JFLAG\\resources\\profiledata\\users.json");
         ProfileManager profileManager = (ProfileManager) appTemplate.getFileComponent();

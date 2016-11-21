@@ -35,6 +35,7 @@ public class HomeSceneSingleton {
     private VBox rightBar;
     private int currentLevel;
     private Region r;
+    private String userName;
 
 
     public static HomeSceneSingleton getHomeSceneSingleton(){
@@ -43,6 +44,16 @@ public class HomeSceneSingleton {
     }
 
     public HomeSceneSingleton(){
+        //userName
+        userName = "User";
+        layout();
+        initializeHandlers();
+        initializeStyle();
+    }
+
+    public HomeSceneSingleton(String userName){
+        //userName
+        this.userName = userName;
         layout();
         initializeHandlers();
         initializeStyle();
@@ -61,7 +72,7 @@ public class HomeSceneSingleton {
         startPlaying = new Button("New Game");
         selectLevel = new Button("Select Level");
         home = new Button("Home");
-        user = new Button("USER");
+        user = new Button(userName);
         selectMode = new ChoiceBox<>();
         selectMode.getStylesheets().add("css/ChoiceBoxStyle.css");
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
@@ -117,7 +128,7 @@ public class HomeSceneSingleton {
 
     public void init(JFLAGWorkspaceComponent workspace) {
         this.workspace = (Workspace) workspace;
-        homeSceneSingleton = new HomeSceneSingleton();
+        homeSceneSingleton = new HomeSceneSingleton(this.workspace.getUserName());
     }
 
     public void buildGrid() {

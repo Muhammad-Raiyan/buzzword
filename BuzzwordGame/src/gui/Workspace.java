@@ -12,6 +12,7 @@ import ui.InitialSceneSingleton;
  */
 public class Workspace extends JFLAGWorkspaceComponent{
     private AppGUI gui;
+    private JFLAGApplication application;
     private Stage primaryStage;
     private Scene primaryScene;
     private HomeSceneSingleton homeSceneSingleton;
@@ -20,6 +21,7 @@ public class Workspace extends JFLAGWorkspaceComponent{
     private LevelPane levelPane;
 
     public Workspace(JFLAGApplication app){
+        this.application = app;
         gui = app.getGUI();
         primaryStage = gui.getPrimaryStage();
         homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
@@ -42,8 +44,12 @@ public class Workspace extends JFLAGWorkspaceComponent{
     }
 
     public void startBuzzword(){
-        homeSceneSingleton.init(null);
+        homeSceneSingleton.init(this);
         primaryScene = homeSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
+    }
+
+    public String getUserName() {
+        return this.application.getCurrentUser().getUserName();
     }
 }

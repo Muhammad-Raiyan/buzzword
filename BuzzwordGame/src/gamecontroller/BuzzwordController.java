@@ -38,9 +38,9 @@ public class BuzzwordController extends AppFileController{
         }
 
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
-        if(profileDialogSingleton.getSelection().equals("login"))
+        if(profileDialogSingleton.getSelection().equals("login")) {
             workspace.startBuzzword();
-
+        }
     }
 
     @Override

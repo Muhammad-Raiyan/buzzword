@@ -53,4 +53,5 @@ public abstract class JFLAGWorkspaceComponent implements JFLAGStyleArbiter {
      * This method is defined completely at the concrete implementation level.
      */
     public abstract void reloadWorkspace();
+
 }

@@ -44,6 +44,10 @@ public class ProfileManager implements JFLAGFileComponent{
         System.out.println(newUser);
     }
 
+    public UserData getUser(String userName){
+        return userList.get(userName);
+    }
+
     private void init(File file){
 
     }
