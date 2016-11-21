@@ -1,17 +1,12 @@
 {
-  "ghrd" : {
-    "userName" : "ghrd",
-    "password" : "hgfdj",
-    "jsonFile" : "file:///C:/resources/profiledata/ghrd.json"
-  },
-  "bnvfdnb" : {
-    "userName" : "bnvfdnb",
-    "password" : "hbgfdhn",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/bnvfdnb.json"
+  "asd" : {
+    "userName" : "asd",
+    "password" : "qwe",
+    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/asd.json"
   },
   "ish" : {
     "userName" : "ish",
     "password" : "Ishmam",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/JFLAG/resources/profiledata/ish.json"
+    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/JFLAG/resources/profiledata/ish.json"
   }
 }

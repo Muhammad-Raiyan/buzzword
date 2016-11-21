@@ -59,6 +59,12 @@ public class AppGUI implements JFLAGStyleArbiter{
         return primaryStage;
     }
 
+    public void changeToInitial(){
+        buttonState = ButtonState.INITIAL;
+        primaryScene = InitialSceneSingleton.getInitialSceneSingleton().getScene();
+        primaryStage.setScene(primaryScene);
+    }
+
     /*public Pane getAppPane(){
         return pane;
     }*/

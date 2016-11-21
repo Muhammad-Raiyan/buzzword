@@ -143,6 +143,11 @@ public class AppFileController implements FileController {
         System.out.println("Help");
     }
 
+    public void handleLogoutRequest() {
+        appTemplate.setCurrentUser(null);
+        appTemplate.getGUI().changeToInitial();
+    }
+
     /**
      * This helper method verifies that the user really wants to save their unsaved work, which they might not want to
      * do. Note that it could be used in multiple, like creating new work, or opening another one. The user will be

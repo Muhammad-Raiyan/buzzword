@@ -1,6 +1,7 @@
 package observer;
 
 import app.JFLAGApplication;
+import controller.AppFileController;
 import controller.FileController;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class ButtonObserver implements Observer {
     }
     @Override
     public void update(Observable o, Object arg) {
-        fileController = app.getGameController();
+        fileController = (AppFileController)app.getGameController();
         String ID = app.getGUI().buttonState.toString();
         switch (ID){
             case "CREATE" :
@@ -44,7 +45,8 @@ public class ButtonObserver implements Observer {
                 }
                 break;
 
-            case "LOGIN" :
+            case "LOGOUT" :
+                fileController.handleLogoutRequest();
                 break;
 
             case "HELP" :

@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import state.ButtonState;
+import ui.InitialSceneSingleton;
 import ui.JFLAGScene;
 
 /**
@@ -30,7 +31,7 @@ public class UserPane extends JFLAGScene {
         data = new VBox();
         data.setMinHeight(500);
 
-        logout = new Button("Logout");
+        logout = InitialSceneSingleton.getInitialSceneSingleton().getLogoutButton();
         bottomPane = new VBox();
         bottomPane.getChildren().add(logout);
         bottomPane.setAlignment(Pos.CENTER);

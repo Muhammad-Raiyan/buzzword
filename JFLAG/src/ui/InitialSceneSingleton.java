@@ -17,7 +17,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     public static InitialSceneSingleton initialSceneSingleton = null;
     private static Scene scene;
     private BorderPane pane;
-    private Button createProfile, login, help, exit;
+    private Button createProfile, login, help, exit, logout;
     private ButtonState buttonState;
     private VBox rightBar;
 
@@ -49,6 +49,8 @@ public class InitialSceneSingleton extends JFLAGScene{
         login = new Button("Sign In");
 
         help = new Button("Help");
+
+        logout = new Button("Logout");
 
         leftBar.getChildren().addAll(filler, createProfile, login, help);
 
@@ -100,7 +102,11 @@ public class InitialSceneSingleton extends JFLAGScene{
             notifyObservers();
         });
         help.setOnAction(event -> System.out.println("Help"));
-
+        logout.setOnAction(event -> {
+            AppGUI.buttonState = ButtonState.LOGOUT;
+            setChanged();
+            notifyObservers();
+        });
     }
 
     public void initializeStyle() {
@@ -112,6 +118,9 @@ public class InitialSceneSingleton extends JFLAGScene{
         this.buttonState = buttonState;
     }
 
+    public Button getLogoutButton(){
+        return logout;
+    }
 
 
 }

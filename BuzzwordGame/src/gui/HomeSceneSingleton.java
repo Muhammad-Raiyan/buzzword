@@ -98,7 +98,7 @@ public class HomeSceneSingleton {
         pane.setLeft(leftBar);
         primaryScene = new Scene(pane);
     }
-   // @Override
+
     public void initializeHandlers() {
         startPlaying.setOnAction(event -> {
             gamePane = (lp == null) ? new BuzzwordPane(selectMode.getValue(), "1")

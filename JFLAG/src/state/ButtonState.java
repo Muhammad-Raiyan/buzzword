@@ -8,12 +8,12 @@ public enum ButtonState {
     CREATE,
     SIGNIN,
     SIGNUP,
-    LOGIN,
     HELP,
     START,
     LEVEL,
     MODE,
     HOME,
     PROFILE,
+    LOGOUT,
     EXIT
 }
