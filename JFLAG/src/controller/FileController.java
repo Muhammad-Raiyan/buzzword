@@ -14,4 +14,6 @@ public interface FileController {
     void handleLoginRequest() throws IOException;
 
     void handleHelpRequest() throws IOException;
+
+    void handleSignUpRequest() throws IOException;
 }

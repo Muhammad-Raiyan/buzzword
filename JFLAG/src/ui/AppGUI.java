@@ -24,7 +24,6 @@ public class AppGUI implements JFLAGStyleArbiter{
     public static ButtonState buttonState;
     public ButtonObserver buttonObserver;
 
-
     public AppGUI(JFLAGApplication app, Stage primaryStage, String appTitle){
         this.app = app;
         this.primaryStage = primaryStage;
@@ -32,10 +31,19 @@ public class AppGUI implements JFLAGStyleArbiter{
         sceneMap = new HashMap<>();
         buttonObserver = new ButtonObserver(this.app);
         buttonState = ButtonState.INITIAL;
+
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
+        profileDialogSingleton.addObserver(buttonObserver);
         InitialSceneSingleton initialSceneSingleton = InitialSceneSingleton.getInitialSceneSingleton();
-        initialSceneSingleton.init(buttonState);
         initialSceneSingleton.addObserver(buttonObserver);
+        AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
+        YesNoCancelDialogSingleton yesNoDialog   = YesNoCancelDialogSingleton.getSingleton();
+
+        initialSceneSingleton.init(buttonState);
+        profileDialogSingleton.init(primaryStage);
+        messageDialog.init(primaryStage);
+        yesNoDialog.init(primaryStage);
+
         primaryScene = initialSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
         //primaryStage.initStyle(StageStyle.UNIFIED);

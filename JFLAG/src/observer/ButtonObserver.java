@@ -36,6 +36,14 @@ public class ButtonObserver implements Observer {
                     e.printStackTrace();
                 }
                 break;
+            case "SIGNUP" :
+                try {
+                    fileController.handleSignUpRequest();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
             case "HELP" :
                 try {
                     fileController.handleHelpRequest();

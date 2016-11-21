@@ -14,7 +14,10 @@ public class Workspace extends JFLAGWorkspaceComponent{
     private AppGUI gui;
     private Stage primaryStage;
     private Scene primaryScene;
-    HomeSceneSingleton homeSceneSingleton;
+    private HomeSceneSingleton homeSceneSingleton;
+    private BuzzwordPane gamePane;
+    private UserPane userPane;
+    private LevelPane levelPane;
 
     public Workspace(JFLAGApplication app){
         gui = app.getGUI();
@@ -39,7 +42,7 @@ public class Workspace extends JFLAGWorkspaceComponent{
     }
 
     public void startBuzzword(){
-        homeSceneSingleton.init(null);
+        homeSceneSingleton.init(this);
         primaryScene = homeSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
     }

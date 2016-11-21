@@ -41,17 +41,6 @@ public class AppFileController implements FileController {
         this.appTemplate = appTemplate;
     }
 
-    /**
-     * Starts the process of editing new Work. If work is already being edited, it will prompt the user to save it
-     * first.
-     */
-    public void handleNewRequest() {
-        System.out.println("HEllo from NEw");
-        JFLAGDataComponent data = appTemplate.getDataComponent();
-
-        //appTemplate.initGame();
-    }
-
     private void ensureActivatedWorkspace() {
         //appTemplate.getWorkspaceComponent().activateWorkspace(appTemplate.getGUI().getAppPane());
     }
@@ -124,6 +113,12 @@ public class AppFileController implements FileController {
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
         profileDialogSingleton.changeToLogin();
         profileDialogSingleton.show();
+    }
+
+    public void handleSignUpRequest() throws IOException {
+        ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
+        System.out.println("User: " + profileDialogSingleton.getUserName());
+        System.out.println("Password: " + profileDialogSingleton.getPassword());
     }
 
     @Override

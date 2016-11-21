@@ -87,7 +87,6 @@ public class InitialSceneSingleton extends JFLAGScene{
 
     @Override
     public void initializeHandlers() {
-        ProfileDialogSingleton s = ProfileDialogSingleton.getProfileCreator();
         createProfile.setOnAction(event -> {
             AppGUI.buttonState = ButtonState.CREATE;
             setChanged();

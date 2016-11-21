@@ -56,13 +56,14 @@ public abstract class JFLAGApplication extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
+        /*AppMessageDialogSingleton  messageDialog = AppMessageDialogSingleton.getSingleton();
         YesNoCancelDialogSingleton yesNoDialog   = YesNoCancelDialogSingleton.getSingleton();
         ProfileDialogSingleton profileCreator = ProfileDialogSingleton.getProfileCreator();
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+
         messageDialog.init(primaryStage);
         yesNoDialog.init(primaryStage);
-        profileCreator.init(primaryStage);
+        profileCreator.init(primaryStage);*/
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         JFLAGComponentsBuilder builder = makeAppBuilderHook();
 
         try {

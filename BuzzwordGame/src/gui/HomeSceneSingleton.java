@@ -1,5 +1,6 @@
 package gui;
 
+import components.JFLAGWorkspaceComponent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,31 +15,78 @@ import ui.JFLAGScene;
 /**
  * Created by ishmam on 11/11/2016.
  */
-public class HomeSceneSingleton extends JFLAGScene {
+public class HomeSceneSingleton {
 
     private String sceneID;
-
+    private Workspace workspace;
     public static HomeSceneSingleton homeSceneSingleton;
+
     private static Scene primaryScene;
-    private Button startPlaying, selectLevel, home, user;
-    private ChoiceBox<String> selectMode;
     private BorderPane pane;
     private GridPane buttonGrid;
+    private Button startPlaying, selectLevel, home, user;
+    private ChoiceBox<String> selectMode;
+
     private ButtonState buttonState;
     private BuzzwordPane gamePane;
     private UserPane userPane;
     private LevelPane lp;
     private VBox rightBar;
     private int currentLevel;
+    private Region r;
 
-    Region r;
+
+    public static HomeSceneSingleton getHomeSceneSingleton(){
+
+        return homeSceneSingleton == null? new HomeSceneSingleton() : homeSceneSingleton;
+    }
 
     public HomeSceneSingleton(){
         layout();
         initializeHandlers();
         initializeStyle();
     }
-    @Override
+
+    public void layout() {
+        pane = new BorderPane();
+        pane.setPrefSize(800, 600);
+
+        VBox leftBar = new VBox(10);
+        leftBar.setId("left-bar");
+
+        Region filler = new Region();
+        filler.setPrefSize(leftBar.getPrefWidth(), 120);
+
+        startPlaying = new Button("New Game");
+        selectLevel = new Button("Select Level");
+        home = new Button("Home");
+        user = new Button("USER");
+        selectMode = new ChoiceBox<>();
+        selectMode.getStylesheets().add("css/ChoiceBoxStyle.css");
+        selectMode.setTooltip(new Tooltip("Select Game Mode"));
+        selectMode.setValue("Dictionary Words");
+        selectMode.getItems().addAll("Dictionary Words", "Famous People", "Places", "Science");
+
+
+        leftBar.getChildren().addAll(filler, startPlaying, selectMode, selectLevel, home, user);
+
+        rightBar = new VBox();
+        rightBar.setId("right-bar");
+
+        BorderPane topPane = InitialSceneSingleton.getInitialSceneSingleton().createTopPane();
+        buttonGrid = new GridPane();
+        buildGrid();
+        r = new Region();
+        r.setPrefHeight(150);
+        VBox rightPane = new VBox(r, buttonGrid);
+        rightPane.setAlignment(Pos.CENTER);
+        rightBar.getChildren().addAll(topPane, rightPane);
+
+        pane.setCenter(rightBar);
+        pane.setLeft(leftBar);
+        primaryScene = new Scene(pane);
+    }
+   // @Override
     public void initializeHandlers() {
         startPlaying.setOnAction(event -> {
             gamePane = (lp == null) ? new BuzzwordPane(selectMode.getValue(), "1")
@@ -62,59 +110,12 @@ public class HomeSceneSingleton extends JFLAGScene {
 
     }
 
-    public static HomeSceneSingleton getHomeSceneSingleton(){
-        return homeSceneSingleton == null? new HomeSceneSingleton() : homeSceneSingleton;
-    }
-    @Override
     public void initializeStyle() {
         primaryScene.getStylesheets().add("css/SceneStyle.css");
     }
 
-    @Override
-    public void init(ButtonState buttonState) {
-        rightBar.getChildren().set(1, new VBox(r, buttonGrid));
-    }
-
-
-    @Override
-    public void layout() {
-        pane = new BorderPane();
-        pane.setPrefSize(800, 600);
-
-        VBox leftBar = new VBox(10);
-        leftBar.setId("left-bar");
-
-        Region filler = new Region();
-        filler.setPrefSize(leftBar.getPrefWidth(), 120);
-
-        startPlaying = new Button("New Game");
-        selectLevel = new Button("Select Level");
-        home = new Button("Home");
-        user = new Button("USER");
-        selectMode = new ChoiceBox<>();
-        selectMode.getStylesheets().add("css/ChoiceBoxStyle.css");
-        selectMode.setTooltip(new Tooltip("Select Game Mode"));
-        selectMode.setValue("Dictionary Words");
-        selectMode.getItems().addAll("Dictionary Words", "Famous People", "Places", "Science");
-
-
-        leftBar.getChildren().addAll(filler, startPlaying, selectLevel, selectMode, home, user);
-
-        rightBar = new VBox();
-        rightBar.setId("right-bar");
-
-        BorderPane topPane = InitialSceneSingleton.getInitialSceneSingleton().createTopPane();
-        buttonGrid = new GridPane();
-        buildGrid();
-        r = new Region();
-        r.setPrefHeight(150);
-        VBox rightPane = new VBox(r, buttonGrid);
-        rightPane.setAlignment(Pos.CENTER);
-        rightBar.getChildren().addAll(topPane, rightPane);
-
-        pane.setCenter(rightBar);
-        pane.setLeft(leftBar);
-        primaryScene = new Scene(pane);
+    public void init(JFLAGWorkspaceComponent workspace) {
+        this.workspace = (Workspace) workspace;
     }
 
     public void buildGrid() {
@@ -144,7 +145,7 @@ public class HomeSceneSingleton extends JFLAGScene {
     public GridPane getButtonGrid(){
         return buttonGrid;
     }
-    @Override
+    //@Override
     public Scene getScene() {
         return primaryScene;
     }

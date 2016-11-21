@@ -7,6 +7,8 @@ public enum ButtonState {
     INITIAL,
     CREATE,
     LOGIN,
+    SIGNUP,
+    SIGNIN,
     HELP,
     START,
     LEVEL,
