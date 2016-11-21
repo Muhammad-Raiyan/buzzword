@@ -6,9 +6,9 @@ package state;
 public enum ButtonState {
     INITIAL,
     CREATE,
-    LOGIN,
-    SIGNUP,
     SIGNIN,
+    SIGNUP,
+    LOGIN,
     HELP,
     START,
     LEVEL,

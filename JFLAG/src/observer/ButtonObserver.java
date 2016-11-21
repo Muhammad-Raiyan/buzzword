@@ -29,9 +29,9 @@ public class ButtonObserver implements Observer {
                     e.printStackTrace();
                 }
                 break;
-            case "LOGIN" :
+            case "SIGNIN" :
                 try {
-                    fileController.handleLoginRequest();
+                    fileController.handleSignInRequest();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -42,6 +42,9 @@ public class ButtonObserver implements Observer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                break;
+
+            case "LOGIN" :
                 break;
 
             case "HELP" :

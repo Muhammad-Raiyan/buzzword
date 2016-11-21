@@ -1,10 +1,12 @@
 package ui;
 
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import state.ButtonState;
 
 /**
@@ -44,7 +46,7 @@ public class InitialSceneSingleton extends JFLAGScene{
 
         createProfile = new Button("Create New Profile");
 
-        login = new Button("Login");
+        login = new Button("Sign In");
 
         help = new Button("Help");
 
@@ -93,7 +95,7 @@ public class InitialSceneSingleton extends JFLAGScene{
             notifyObservers();
         });
         login.setOnAction(event -> {
-            AppGUI.buttonState = ButtonState.LOGIN;
+            AppGUI.buttonState = ButtonState.SIGNIN;
             setChanged();
             notifyObservers();
         });
@@ -109,5 +111,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     public void init(ButtonState buttonState) {
         this.buttonState = buttonState;
     }
+
+
 
 }

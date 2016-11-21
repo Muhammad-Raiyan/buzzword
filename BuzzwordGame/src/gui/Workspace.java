@@ -42,7 +42,7 @@ public class Workspace extends JFLAGWorkspaceComponent{
     }
 
     public void startBuzzword(){
-        homeSceneSingleton.init(this);
+        homeSceneSingleton.init(null);
         primaryScene = homeSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
     }

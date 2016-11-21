@@ -1,11 +1,12 @@
 package data;
 
 import app.JFLAGApplication;
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import components.JFLAGDataComponent;
 import components.JFLAGFileComponent;
 
@@ -17,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -45,10 +45,6 @@ public class ProfileManager implements JFLAGFileComponent{
     }
 
     private void init(File file){
-
-    }
-
-    private void loadToList(){
 
     }
 
@@ -112,5 +108,12 @@ public class ProfileManager implements JFLAGFileComponent{
     @Override
     public void exportData(JFLAGDataComponent data, Path filePath) throws IOException {
 
+    }
+
+    public boolean validate(String userName, String password){
+
+        if (userList.containsKey(userName) && userList.get(userName).getPassword().equals(password))
+            return true;
+        return false;
     }
 }

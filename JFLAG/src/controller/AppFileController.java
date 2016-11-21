@@ -1,26 +1,20 @@
 package controller;
 
 import app.JFLAGApplication;
-import components.JFLAGDataComponent;
 import data.ProfileManager;
 import data.UserData;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import propertymanager.PropertyManager;
-import ui.AppMessageDialogSingleton;
 import ui.ProfileDialogSingleton;
 import ui.YesNoCancelDialogSingleton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static settings.AppPropertyType.*;
-import static settings.InitializationParameters.APP_WORKDIR_PATH;
+import static settings.AppPropertyType.SAVE_UNSAVED_WORK_MESSAGE;
+import static settings.AppPropertyType.SAVE_UNSAVED_WORK_TITLE;
 
 /**
  * This class provides the event programmed responses for the file controls
@@ -112,10 +106,15 @@ public class AppFileController implements FileController {
     }
 
     @Override
-    public void handleLoginRequest() throws IOException {
+    public void handleSignInRequest() throws IOException {
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
         profileDialogSingleton.changeToLogin();
         profileDialogSingleton.show();
+        ProfileManager profileManager = (ProfileManager) appTemplate.getFileComponent();
+        if(profileDialogSingleton.getSelection().equals("cancel")) return;
+        if(!profileManager.validate(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword())){
+            throw new IOException("Incorrect");
+        }
     }
 
     public void handleSignUpRequest() throws IOException {

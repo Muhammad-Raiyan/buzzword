@@ -8,12 +8,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import propertymanager.PropertyManager;
-import ui.*;
-import observer.ButtonObserver;
+import ui.AppGUI;
+import ui.AppMessageDialogSingleton;
 
 import java.net.URL;
 
-import static settings.AppPropertyType.*;
+import static settings.AppPropertyType.PROPERTIES_LOAD_ERROR_MESSAGE;
+import static settings.AppPropertyType.PROPERTIES_LOAD_ERROR_TITLE;
 
 /**
  * @author Ritwik Banerjee
@@ -124,7 +125,4 @@ public abstract class JFLAGApplication extends Application{
         this.currentUser = currentUser;
     }
 
-    public ProfileManager getProfileManager() {
-        return profileManager;
-    }
 }

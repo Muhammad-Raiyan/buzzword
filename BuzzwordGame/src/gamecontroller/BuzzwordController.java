@@ -2,7 +2,6 @@ package gamecontroller;
 
 import app.JFLAGApplication;
 import controller.AppFileController;
-import controller.FileController;
 import gui.Workspace;
 import ui.ProfileDialogSingleton;
 
@@ -25,14 +24,22 @@ public class BuzzwordController extends AppFileController{
         workspace = (Workspace) appTemplate.getWorkspaceComponent();
     }
 
-    public void handleLoginRequest() throws IOException {
-        try{
-            super.handleLoginRequest();
-        }
-        catch (IOException e){
+    public void handleSignInRequest() throws IOException {
+        Boolean success = false;
 
+        while(!success){
+            try{
+                super.handleSignInRequest();
+                success = true;
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
         }
-        workspace.startBuzzword();
+
+        ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
+        if(profileDialogSingleton.getSelection().equals("login"))
+            workspace.startBuzzword();
 
     }
 

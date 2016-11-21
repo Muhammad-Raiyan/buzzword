@@ -3,14 +3,15 @@ package gui;
 import components.JFLAGWorkspaceComponent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import state.ButtonState;
 import ui.InitialSceneSingleton;
-import ui.JFLAGScene;
 
 /**
  * Created by ishmam on 11/11/2016.
@@ -116,6 +117,7 @@ public class HomeSceneSingleton {
 
     public void init(JFLAGWorkspaceComponent workspace) {
         this.workspace = (Workspace) workspace;
+        homeSceneSingleton = new HomeSceneSingleton();
     }
 
     public void buildGrid() {
