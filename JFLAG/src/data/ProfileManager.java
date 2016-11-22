@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import components.JFLAGDataComponent;
 import components.JFLAGFileComponent;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,7 +26,7 @@ public class ProfileManager implements JFLAGFileComponent{
     private UserData user;
     private Path allProfilePath;
 
-    private final static String USERNAME = "userName", PASSWORD = "password", FILENAME = "jsonFile";
+    private final static String USERNAME = "userName", PASSWORD = "password";
 
     public ProfileManager(JFLAGApplication app){
         userList = new HashMap<>();
@@ -41,7 +40,7 @@ public class ProfileManager implements JFLAGFileComponent{
 
     public void addUser(UserData newUser){
         userList.put(newUser.getUserName(), newUser);
-        System.out.println(newUser);
+        System.out.println(newUser + " :ProfMan 43");
     }
 
     public UserData getUser(String userName){
@@ -99,9 +98,6 @@ public class ProfileManager implements JFLAGFileComponent{
                     case PASSWORD:
                         jsonParser.nextToken();
                         data.setPassword(jsonParser.getValueAsString());
-                        break;
-                    case FILENAME:
-                        jsonParser.nextToken();
                         addUser(data);
                         break;
                 }

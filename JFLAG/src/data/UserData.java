@@ -16,7 +16,6 @@ import java.security.NoSuchAlgorithmException;
 public class UserData implements JFLAGDataComponent{
     private String userName;
     private String password;
-    private Path jsonFile;
     private JFLAGApplication app;
 
     public UserData(){
@@ -26,13 +25,6 @@ public class UserData implements JFLAGDataComponent{
     public void createUser(String userName, String password){
         this.userName = userName;
         this.password = encryptPass(password);
-        jsonFile = generateJsonFileName(userName);
-    }
-
-    public UserData(String userName, String password, Path jsonFile) {
-        this.userName = userName;
-        this.password = password;
-        this.jsonFile = jsonFile;
     }
 
     public static String encryptPass(String input){
@@ -50,11 +42,6 @@ public class UserData implements JFLAGDataComponent{
         byte raw[] = md.digest();
         String hash = (new BASE64Encoder()).encode(raw);
         return hash;
-    }
-
-    private Path generateJsonFileName(String input){
-        Path target = Paths.get("BuzzwordGame\\resources\\profiledata\\" + input + ".json").toAbsolutePath();
-        return target;
     }
 
     public boolean checkUser(String user){
@@ -75,7 +62,6 @@ public class UserData implements JFLAGDataComponent{
 
     public void setUserName(String userName) {
         this.userName = userName;
-        this.jsonFile = generateJsonFileName(userName);
     }
 
     public String getPassword() {
@@ -86,12 +72,12 @@ public class UserData implements JFLAGDataComponent{
         this.password = password;
     }
 
-    public Path getJsonFile() {
-        return jsonFile;
+    private Path generateJsonFileName(String input){
+        return Paths.get("BuzzwordGame\\resources\\profiledata\\" + input + ".json").toAbsolutePath();
     }
 
-    public void setJsonFile(String jsonFile) {
-        this.jsonFile = Paths.get(jsonFile).toAbsolutePath();
+    public Path getJsonFile() {
+        return generateJsonFileName(userName);
     }
 
     @Override
@@ -99,7 +85,6 @@ public class UserData implements JFLAGDataComponent{
         return "UserData{" +
                 "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", jsonFile=" + jsonFile +
                 '}';
     }
 }

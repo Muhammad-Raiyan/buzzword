@@ -1,12 +1,12 @@
 {
   "asd" : {
     "userName" : "asd",
-    "password" : "NvF8OTmsPnsvyTlvqOlT6g==",
-    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/BuzzwordGame/resources/profiledata/asd.json"
+    "password" : "eBVpbsvxyW5olLd5RW0zDg==",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/asd.json"
   },
-  "Ish" : {
-    "userName" : "Ish",
-    "password" : "4vxxTEcn7pOV8yTNLn8zHw==",
-    "jsonFile" : "file:///Z:/Desktop/Intellijprojects/buzzword/BuzzwordGame/resources/profiledata/Ish.json"
+  "ish" : {
+    "userName" : "ish",
+    "password" : "g2e9tuuc2HJdZYyTlRqzcQ==",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/ish.json"
   }
 }
