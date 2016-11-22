@@ -2,8 +2,8 @@ package gamedata;
 
 import app.JFLAGApplication;
 import components.JFLAGDataComponent;
-import data.UserData;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,14 +11,32 @@ import java.util.HashMap;
  */
 public class BuzzwordData implements JFLAGDataComponent {
 
+    JFLAGApplication app;
     private Double progPerc;
-    private String currentMode, currentLevel;
-    private HashMap<String, Double> scores;
-    private HashMap<String, HashMap<String, Integer>> progress;
+    private String currentMode;
+    private int currentLevel;
+    private ArrayList<Integer> scores;
+    private HashMap<String, ArrayList<Integer>> progress;
 
     public BuzzwordData(JFLAGApplication app){
-
+        this.app = app;
+        currentLevel = 1;
+        currentMode = "Dictionary";
+        init();
     }
+
+    private void init() {
+        progress = new HashMap<>();
+        progress.put("Dictionary", new ArrayList<Integer>());
+        progress.get("Dictionary").add(0);
+        progress.put("Places", new ArrayList<Integer>());
+        progress.get("Places").add(0);
+        progress.put("Science", new ArrayList<Integer>());
+        progress.get("Science").add(0);
+        progress.put("Famous", new ArrayList<Integer>());
+        progress.get("Famous").add(0);
+    }
+
     @Override
     public void reset() {
 

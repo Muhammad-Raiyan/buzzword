@@ -112,10 +112,18 @@ public class HomeSceneSingleton {
     }
 
     public void startGame() {
-        gamePane = (lp == null) ? new BuzzwordPane(selectMode.getValue(), "1")
+        gamePane = (lp == null) ? new BuzzwordPane()
                 : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
 
+    }
+
+    public int getSelectedLevel(){
+        return lp.getSelectedLevel();
+    }
+
+    public String getSelectedMode(){
+        return selectMode.getValue();
     }
 
     private void initializeStyle() {
