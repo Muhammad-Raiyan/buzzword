@@ -1,10 +1,10 @@
 package gui;
 
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import state.ButtonState;
 import ui.InitialSceneSingleton;
@@ -18,7 +18,7 @@ public class UserPane extends JFLAGScene {
     BorderPane primaryPane;
     private Button logout;
     private VBox data;
-    private VBox bottomPane;
+    private HBox bottomPane;
 
     public UserPane() {
         layout();
@@ -32,11 +32,12 @@ public class UserPane extends JFLAGScene {
         data.setMinHeight(500);
 
         logout = InitialSceneSingleton.getInitialSceneSingleton().getLogoutButton();
-        bottomPane = new VBox();
-        bottomPane.getChildren().add(logout);
-        bottomPane.setAlignment(Pos.CENTER);
-        primaryPane.setCenter(data);
-        primaryPane.setBottom(logout);
+        bottomPane = new HBox();
+
+        Region space = new Region();
+        space.setPrefWidth(100);
+        bottomPane.getChildren().addAll(space, logout);
+        primaryPane.setCenter(logout);
     }
 
     public BorderPane getPrimaryPane() {

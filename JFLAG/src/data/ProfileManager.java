@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 /**
  * Created by ishmam on 10/30/2016.
+ * @author ishmam
  */
 public class ProfileManager implements JFLAGFileComponent{
     private HashMap<String, UserData> userList;

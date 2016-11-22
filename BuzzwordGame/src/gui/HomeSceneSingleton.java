@@ -10,17 +10,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import state.ButtonState;
 import ui.InitialSceneSingleton;
 
 /**
  * Created by ishmam on 11/11/2016.
+ * @author ishmam
  */
 public class HomeSceneSingleton {
 
-    private String sceneID;
     private Workspace workspace;
-    public static HomeSceneSingleton homeSceneSingleton;
+    private static HomeSceneSingleton homeSceneSingleton;
 
     private static Scene primaryScene;
     private BorderPane pane;
@@ -28,14 +27,12 @@ public class HomeSceneSingleton {
     private Button startPlaying, selectLevel, home, user;
     private ChoiceBox<String> selectMode;
 
-    private ButtonState buttonState;
     private BuzzwordPane gamePane;
     private UserPane userPane;
     private LevelPane lp;
     private VBox rightBar;
-    private int currentLevel;
     private Region r;
-    private String userName;
+    private final String userName;
 
 
     public static HomeSceneSingleton getHomeSceneSingleton(){
@@ -44,22 +41,17 @@ public class HomeSceneSingleton {
     }
 
     public HomeSceneSingleton(){
-        //userName
-        userName = "User";
-        layout();
-        initializeHandlers();
-        initializeStyle();
+        this("User");
     }
 
     public HomeSceneSingleton(String userName){
-        //userName
         this.userName = userName;
         layout();
         initializeHandlers();
         initializeStyle();
     }
 
-    public void layout() {
+    private void layout() {
         pane = new BorderPane();
         pane.setPrefSize(800, 600);
 
@@ -99,20 +91,12 @@ public class HomeSceneSingleton {
         primaryScene = new Scene(pane);
     }
 
-    public void initializeHandlers() {
-        startPlaying.setOnAction(event -> {
-            startGame();
-        });
-        selectLevel.setOnAction(event -> {
-            levelSelection();
-        });
+    private void initializeHandlers() {
+        startPlaying.setOnAction(event -> startGame());
+        selectLevel.setOnAction(event -> levelSelection());
 
-        selectMode.setOnAction(event -> {
-            levelSelection();
-        });
-        home.setOnAction(event -> {
-            rightBar.getChildren().set(1, new VBox(r, buttonGrid));
-        });
+        selectMode.setOnAction(event -> levelSelection());
+        home.setOnAction(event -> rightBar.getChildren().set(1, new VBox(r, buttonGrid)));
 
         user.setOnAction(event -> {
             userPane = new UserPane();
@@ -134,7 +118,7 @@ public class HomeSceneSingleton {
 
     }
 
-    public void initializeStyle() {
+    private void initializeStyle() {
         primaryScene.getStylesheets().add("css/SceneStyle.css");
     }
 
@@ -143,7 +127,7 @@ public class HomeSceneSingleton {
         homeSceneSingleton = new HomeSceneSingleton(this.workspace.getUserName());
     }
 
-    public void buildGrid() {
+    private void buildGrid() {
         buttonGrid = new GridPane();
         buttonGrid.setAlignment(Pos.CENTER);
         buttonGrid.setVgap(20);

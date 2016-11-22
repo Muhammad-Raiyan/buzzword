@@ -31,8 +31,5 @@ public class BuzzwordDataFile extends ProfileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
