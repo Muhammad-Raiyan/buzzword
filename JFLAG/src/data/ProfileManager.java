@@ -40,7 +40,7 @@ public class ProfileManager implements JFLAGFileComponent{
 
     public void addUser(UserData newUser){
         userList.put(newUser.getUserName(), newUser);
-        System.out.println(newUser + " :ProfMan 43");
+        System.out.println(newUser);   //TODO : Remove
     }
 
     public UserData getUser(String userName){

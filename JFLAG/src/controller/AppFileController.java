@@ -122,8 +122,8 @@ public class AppFileController implements FileController {
 
     public void handleSignUpRequest() throws IOException {
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
-        System.out.println("User: " + profileDialogSingleton.getUserName());
-        System.out.println("Password: " + profileDialogSingleton.getPassword());
+        System.out.println("User: " + profileDialogSingleton.getUserName());        //TODO : Remove
+        System.out.println("Password: " + profileDialogSingleton.getPassword());    //TODO : Remove
 
         UserData userProfile = new UserData();
         userProfile.createUser(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword());

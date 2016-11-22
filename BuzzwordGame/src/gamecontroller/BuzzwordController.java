@@ -8,7 +8,6 @@ import gui.Workspace;
 import ui.ProfileDialogSingleton;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -38,8 +37,8 @@ public class BuzzwordController extends AppFileController{
                 success = true;
                 gameFile.loadGameData(gameData, appTemplate.getCurrentUser().getJsonFile());
             }
-            catch (IOException e){
-                e.printStackTrace();
+            catch (Exception e){
+                e.printStackTrace();    //TODO : remove this before submission
             }
         }
 
