@@ -1,6 +1,7 @@
 package gui;
 
 import components.JFLAGWorkspaceComponent;
+import gamecontroller.BuzzwordState;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,11 +13,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import ui.InitialSceneSingleton;
 
+import java.util.Observable;
+
 /**
  * Created by ishmam on 11/11/2016.
  * @author ishmam
  */
-public class HomeSceneSingleton {
+public class HomeSceneSingleton extends Observable{
 
     private Workspace workspace;
     private static HomeSceneSingleton homeSceneSingleton;
@@ -36,16 +39,19 @@ public class HomeSceneSingleton {
 
 
     public static HomeSceneSingleton getHomeSceneSingleton(){
-
         return homeSceneSingleton == null? new HomeSceneSingleton() : homeSceneSingleton;
     }
 
     public HomeSceneSingleton(){
-        this("User");
+        userName = "USER";
+        layout();
+        initializeHandlers();
+        initializeStyle();
     }
 
-    public HomeSceneSingleton(String userName){
-        this.userName = userName;
+    public HomeSceneSingleton(Workspace workspace){
+        this.workspace = workspace;
+        this.userName = workspace.getUserName();
         layout();
         initializeHandlers();
         initializeStyle();
@@ -93,7 +99,11 @@ public class HomeSceneSingleton {
     }
 
     private void initializeHandlers() {
-        startPlaying.setOnAction(event -> startGame());
+        startPlaying.setOnAction(event -> {
+            workspace.gameState = BuzzwordState.START;
+            setChanged();
+            notifyObservers();
+        });
         restartGame.setOnAction(event -> startGame());
         selectLevel.setOnAction(event -> levelSelection());
 
@@ -156,7 +166,7 @@ public class HomeSceneSingleton {
 
     public void init(JFLAGWorkspaceComponent workspace) {
         this.workspace = (Workspace) workspace;
-        homeSceneSingleton = new HomeSceneSingleton(this.workspace.getUserName());
+        homeSceneSingleton = new HomeSceneSingleton(this.workspace);
     }
 
     private void buildGrid() {

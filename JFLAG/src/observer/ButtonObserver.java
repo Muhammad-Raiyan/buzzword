@@ -13,7 +13,7 @@ import java.util.Observer;
  */
 public class ButtonObserver implements Observer {
     private JFLAGApplication app;
-    private FileController fileController;
+    private AppFileController fileController;
 
     public ButtonObserver(JFLAGApplication app){
         this.app = app;

@@ -2,6 +2,8 @@ package gui;
 
 import app.JFLAGApplication;
 import components.JFLAGWorkspaceComponent;
+import gamecontroller.BuzzwordObserver;
+import gamecontroller.BuzzwordState;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ui.AppGUI;
@@ -11,20 +13,27 @@ import ui.InitialSceneSingleton;
  * Created by ishmam on 10/31/2016.
  */
 public class Workspace extends JFLAGWorkspaceComponent{
+
     private AppGUI gui;
     private JFLAGApplication application;
     private Stage primaryStage;
     private Scene primaryScene;
     private HomeSceneSingleton homeSceneSingleton;
-    private BuzzwordPane gamePane;
+    /*private BuzzwordPane gamePane;
     private UserPane userPane;
     private LevelPane levelPane;
+    */
+    public static BuzzwordState gameState;
+    private BuzzwordObserver buzzwordObserver;
 
     public Workspace(JFLAGApplication app){
         this.application = app;
         gui = app.getGUI();
         primaryStage = gui.getPrimaryStage();
+        gameState = BuzzwordState.HOME;
+        buzzwordObserver = new BuzzwordObserver(app);
         homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
+        homeSceneSingleton.addObserver(buzzwordObserver);
         setBuzzwordGrid();
     }
 
@@ -45,6 +54,7 @@ public class Workspace extends JFLAGWorkspaceComponent{
 
     public void startBuzzword(){
         homeSceneSingleton.init(this);
+        //homeSceneSingleton.addObserver(buzzwordObserver);
         primaryScene = homeSceneSingleton.getScene();
         primaryStage.setScene(primaryScene);
     }

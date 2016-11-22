@@ -37,6 +37,22 @@ public class BuzzwordData implements JFLAGDataComponent {
         progress.get("Famous").add(0);
     }
 
+    public String getCurrentMode() {
+        return currentMode;
+    }
+
+    public void setCurrentMode(String currentMode) {
+        this.currentMode = currentMode;
+    }
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
     @Override
     public void reset() {
 

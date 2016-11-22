@@ -4,6 +4,7 @@ import app.JFLAGApplication;
 import controller.AppFileController;
 import gamedata.BuzzwordData;
 import gamedata.BuzzwordDataFile;
+import gui.HomeSceneSingleton;
 import gui.Workspace;
 import ui.ProfileDialogSingleton;
 
@@ -51,5 +52,13 @@ public class BuzzwordController extends AppFileController{
     @Override
     public void handleExitRequest() {
         super.handleExitRequest();
+    }
+
+    public void handleStartRequest(){
+        HomeSceneSingleton homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
+        BuzzwordData gameData = (BuzzwordData) appTemplate.getDataComponent();
+        gameData.setCurrentLevel(homeSceneSingleton.getSelectedLevel());
+        gameData.setCurrentMode(homeSceneSingleton.getSelectedMode());
+        homeSceneSingleton.startGame();
     }
 }
