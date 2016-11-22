@@ -113,12 +113,10 @@ public class BuzzwordPane extends JFLAGScene{
 
     public void buildPath(){
         buttonList.forEach(node ->{
-            for(Button target : buttonList){
-                if(target != node){
-                    int diff = Math.abs(buttonList.indexOf(target)-buttonList.indexOf(node));
-                    if(diff == 1 || diff == 4) link(node, target);
-                }
-            }
+            buttonList.stream().filter(target -> target != node).forEachOrdered(target -> {
+                int diff = Math.abs(buttonList.indexOf(target) - buttonList.indexOf(node));
+                if (diff == 1 || diff == 4) link(node, target);
+            });
         });
     }
 
@@ -192,6 +190,8 @@ public class BuzzwordPane extends JFLAGScene{
     public void initializeHandlers() {
         play.setOnAction(event -> {
             centerPane.getChildren().set(3, pause);
+            VBox temp = HomeSceneSingleton.getHomeSceneSingleton().getLeftBar();
+            HomeSceneSingleton.getHomeSceneSingleton().switchToRestartButton();
             if(timeLine == null) {
                 timeLine = new Timeline(new KeyFrame(
                         Duration.seconds(sec),

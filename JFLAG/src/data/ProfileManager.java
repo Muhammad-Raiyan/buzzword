@@ -113,8 +113,6 @@ public class ProfileManager implements JFLAGFileComponent{
 
     public boolean validate(String userName, String password){
         password = UserData.encryptPass(password);
-        if (userList.containsKey(userName) && userList.get(userName).getPassword().equals(password))
-            return true;
-        return false;
+        return userList.containsKey(userName) && userList.get(userName).getPassword().equals(password);
     }
 }

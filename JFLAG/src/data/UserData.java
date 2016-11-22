@@ -35,13 +35,13 @@ public class UserData implements JFLAGDataComponent{
             e.printStackTrace();
         }
         try {
+            assert md != null;
             md.update(input.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         byte raw[] = md.digest();
-        String hash = (new BASE64Encoder()).encode(raw);
-        return hash;
+        return (new BASE64Encoder()).encode(raw);
     }
 
     public boolean checkUser(String user){

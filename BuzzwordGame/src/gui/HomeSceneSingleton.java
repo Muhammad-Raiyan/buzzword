@@ -24,13 +24,13 @@ public class HomeSceneSingleton {
     private static Scene primaryScene;
     private BorderPane pane;
     private GridPane buttonGrid;
-    private Button startPlaying, selectLevel, home, user;
+    private Button startPlaying, selectLevel, home, user, restartGame;
     private ChoiceBox<String> selectMode;
 
     private BuzzwordPane gamePane;
     private UserPane userPane;
     private LevelPane lp;
-    private VBox rightBar;
+    private VBox rightBar, leftBar;
     private Region r;
     private final String userName;
 
@@ -55,13 +55,14 @@ public class HomeSceneSingleton {
         pane = new BorderPane();
         pane.setPrefSize(800, 600);
 
-        VBox leftBar = new VBox(10);
+        leftBar = new VBox(10);
         leftBar.setId("left-bar");
 
         Region filler = new Region();
         filler.setPrefSize(leftBar.getPrefWidth(), 120);
 
         startPlaying = new Button("New Game");
+        restartGame = new Button("Restart Level");
         selectLevel = new Button("Select Level");
         home = new Button("Home");
         user = new Button(userName);
@@ -93,31 +94,54 @@ public class HomeSceneSingleton {
 
     private void initializeHandlers() {
         startPlaying.setOnAction(event -> startGame());
+        restartGame.setOnAction(event -> startGame());
         selectLevel.setOnAction(event -> levelSelection());
 
         selectMode.setOnAction(event -> levelSelection());
-        home.setOnAction(event -> rightBar.getChildren().set(1, new VBox(r, buttonGrid)));
+        home.setOnAction(event -> {
+            rightBar.getChildren().set(1, new VBox(r, buttonGrid));
+            switchToStartButton();
+        });
 
         user.setOnAction(event -> {
             userPane = new UserPane();
             rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
-
-
     }
 
     public void levelSelection() {
         lp = new LevelPane(selectMode.getValue());
+        switchToStartButton();
         rightBar.getChildren().set(1, lp.getPrimaryPane());
     }
 
     public void startGame() {
         gamePane = (lp == null) ? new BuzzwordPane()
                 : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
+        //if(leftBar.getChildren().get(1) == startPlaying) leftBar.getChildren().set(1, restartGame);
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
 
     }
 
+    public VBox getLeftBar(){
+        return leftBar;
+    }
+
+    public Button getStartPlaying() {
+        return startPlaying;
+    }
+
+    public Button getRestartGame() {
+        return restartGame;
+    }
+
+    public void switchToRestartButton(){
+        if(leftBar.getChildren().get(1) == startPlaying) leftBar.getChildren().set(1, restartGame);
+    }
+
+    public void switchToStartButton(){
+        if(leftBar.getChildren().get(1) == restartGame) leftBar.getChildren().set(1, startPlaying);
+    }
     public int getSelectedLevel(){
         return lp.getSelectedLevel();
     }
