@@ -101,15 +101,15 @@ public class HomeSceneSingleton {
 
     public void initializeHandlers() {
         startPlaying.setOnAction(event -> {
-            gamePane = (lp == null) ? new BuzzwordPane(selectMode.getValue(), "1")
-                    : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
-            rightBar.getChildren().set(1, gamePane.getPrimaryPane());
+            startGame();
         });
         selectLevel.setOnAction(event -> {
-            lp = new LevelPane(selectMode.getValue());
-            rightBar.getChildren().set(1, lp.getPrimaryPane());
+            levelSelection();
         });
 
+        selectMode.setOnAction(event -> {
+            levelSelection();
+        });
         home.setOnAction(event -> {
             rightBar.getChildren().set(1, new VBox(r, buttonGrid));
         });
@@ -119,6 +119,18 @@ public class HomeSceneSingleton {
             rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
 
+
+    }
+
+    public void levelSelection() {
+        lp = new LevelPane(selectMode.getValue());
+        rightBar.getChildren().set(1, lp.getPrimaryPane());
+    }
+
+    public void startGame() {
+        gamePane = (lp == null) ? new BuzzwordPane(selectMode.getValue(), "1")
+                : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
+        rightBar.getChildren().set(1, gamePane.getPrimaryPane());
 
     }
 

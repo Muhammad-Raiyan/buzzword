@@ -54,6 +54,7 @@ public class LevelPane extends JFLAGScene {
                 Button button = new Button(l);
                 button.setOnAction(event -> {
                     selectedLevel = Integer.parseInt(button.getText());
+                    HomeSceneSingleton.getHomeSceneSingleton().startGame();
                 });
                 button.setShape(new Circle(20));
                 button.setDisable(true);

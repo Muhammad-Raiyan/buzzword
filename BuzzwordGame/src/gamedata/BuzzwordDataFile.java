@@ -23,9 +23,16 @@ public class BuzzwordDataFile extends ProfileManager {
 
     public void loadGameData(JFLAGDataComponent data, Path filePath) throws IOException {
 
-        if(!filePath.toFile().exists()){
-            filePath.toFile().getParentFile().mkdirs();
-            filePath.toFile().createNewFile();
+        try {
+            if(!filePath.toFile().exists()){
+                filePath.toFile().getParentFile().mkdirs();
+                filePath.toFile().createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+
     }
 }
