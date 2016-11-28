@@ -21,6 +21,7 @@ import state.ButtonState;
 import ui.JFLAGScene;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -159,7 +160,9 @@ public class BuzzwordPane extends JFLAGScene{
 
         for(int i = 0; i< 4; i++){
             for(int j = 0; j<4; j++){
-                Button gameButton = new Button("a");
+                Random r = new Random();
+                char c = (char) (r.nextInt(26) + 'A');
+                Button gameButton = new Button(Character.toString(c));
                 gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
                 gameButton.setPrefSize(40, 40);
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
