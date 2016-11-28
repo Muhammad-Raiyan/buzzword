@@ -18,6 +18,9 @@ public class BuzzwordData implements JFLAGDataComponent {
     private ArrayList<Integer> scores;
     private HashMap<String, ArrayList<Integer>> progress;
 
+    public BuzzwordData() {
+    }
+
     public BuzzwordData(JFLAGApplication app){
         this.app = app;
         currentLevel = 1;
@@ -55,6 +58,19 @@ public class BuzzwordData implements JFLAGDataComponent {
 
     public HashMap<String, ArrayList<Integer>> getProgress() {
         return progress;
+    }
+
+    public void setProgress(HashMap<String, ArrayList<Integer>> progress) {
+        this.progress = progress;
+    }
+
+    @Override
+    public String toString() {
+        return "BuzzwordData{" +
+                "currentMode='" + currentMode + '\'' +
+                ", currentLevel=" + currentLevel +
+                ", progress=" + progress +
+                '}';
     }
 
     @Override
