@@ -17,13 +17,14 @@ public class BuzzwordObserver implements Observer {
 
     public BuzzwordObserver(JFLAGApplication application){
         this.application = application;
-        fileController = (BuzzwordController) application.getGameController();
+
         workspace = (Workspace) application.getWorkspaceComponent();
     }
 
     @Override
     public void update(Observable o, Object arg) {
         String ID = workspace.gameState.toString();
+        fileController = (BuzzwordController) application.getGameController();
         switch (ID){
             case "START" :
                 fileController.handleStartRequest();

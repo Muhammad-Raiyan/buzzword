@@ -57,8 +57,8 @@ public class BuzzwordController extends AppFileController{
     public void handleStartRequest(){
         HomeSceneSingleton homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
         BuzzwordData gameData = (BuzzwordData) appTemplate.getDataComponent();
-        gameData.setCurrentLevel(homeSceneSingleton.getSelectedLevel());
-        gameData.setCurrentMode(homeSceneSingleton.getSelectedMode());
+        //gameData.setCurrentLevel(homeSceneSingleton.getSelectedLevel());
+        //gameData.setCurrentMode(homeSceneSingleton.getSelectedMode());
         homeSceneSingleton.startGame();
     }
 }

@@ -128,7 +128,6 @@ public class HomeSceneSingleton extends Observable{
     public void startGame() {
         gamePane = (lp == null) ? new BuzzwordPane()
                 : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
-        //if(leftBar.getChildren().get(1) == startPlaying) leftBar.getChildren().set(1, restartGame);
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
 
     }
@@ -167,6 +166,7 @@ public class HomeSceneSingleton extends Observable{
     public void init(JFLAGWorkspaceComponent workspace) {
         this.workspace = (Workspace) workspace;
         homeSceneSingleton = new HomeSceneSingleton(this.workspace);
+        homeSceneSingleton.addObserver(((Workspace) workspace).getBuzzwordObserver());
     }
 
     private void buildGrid() {

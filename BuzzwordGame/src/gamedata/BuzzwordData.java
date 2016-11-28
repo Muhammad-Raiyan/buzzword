@@ -53,6 +53,10 @@ public class BuzzwordData implements JFLAGDataComponent {
         this.currentLevel = currentLevel;
     }
 
+    public HashMap<String, ArrayList<Integer>> getProgress() {
+        return progress;
+    }
+
     @Override
     public void reset() {
 

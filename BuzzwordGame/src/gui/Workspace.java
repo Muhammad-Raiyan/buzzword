@@ -62,4 +62,8 @@ public class Workspace extends JFLAGWorkspaceComponent{
     public String getUserName() {
         return this.application.getCurrentUser().getUserName();
     }
+
+    public BuzzwordObserver getBuzzwordObserver() {
+        return buzzwordObserver;
+    }
 }

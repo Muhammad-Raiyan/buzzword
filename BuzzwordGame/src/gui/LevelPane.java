@@ -63,8 +63,8 @@ public class LevelPane extends JFLAGScene {
             }
         }
         buttonArrayList.get(0).setDisable(false);
-        buttonArrayList.get(1).setDisable(false);
-        buttonArrayList.get(2).setDisable(false);
+       /* buttonArrayList.get(1).setDisable(false);
+        buttonArrayList.get(2).setDisable(false);*/
 
         primaryPane = new VBox(10);
         primaryPane.setId("levelPane");
