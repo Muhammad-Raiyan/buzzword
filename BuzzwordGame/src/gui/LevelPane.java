@@ -19,7 +19,7 @@ public class LevelPane extends JFLAGScene {
     private String mode;
     private VBox primaryPane;
     private GridPane levelGrid;
-    private int selectedLevel;
+    private int selectedLevel, unfinishedLevel;
     private ArrayList<Button> buttonArrayList;
 
     public LevelPane(){
@@ -74,6 +74,11 @@ public class LevelPane extends JFLAGScene {
     public int getSelectedLevel(){
         return selectedLevel;
     }
+
+    public String getMode() {
+        return mode;
+    }
+
     @Override
     public Scene getScene() {
         return null;

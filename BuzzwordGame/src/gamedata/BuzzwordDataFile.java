@@ -35,7 +35,7 @@ public class BuzzwordDataFile extends ProfileManager {
             else {
                 ObjectMapper mapper = new ObjectMapper();
                 data = mapper.readValue(filePath.toFile(), BuzzwordData.class);
-                System.out.println(data);
+                app.setData(data);
             }
         } catch (IOException e) {
             e.printStackTrace();

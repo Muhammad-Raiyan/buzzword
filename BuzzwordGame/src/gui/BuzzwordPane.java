@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class BuzzwordPane extends JFLAGScene{
 
     private String mode;
+    private int level;
     private BorderPane primaryPane;
     private BorderPane topPane;
     private VBox rightPane, centerPane;
@@ -37,17 +38,18 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList;
     private int sec = 10;
-    private Label level;
+    private Label levelLabel;
     private SimpleIntegerProperty secProperty;
     private ArrayList<Line> lineList;
 
     public BuzzwordPane() {
-        this("Dictionary Words", "1");
+        this("Dictionary Words", 1);
     }
 
-    public BuzzwordPane(String mode, String level) {
+    public BuzzwordPane(String mode, int level) {
         this.mode = mode;
-        this.level = new Label("LEVEL " + level);
+        this.level = (level);
+        this.levelLabel = new Label("LEVEL " + level);
         buttonList = new ArrayList<>();
         lineList = new ArrayList<>();
         layout();
@@ -64,66 +66,6 @@ public class BuzzwordPane extends JFLAGScene{
         primaryPane.setTop(topPane);
         primaryPane.setCenter(centerPane);
         primaryPane.setRight(rightPane);
-    }
-
-    private void centerLayout() {
-        centerPane = new VBox();
-        centerPane.setAlignment(Pos.CENTER);
-        buildGrid();
-
-        play = new Button("Play");
-        Image playImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PlayIcon.png"));
-        play.setGraphic(new ImageView(playImage));
-        pause = new Button("Pause");
-        Image pauseImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PauseIcon.png"));
-        pause.setGraphic(new ImageView(pauseImage));
-
-        level.setStyle("-fx-text-fill: white");
-        gridStack = new StackPane();
-        gridStack.getChildren().addAll(buttonGrid);
-        gridStack.getChildren().addAll(lineList);
-        Region r = new Region();
-        r.setPrefHeight(30);
-        centerPane.getChildren().addAll(gridStack, r, level, play);
-        //centerPane.getChildren().addAll(lineList);
-    }
-
-    private void buildGrid() {
-        buttonGrid = new GridPane();
-        buttonGrid.setAlignment(Pos.CENTER);
-        buttonGrid.setVgap(25);
-        buttonGrid.setHgap(25);
-
-        for(int i = 0; i< 4; i++){
-            for(int j = 0; j<4; j++){
-                Button gameButton = new Button("a");
-                gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
-                gameButton.setPrefSize(40, 40);
-                gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
-                gameButton.setId("gameButton");
-                gameButton.setOnMousePressed(event -> {
-                    gameButton.setEffect(new Glow(0.8));
-                });
-                buttonGrid.add(gameButton, i, j);
-                buttonList.add(gameButton);
-            }
-        }
-        buildPath();
-    }
-
-    public void buildPath(){
-        buttonList.forEach(node ->{
-            buttonList.stream().filter(target -> target != node).forEachOrdered(target -> {
-                int diff = Math.abs(buttonList.indexOf(target) - buttonList.indexOf(node));
-                if (diff == 1 || diff == 4) link(node, target);
-            });
-        });
-    }
-
-    public void link(Node from, Node to){
-        Line l = new Line(from.getLayoutX(), from.getLayoutY(), to.getLayoutX(), to.getLayoutY());
-        //System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
-        lineList.add(l);
     }
 
     public void topLayout(){
@@ -186,6 +128,67 @@ public class BuzzwordPane extends JFLAGScene{
 
         rightPane.getChildren().addAll(currentGuess, progress, targetBox);
     }
+
+    private void centerLayout() {
+        centerPane = new VBox();
+        centerPane.setAlignment(Pos.CENTER);
+        buildGrid();
+
+        play = new Button("Play");
+        Image playImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PlayIcon.png"));
+        play.setGraphic(new ImageView(playImage));
+        pause = new Button("Pause");
+        Image pauseImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PauseIcon.png"));
+        pause.setGraphic(new ImageView(pauseImage));
+
+        levelLabel.setStyle("-fx-text-fill: white");
+        gridStack = new StackPane();
+        gridStack.getChildren().addAll(buttonGrid);
+        gridStack.getChildren().addAll(lineList);
+        Region r = new Region();
+        r.setPrefHeight(30);
+        centerPane.getChildren().addAll(gridStack, r, levelLabel, play);
+        //centerPane.getChildren().addAll(lineList);
+    }
+
+    private void buildGrid() {
+        buttonGrid = new GridPane();
+        buttonGrid.setAlignment(Pos.CENTER);
+        buttonGrid.setVgap(25);
+        buttonGrid.setHgap(25);
+
+        for(int i = 0; i< 4; i++){
+            for(int j = 0; j<4; j++){
+                Button gameButton = new Button("a");
+                gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
+                gameButton.setPrefSize(40, 40);
+                gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
+                gameButton.setId("gameButton");
+                gameButton.setOnMousePressed(event -> {
+                    gameButton.setEffect(new Glow(0.8));
+                });
+                buttonGrid.add(gameButton, i, j);
+                buttonList.add(gameButton);
+            }
+        }
+        buildPath();
+    }
+
+    public void buildPath(){
+        buttonList.forEach(node ->{
+            buttonList.stream().filter(target -> target != node).forEachOrdered(target -> {
+                int diff = Math.abs(buttonList.indexOf(target) - buttonList.indexOf(node));
+                if (diff == 1 || diff == 4) link(node, target);
+            });
+        });
+    }
+
+    public void link(Node from, Node to){
+        Line l = new Line(from.getLayoutX(), from.getLayoutY(), to.getLayoutX(), to.getLayoutY());
+        //System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
+        lineList.add(l);
+    }
+
     @Override
     public void initializeHandlers() {
         play.setOnAction(event -> {
@@ -225,5 +228,13 @@ public class BuzzwordPane extends JFLAGScene{
 
     public BorderPane  getPrimaryPane(){
         return primaryPane;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

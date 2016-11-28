@@ -125,4 +125,7 @@ public abstract class JFLAGApplication extends Application{
         this.currentUser = currentUser;
     }
 
+    public void setData(JFLAGDataComponent data) {
+        this.dataComponent = data;
+    }
 }

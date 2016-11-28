@@ -2,6 +2,7 @@ package gui;
 
 import components.JFLAGWorkspaceComponent;
 import gamecontroller.BuzzwordState;
+import gamedata.BuzzwordData;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,6 +38,8 @@ public class HomeSceneSingleton extends Observable{
     private Region r;
     private final String userName;
 
+    private String currentMode;
+    private int currentLevel;
 
     public static HomeSceneSingleton getHomeSceneSingleton(){
         return homeSceneSingleton == null? new HomeSceneSingleton() : homeSceneSingleton;
@@ -104,7 +107,9 @@ public class HomeSceneSingleton extends Observable{
             setChanged();
             notifyObservers();
         });
-        restartGame.setOnAction(event -> startGame());
+        restartGame.setOnAction(event -> {
+            restartGame();
+        });
         selectLevel.setOnAction(event -> levelSelection());
 
         selectMode.setOnAction(event -> levelSelection());
@@ -125,11 +130,23 @@ public class HomeSceneSingleton extends Observable{
         rightBar.getChildren().set(1, lp.getPrimaryPane());
     }
 
-    public void startGame() {
-        gamePane = (lp == null) ? new BuzzwordPane()
-                : new BuzzwordPane(selectMode.getValue(), Integer.toString(lp.getSelectedLevel()));
+    public void startGame(){
+        gamePane = new BuzzwordPane(selectMode.getValue(), lp.getSelectedLevel());
+        currentLevel = lp.getSelectedLevel();
+        currentMode = selectMode.getValue();
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
+    }
 
+    public void startGame(BuzzwordData data) {
+        gamePane = new BuzzwordPane(data.getCurrentMode(), data.getCurrentLevel());
+        currentLevel = data.getCurrentLevel();
+        currentMode = data.getCurrentMode();
+        rightBar.getChildren().set(1, gamePane.getPrimaryPane());
+    }
+
+    public void restartGame(){
+        gamePane = new BuzzwordPane(currentMode, currentLevel);
+        rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
 
     public VBox getLeftBar(){
@@ -151,6 +168,7 @@ public class HomeSceneSingleton extends Observable{
     public void switchToStartButton(){
         if(leftBar.getChildren().get(1) == restartGame) leftBar.getChildren().set(1, startPlaying);
     }
+
     public int getSelectedLevel(){
         return lp.getSelectedLevel();
     }
