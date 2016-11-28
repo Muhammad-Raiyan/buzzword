@@ -1,4 +1,9 @@
 {
+  "ishm" : {
+    "userName" : "ishm",
+    "password" : "5GKc3z6LNIxoDKBwLJhTmA==",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/ishm.json"
+  },
   "ish" : {
     "userName" : "ish",
     "password" : "g2e9tuuc2HJdZYyTlRqzcQ==",

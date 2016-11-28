@@ -4,6 +4,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -149,7 +151,6 @@ public class BuzzwordPane extends JFLAGScene{
         Region r = new Region();
         r.setPrefHeight(30);
         centerPane.getChildren().addAll(gridStack, r, levelLabel, play);
-        //centerPane.getChildren().addAll(lineList);
     }
 
     private void buildGrid() {
@@ -170,11 +171,19 @@ public class BuzzwordPane extends JFLAGScene{
                 gameButton.setOnMousePressed(event -> {
                     gameButton.setEffect(new Glow(0.8));
                 });
+                /*gameButton.setOnDragDetected(event -> {
+                    System.out.println("Drag");
+                });*/
+                setupHandler(gameButton);
                 buttonGrid.add(gameButton, i, j);
                 buttonList.add(gameButton);
             }
         }
-        buildPath();
+        //buildPath();
+        ObservableList<Button> list = FXCollections.observableArrayList(buttonList);
+        for (Button btn : list){
+            btn.setOnDragDetected(event -> System.out.println("Drag"));
+        }
     }
 
     public void buildPath(){
@@ -239,5 +248,9 @@ public class BuzzwordPane extends JFLAGScene{
 
     public int getLevel() {
         return level;
+    }
+
+    public void setupHandler(Button upHandler) {
+
     }
 }
