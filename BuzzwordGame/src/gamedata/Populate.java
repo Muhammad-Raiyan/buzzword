@@ -44,7 +44,7 @@ public class Populate {
                 }
             }
         }
-        System.out.println(map);
+        //System.out.println(map);
     }
 
     private void generateList() {

@@ -47,12 +47,12 @@ public class AppFileController implements FileController {
      * know the name of the file, so we won't need to prompt the user.
      */
     public void handleSaveRequest() {
-        System.out.println("Hello from save");
+        //System.out.println("Hello from save");
         //appTemplate.startPlay();
     }
 
     public void handleLoadRequest() {
-        System.out.println("Hello From LOAD");
+        //System.out.println("Hello From LOAD");
     }
     
     /**
@@ -122,8 +122,8 @@ public class AppFileController implements FileController {
 
     public void handleSignUpRequest() throws IOException {
         ProfileDialogSingleton profileDialogSingleton = ProfileDialogSingleton.getProfileCreator();
-        System.out.println("User: " + profileDialogSingleton.getUserName());        //TODO : Remove
-        System.out.println("Password: " + profileDialogSingleton.getPassword());    //TODO : Remove
+        //System.out.println("User: " + profileDialogSingleton.getUserName());        //TODO : Remove
+        //System.out.println("Password: " + profileDialogSingleton.getPassword());    //TODO : Remove
 
         UserData userProfile = new UserData();
         userProfile.createUser(profileDialogSingleton.getUserName(), profileDialogSingleton.getPassword());
@@ -140,7 +140,7 @@ public class AppFileController implements FileController {
 
     @Override
     public void handleHelpRequest() throws IOException {
-        System.out.println("Help");
+        //System.out.println("Help");
     }
 
     public void handleLogoutRequest() {

@@ -41,7 +41,7 @@ public class ProfileManager implements JFLAGFileComponent{
 
     public void addUser(UserData newUser){
         userList.put(newUser.getUserName(), newUser);
-        System.out.println(newUser);   //TODO : Remove
+        //System.out.println(newUser);   //TODO : Remove
     }
 
     public UserData getUser(String userName){

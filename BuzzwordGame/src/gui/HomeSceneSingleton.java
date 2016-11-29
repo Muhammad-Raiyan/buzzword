@@ -218,4 +218,12 @@ public class HomeSceneSingleton extends Observable{
     public Scene getScene() {
         return primaryScene;
     }
+
+    public void pauseGame() {
+        gamePane.pauseTime();
+    }
+
+    public void playGame() {
+        gamePane.playGame();
+    }
 }

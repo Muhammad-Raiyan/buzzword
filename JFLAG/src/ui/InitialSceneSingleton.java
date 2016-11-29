@@ -101,7 +101,7 @@ public class InitialSceneSingleton extends JFLAGScene{
             setChanged();
             notifyObservers();
         });
-        help.setOnAction(event -> System.out.println("Help"));
+        //help.setOnAction(event -> System.out.println("Help"));
         logout.setOnAction(event -> {
             AppGUI.buttonState = ButtonState.LOGOUT;
             setChanged();

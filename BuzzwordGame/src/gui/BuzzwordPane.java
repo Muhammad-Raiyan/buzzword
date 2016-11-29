@@ -191,7 +191,7 @@ public class BuzzwordPane extends JFLAGScene{
         //buildPath();
         ObservableList<Button> list = FXCollections.observableArrayList(buttonList);
         for (Button btn : list){
-            btn.setOnDragDetected(event -> System.out.println("Drag"));
+            //btn.setOnDragDetected(event -> System.out.println("Drag"));
         }
     }
 
@@ -219,7 +219,7 @@ public class BuzzwordPane extends JFLAGScene{
             if(timeLine == null) {
                 timeLine = new Timeline(new KeyFrame(
                         Duration.seconds(sec),
-                        ae -> System.out.println("Hello"),
+                        //ae -> System.out.println("Hello"),
                         new KeyValue(secProperty, 0)
                 ));
             }
@@ -263,4 +263,12 @@ public class BuzzwordPane extends JFLAGScene{
 
     }
 
+    public void pauseTime() {
+        if(timeLine != null)
+            timeLine.pause();
+    }
+
+    public void playGame() {
+        if(timeLine!=null)timeLine.play();
+    }
 }

@@ -39,7 +39,7 @@ public class BuzzwordController extends AppFileController{
                 gameFile.loadGameData(gameData, appTemplate.getCurrentUser().getJsonFile());
             }
             catch (Exception e){
-                e.printStackTrace();    //TODO : remove this before submission
+                //e.printStackTrace();    //TODO : remove this before submission
             }
         }
 
@@ -51,7 +51,10 @@ public class BuzzwordController extends AppFileController{
 
     @Override
     public void handleExitRequest() {
+        HomeSceneSingleton singleton = HomeSceneSingleton.getHomeSceneSingleton();
+        singleton.pauseGame();
         super.handleExitRequest();
+        singleton.playGame();
     }
 
     public void handleStartRequest(){

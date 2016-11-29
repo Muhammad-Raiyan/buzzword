@@ -70,8 +70,8 @@ public class BuzzwordData implements JFLAGDataComponent {
             t = trie.searchNode(Character.toString(c));
         }
         //t.children.clear();
-        System.out.println(c);
-        System.out.println(t.children.size());
+        //System.out.println(c);
+        //System.out.println(t.children.size());
 
     }
 

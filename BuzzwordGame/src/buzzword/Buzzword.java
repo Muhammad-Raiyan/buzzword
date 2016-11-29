@@ -9,8 +9,6 @@ import gamedata.BuzzwordDataFile;
 import gamesettings.BuzzwordSettings;
 import gui.Workspace;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Created by ishmam on 10/29/2016.
  */
@@ -67,6 +65,6 @@ public class Buzzword extends JFLAGApplication {
 
     public void load(){
 
-        System.out.println("loaded");
+        //System.out.println("loaded");
     }
 }

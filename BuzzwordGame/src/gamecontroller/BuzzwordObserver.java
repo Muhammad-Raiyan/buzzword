@@ -30,7 +30,7 @@ public class BuzzwordObserver implements Observer {
                 fileController.handleStartRequest();
                 break;
             default:
-                System.out.println("hello from buzzword");
+                //System.out.println("hello from buzzword");
         }
     }
 }
