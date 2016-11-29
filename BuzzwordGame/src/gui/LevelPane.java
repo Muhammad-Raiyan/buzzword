@@ -19,16 +19,17 @@ public class LevelPane extends JFLAGScene {
     private String mode;
     private VBox primaryPane;
     private GridPane levelGrid;
-    private int selectedLevel, unfinishedLevel;
+    private int selectedLevel;
     private ArrayList<Button> buttonArrayList;
-
+    private ArrayList<Integer> unlockedLevels;
     public LevelPane(){
-        this("Dictionary");
+        this("Dictionary", null);
     }
 
-    public LevelPane(String mode){
+    public LevelPane(String mode, ArrayList<Integer> unlockedLevels){
         this.mode = mode;
         selectedLevel = 1;
+        this.unlockedLevels = unlockedLevels;
         layout();
         initializeStyle();
     }
@@ -62,7 +63,11 @@ public class LevelPane extends JFLAGScene {
                 levelGrid.add(button, j-1, i-1);
             }
         }
-        buttonArrayList.get(0).setDisable(false);
+
+        for(int i=0; i<unlockedLevels.size(); i++){
+            buttonArrayList.get(i).setDisable(false);
+        }
+
        /* buttonArrayList.get(1).setDisable(false);
         buttonArrayList.get(2).setDisable(false);*/
 
@@ -101,5 +106,9 @@ public class LevelPane extends JFLAGScene {
 
     public VBox getPrimaryPane(){
         return primaryPane;
+    }
+
+    public ArrayList<Button> getButtonArrayList() {
+        return buttonArrayList;
     }
 }

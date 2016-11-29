@@ -125,7 +125,7 @@ public class HomeSceneSingleton extends Observable{
     }
 
     public void levelSelection() {
-        lp = new LevelPane(selectMode.getValue());
+        lp = new LevelPane(selectMode.getValue(), workspace.getUnlockedLevels(selectMode.getValue()));
         switchToStartButton();
         rightBar.getChildren().set(1, lp.getPrimaryPane());
     }

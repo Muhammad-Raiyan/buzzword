@@ -99,6 +99,21 @@ public class BuzzwordData implements JFLAGDataComponent {
         this.progress = progress;
     }
 
+    public ArrayList<Integer> getUnlockedLevels(String mode){
+        switch(mode){
+            case "Dictionary Words":
+                return progress.get("Dictionary");
+            case "Famous People":
+                return progress.get("Famous");
+            case "Places":
+                return progress.get("Places");
+            case "Science":
+                return progress.get("Science");
+            default:
+                return null;
+        }
+    }
+
     @Override
     public String toString() {
         return "BuzzwordData{" +

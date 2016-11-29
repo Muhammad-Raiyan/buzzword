@@ -4,10 +4,13 @@ import app.JFLAGApplication;
 import components.JFLAGWorkspaceComponent;
 import gamecontroller.BuzzwordObserver;
 import gamecontroller.BuzzwordState;
+import gamedata.BuzzwordData;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ui.AppGUI;
 import ui.InitialSceneSingleton;
+
+import java.util.ArrayList;
 
 /**
  * Created by ishmam on 10/31/2016.
@@ -65,5 +68,11 @@ public class Workspace extends JFLAGWorkspaceComponent{
 
     public BuzzwordObserver getBuzzwordObserver() {
         return buzzwordObserver;
+    }
+
+    public ArrayList<Integer> getUnlockedLevels(String mode) {
+        BuzzwordData data =  (BuzzwordData) application.getDataComponent();
+        return data.getUnlockedLevels(mode);
+
     }
 }
