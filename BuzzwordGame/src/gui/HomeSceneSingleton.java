@@ -220,10 +220,12 @@ public class HomeSceneSingleton extends Observable{
     }
 
     public void pauseGame() {
-        gamePane.pauseTime();
+        if(gamePane!= null)
+            gamePane.pauseTime();
     }
 
     public void playGame() {
-        gamePane.playGame();
+        if(gamePane!= null)
+            gamePane.playGame();
     }
 }

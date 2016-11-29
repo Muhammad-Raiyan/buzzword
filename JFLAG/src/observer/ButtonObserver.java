@@ -2,7 +2,6 @@ package observer;
 
 import app.JFLAGApplication;
 import controller.AppFileController;
-import controller.FileController;
 
 import java.io.IOException;
 import java.util.Observable;
