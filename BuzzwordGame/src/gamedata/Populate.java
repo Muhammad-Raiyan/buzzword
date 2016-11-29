@@ -1,4 +1,4 @@
-package testing;
+package gamedata;
 
 import trie.Trie;
 import trie.TrieNode;
@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -16,17 +17,14 @@ import java.util.Random;
  * @author ishmam
  */
 public class Populate {
-
     Trie trie;
-    ArrayList<String> list;
     HashMap<Integer, String> map;
-    static int place=0;
+    static int place;
 
     public Populate() {
         trie = new Trie();
-        list = new ArrayList<>();
         map = new HashMap<>();
-        list.ensureCapacity(16);
+        place = 0;
         try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\science"))){
             String line;
             while( (line = br.readLine()) != null){
@@ -65,7 +63,7 @@ public class Populate {
     public void fillNext(TrieNode root){
         if(root.children.size() == 0) return;
         ArrayList value = new ArrayList<>(root.children.values());
-        //Collections.shuffle(value);
+        Collections.shuffle(value);
         while(value.size()!=0) {
             insert(String.valueOf((TrieNode) value.get(0)));
             fillNext((TrieNode) value.remove(0));
@@ -73,9 +71,18 @@ public class Populate {
     }
 
     public void insert(String letter){
-        int[] arr = {0, 1,2,3,7,11, 15, 4,5,6,10,14,8,9,13,12};
-        map.put(arr[place], letter);
+        int[] arr = {0, 1,2,3,7,11,15, 4,5,6,10,14,8,9,13,12};
+        if(place<16)map.put(arr[place], letter);
         place++;
     }
 
+    public int getTargetScore(){
+        Random r = new Random();
+        int num = r.nextInt(6)*5+50;
+        return num;
+    }
+
+    public HashMap<Integer, String> getMap() {
+        return map;
+    }
 }

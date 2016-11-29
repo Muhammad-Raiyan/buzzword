@@ -1,8 +1,10 @@
 package gui;
 
+import gamedata.Populate;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +12,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,7 +26,7 @@ import state.ButtonState;
 import ui.JFLAGScene;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.HashMap;
 
 /**
  * Created by ishmam on 10/30/2016.
@@ -44,6 +47,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Label levelLabel;
     private SimpleIntegerProperty secProperty;
     private ArrayList<Line> lineList;
+    private IntegerProperty targetScore;
 
     public BuzzwordPane() {
         this("Dictionary Words", 1);
@@ -63,8 +67,9 @@ public class BuzzwordPane extends JFLAGScene{
     @Override
     public void layout() {
         topLayout();
-        rightLayout();
         centerLayout();
+        rightLayout();
+        targetScore = new SimpleIntegerProperty();
         primaryPane = new BorderPane();
         primaryPane.setTop(topPane);
         primaryPane.setCenter(centerPane);
@@ -125,7 +130,7 @@ public class BuzzwordPane extends JFLAGScene{
         Label target = new Label("TARGET: ");
         target.setStyle("-fx-underline: true");
         //target.setMinWidth(150);
-        Label points = new Label("75 Points");
+        Label points = new Label(targetScore.getValue().toString());
         points.setMinWidth(80);
         targetBox.getChildren().addAll(target, points);
 
@@ -158,12 +163,16 @@ public class BuzzwordPane extends JFLAGScene{
         buttonGrid.setAlignment(Pos.CENTER);
         buttonGrid.setVgap(25);
         buttonGrid.setHgap(25);
-
+        Populate ob = new Populate();
+        targetScore= new SimpleIntegerProperty(ob.getTargetScore());
+        HashMap<Integer, String> alphabets = ob.getMap();
+        int pos = 0;
         for(int i = 0; i< 4; i++){
             for(int j = 0; j<4; j++){
-                Random r = new Random();
-                char c = (char) (r.nextInt(26) + 'A');
-                Button gameButton = new Button(Character.toString(c));
+                //Random r = new Random();
+                String c = alphabets.get(pos);
+                pos++;
+                Button gameButton = new Button(c);
                 gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
                 gameButton.setPrefSize(40, 40);
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
@@ -253,4 +262,5 @@ public class BuzzwordPane extends JFLAGScene{
     public void setupHandler(Button upHandler) {
 
     }
+
 }
