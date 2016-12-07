@@ -14,6 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +24,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import state.ButtonState;
 import ui.JFLAGScene;
@@ -174,7 +178,8 @@ public class BuzzwordPane extends JFLAGScene{
                 pos++;
                 Button gameButton = new Button(c);
                 gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
-                gameButton.setPrefSize(40, 40);
+                gameButton.setPrefSize(45, 45);
+                //System.out.println(gameButton.getPrefHeight() + " " + gameButton.getPrefWidth());
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
                 //gameButton.setId("gameButton");
                 gameButton.setOnMousePressed(event -> {
@@ -189,11 +194,11 @@ public class BuzzwordPane extends JFLAGScene{
                 buttonList.add(gameButton);
             }
         }
-        //buildPath();
+        /*//buildPath();
         ObservableList<Button> list = FXCollections.observableArrayList(buttonList);
         for (Button btn : list){
             //btn.setOnDragDetected(event -> System.out.println("Drag"));
-        }
+        }*/
     }
 
     public void buildPath(){
@@ -248,12 +253,19 @@ public class BuzzwordPane extends JFLAGScene{
             });
         }
         */
-        for(Node btn : buttonGrid.getChildren()){
+        for(Button btn : buttonList){
             //System.out.println(btn.getBoundsInParent());
-            btn.setOnMouseDragged(event -> {
-                System.out.println(event.getSceneX());
-
+            Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0);
+            btn.setOnDragDetected(event -> {
+                btn.startFullDrag();
+                btn.setEffect(dragShadow);
             });
+            btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
+            btn.setOnMouseDragOver(event -> btn.setEffect(dragShadow));
+            btn.setOnMouseReleased(event -> {
+                buttonList.forEach(node -> node.setEffect(null));
+            });
+            //btn.setOnDragEntered(event -> btn.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0)));
         }
     }
 

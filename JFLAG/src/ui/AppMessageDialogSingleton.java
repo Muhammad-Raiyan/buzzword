@@ -51,7 +51,7 @@ public class AppMessageDialogSingleton extends Stage {
      * @param owner The window above which this dialog will be centered.
      */
     public void init(Stage owner) {
-        initModality(Modality.WINDOW_MODAL); // modal => messages are blocked from reaching other windows
+        initModality(Modality.APPLICATION_MODAL); // modal => messages are blocked from reaching other windows
         initOwner(owner);
         
         // LABEL TO DISPLAY THE CUSTOM MESSAGE
