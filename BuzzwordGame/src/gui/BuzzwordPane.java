@@ -176,7 +176,7 @@ public class BuzzwordPane extends JFLAGScene{
                 gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
                 gameButton.setPrefSize(40, 40);
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
-                gameButton.setId("gameButton");
+                //gameButton.setId("gameButton");
                 gameButton.setOnMousePressed(event -> {
                     gameButton.setEffect(new Glow(0.8));
                 });
@@ -239,6 +239,22 @@ public class BuzzwordPane extends JFLAGScene{
             });*/
             pauseTime();
         });
+        /*buttonGrid.setOnDragDetected(event -> {
+            System.out.println("Hello");
+        });*/
+        /*for(Button btn : buttonList){
+            btn.setOnMouseDragged(event -> {
+                System.out.println(event.getX());
+            });
+        }
+        */
+        for(Node btn : buttonGrid.getChildren()){
+            //System.out.println(btn.getBoundsInParent());
+            btn.setOnMouseDragged(event -> {
+                System.out.println(event.getSceneX());
+
+            });
+        }
     }
 
     @Override
