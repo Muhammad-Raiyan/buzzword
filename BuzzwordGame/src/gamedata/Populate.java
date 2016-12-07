@@ -25,7 +25,7 @@ public class Populate {
         trie = new Trie();
         map = new HashMap<>();
         place = 0;
-        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\science"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\dictionary.txt"))){
             String line;
             while( (line = br.readLine()) != null){
                 if(line.length()<=7)trie.insert(line);

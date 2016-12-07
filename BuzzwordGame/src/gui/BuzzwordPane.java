@@ -184,6 +184,7 @@ public class BuzzwordPane extends JFLAGScene{
                     System.out.println("Drag");
                 });*/
                 setupHandler(gameButton);
+                gameButton.setVisible(false);
                 buttonGrid.add(gameButton, i, j);
                 buttonList.add(gameButton);
             }
@@ -223,12 +224,20 @@ public class BuzzwordPane extends JFLAGScene{
                         new KeyValue(secProperty, 0)
                 ));
             }
-            timeLine.play();
+           /* timeLine.play();
+            buttonList.forEach(node ->{
+                if(!node.isVisible())node.setVisible(true);
+            });*/
+           playGame();
         });
 
         pause.setOnAction(event -> {
             centerPane.getChildren().set(3, play);
-            timeLine.pause();
+            /*timeLine.pause();
+            buttonList.forEach(node ->{
+                if(node.isVisible())node.setVisible(false);
+            });*/
+            pauseTime();
         });
     }
 
@@ -264,11 +273,20 @@ public class BuzzwordPane extends JFLAGScene{
     }
 
     public void pauseTime() {
-        if(timeLine != null)
+        if(timeLine != null) {
             timeLine.pause();
+            buttonList.forEach(node ->{
+                if(node.isVisible())node.setVisible(false);
+            });
+        }
     }
 
     public void playGame() {
-        if(timeLine!=null)timeLine.play();
+        if(timeLine!=null) {
+            timeLine.play();
+            buttonList.forEach(node ->{
+                if(!node.isVisible())node.setVisible(true);
+            });
+        }
     }
 }
