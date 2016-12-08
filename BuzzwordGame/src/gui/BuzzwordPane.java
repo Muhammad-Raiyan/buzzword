@@ -46,7 +46,7 @@ public class BuzzwordPane extends JFLAGScene{
     private GridPane buttonGrid;
     public StackPane gridStack;
     private Timeline timeLine;
-    private ArrayList<Button> buttonList;
+    private ArrayList<Button> buttonList, draggedPath;
     private int sec = 10;
     private Label levelLabel;
     private SimpleIntegerProperty secProperty;
@@ -62,7 +62,7 @@ public class BuzzwordPane extends JFLAGScene{
         this.level = (level);
         this.levelLabel = new Label("LEVEL " + level);
         buttonList = new ArrayList<>();
-        lineList = new ArrayList<>();
+        draggedPath = new ArrayList<>();
         layout();
         initializeHandlers();
         initializeStyle();
@@ -156,7 +156,7 @@ public class BuzzwordPane extends JFLAGScene{
         levelLabel.setStyle("-fx-text-fill: white");
         gridStack = new StackPane();
         gridStack.getChildren().addAll(buttonGrid);
-        gridStack.getChildren().addAll(lineList);
+        //gridStack.getChildren().addAll(lineList);
         Region r = new Region();
         r.setPrefHeight(30);
         centerPane.getChildren().addAll(gridStack, r, levelLabel, play);
@@ -259,15 +259,27 @@ public class BuzzwordPane extends JFLAGScene{
             btn.setOnDragDetected(event -> {
                 btn.startFullDrag();
                 btn.setEffect(dragShadow);
+                addToPath(btn);
             });
             btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
-            btn.setOnMouseDragOver(event -> btn.setEffect(dragShadow));
+            btn.setOnMouseDragOver(event -> {
+                btn.setEffect(dragShadow);
+                addToPath(btn);
+            });
             btn.setOnMouseReleased(event -> {
                 buttonList.forEach(node -> node.setEffect(null));
             });
             //btn.setOnDragEntered(event -> btn.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0)));
         }
     }
+
+    private void addToPath(Button btn) {
+        draggedPath.add(btn);
+        for(int i=1; i< draggedPath.size(); i++){
+            System.out.println(draggedPath.get(i).getLayoutX() + " " + draggedPath.get(i).getLayoutY());
+        }
+    }
+
 
     @Override
     public void initializeStyle() {
