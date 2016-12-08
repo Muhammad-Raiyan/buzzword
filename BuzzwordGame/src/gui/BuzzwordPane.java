@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
@@ -45,6 +46,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Button play, pause;
     private GridPane buttonGrid;
     public StackPane gridStack;
+    public Pane linePane;
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private int sec = 10;
@@ -159,7 +161,9 @@ public class BuzzwordPane extends JFLAGScene{
         //gridStack.getChildren().addAll(lineList);
         Region r = new Region();
         r.setPrefHeight(30);
-        centerPane.getChildren().addAll(gridStack, r, levelLabel, play);
+        linePane = new Pane();
+        linePane.getChildren().add(gridStack);
+        centerPane.getChildren().addAll(linePane, r, levelLabel, play);
     }
 
     private void buildGrid() {
@@ -274,10 +278,18 @@ public class BuzzwordPane extends JFLAGScene{
     }
 
     private void addToPath(Button btn) {
-        draggedPath.add(btn);
-        for(int i=1; i< draggedPath.size(); i++){
-            System.out.println(draggedPath.get(i).getLayoutX() + " " + draggedPath.get(i).getLayoutY());
+
+        if(!draggedPath.isEmpty()) {
+            Button startTarget = draggedPath.get(draggedPath.size() - 1);
+            Button endTarget = btn;
+            double offset = 20;
+            Line link = new Line(startTarget.getLayoutX() + offset, startTarget.getLayoutY() + offset, endTarget.getLayoutX() + offset, endTarget.getLayoutY() + offset);
+            linePane.getChildren().add(link);
         }
+        draggedPath.add(btn);
+        /*for(int i=1; i< draggedPath.size(); i++){
+            System.out.println(draggedPath.get(i).getLayoutX() + " " + draggedPath.get(i).getLayoutY());
+        }*/
     }
 
 
