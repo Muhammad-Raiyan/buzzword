@@ -33,6 +33,7 @@ import java.util.HashMap;
 public class BuzzwordPane extends JFLAGScene{
 
     private String mode;
+    //private StringBuffer dynamicWord;
     private int level;
     private BorderPane primaryPane;
     private BorderPane topPane;
@@ -44,10 +45,11 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private int sec = 10;
-    private Label levelLabel;
+    private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
     //private ArrayList<Line> lineList;
     private IntegerProperty targetScore;
+    private Pane linePane;
 
     public BuzzwordPane() {
         this("Dictionary Words", 1);
@@ -55,6 +57,7 @@ public class BuzzwordPane extends JFLAGScene{
 
     public BuzzwordPane(String mode, int level) {
         this.mode = mode;
+        //this.dynamicWord = new StringBuffer();
         this.level = (level);
         this.levelLabel = new Label("LEVEL " + level);
         buttonList = new ArrayList<>();
@@ -103,7 +106,8 @@ public class BuzzwordPane extends JFLAGScene{
     public void rightLayout(){
         rightPane = new VBox(10);
         rightPane.setId("rightPane");
-        Label currentGuess = new Label("B U ");
+        currentGuess = new Label("");
+        //currentGuess.textProperty().bind(Bindings.format("%s", dynamicWord));
         currentGuess.setPrefWidth(200);
 
         HBox progress = new HBox();
@@ -155,9 +159,9 @@ public class BuzzwordPane extends JFLAGScene{
         //gridStack.getChildren().addAll(lineList);
         Region r = new Region();
         r.setPrefHeight(30);
-        //line
+        linePane = new Pane();
         buttonPane = new StackPane();
-        buttonPane.getChildren().add(gridStack);
+        buttonPane.getChildren().addAll(linePane, gridStack);
         centerPane.getChildren().addAll(buttonPane, r, levelLabel, play);
     }
 
@@ -247,9 +251,7 @@ public class BuzzwordPane extends JFLAGScene{
             });
 
             btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
-
             btn.setOnMouseDragOver(event -> {
-                {
                     btn.setEffect(dragShadow);
                     //btn.setStyle("-fx-background-color: BLUE");
                     dynamicDisable(btn, index);
@@ -257,7 +259,6 @@ public class BuzzwordPane extends JFLAGScene{
 
                     //btn.setEffect(dragShadow);
                     addToPath(btn);
-                }
             });
 
             btn.setOnMouseReleased(event -> {
@@ -266,39 +267,17 @@ public class BuzzwordPane extends JFLAGScene{
                     node.setEffect(null);
                     node.setDisable(false);
                 });
+                linePane.getChildren().clear();
+                currentGuess.setText("");
                 draggedPath.clear();
             });
         }
-
-        /*for(Button btn : buttonList){
-            Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0);
-            System.out.println(btn.getText());
-            btn.setOnDragDetected(event -> {
-                btn.startFullDrag();
-                dynamicDisable(btn);
-                //btn.setEffect(dragShadow);
-                addToPath(btn);
-
-            });
-            btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
-            btn.setOnMouseDragOver(event -> {
-                if(!btn.isDisable()){
-                    btn.setEffect(dragShadow);
-                    addToPath(btn);
-                }
-            });
-            btn.setOnMouseReleased(event -> {
-                buttonList.forEach(node -> node.setEffect(null));
-            });
-            //btn.setOnDragEntered(event -> btn.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0)));
-        }*/
     }
 
     private void dynamicDisable(Button btn, int index) {
-        /*int neighbour[] = new int[]{
-                -5, -1, +3, -4, 0, +4, -3, +1, +5
-        };*/
-        if(draggedPath.contains(btn)) return;
+        if(draggedPath.contains(btn)) {
+            return;
+        }
         int neighbours[][] = new int[][]{
                 {0, 1, 4, 5},                           // 0
                 {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 1
@@ -325,40 +304,26 @@ public class BuzzwordPane extends JFLAGScene{
                 if((index-i) == neighbours[i][k])
                     current.setDisable(false);
             }
-            /*for(int j = 0; j<neighbours.length; j++){
-
-            }*/
         }
-        /*for(int i=0; i<buttonList.size(); i++){
-            if(!draggedPath.contains(buttonList.get(i)))buttonList.get(i).setDisable(true);
-            for(int j = 0; j<neighbour.length; j++){
-                if(index + neighbour[j] >=0 && Math.abs(index-i) == neighbour[j]) {
-                    //System.out.println(index + " " + i + " " + neighbour[j]);
-                    buttonList.get(i).setDisable(false);
-                }
-            }
-        }*/
-       /* for(int i=0; i<neighbour.length; i++){
-            if(index + neighbour[i] >= 0) {
-
-            }
-        }*/
-
     }
 
-    private void addToPath(Button btn) {
+    private synchronized void addToPath(Button btn) {
+        Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
+        if(!draggedPath.isEmpty() && !draggedPath.contains(btn)) {
+            draggedPath.add(btn);
+            currentGuess.setText(currentGuess.getText()+btn.getText());
+            Button startTarget = draggedPath.get(draggedPath.size()-2);
+            Button endTarget = draggedPath.get(draggedPath.size()-1);
 
-        if(!draggedPath.isEmpty()) {
-            Button startTarget = draggedPath.get(draggedPath.size() - 1);
-            Button endTarget = btn;
             double offset = 20;
             Line link = new Line(startTarget.getLayoutX() + offset, startTarget.getLayoutY() + offset, endTarget.getLayoutX() + offset, endTarget.getLayoutY() + offset);
-            buttonPane.getChildren().add(link);
+            link.setEffect(dragShadow);
+            linePane.getChildren().add(link);
         }
-        draggedPath.add(btn);
-        /*for(int i=1; i< draggedPath.size(); i++){
-            System.out.println(draggedPath.get(i).getLayoutX() + " " + draggedPath.get(i).getLayoutY());
-        }*/
+        else if(!draggedPath.contains(btn)) {
+            draggedPath.add(btn);
+            currentGuess.setText(currentGuess.getText()+btn.getText());
+        }
     }
 
 
@@ -410,21 +375,4 @@ public class BuzzwordPane extends JFLAGScene{
             });
         }
     }
-
-   /* public class GameButton extends Button{
-        boolean isUsed = false;
-
-        public GameButton(String title) {
-            super(title);
-        }
-
-        public void makeUsed(){
-            this.isUsed = true;
-        }
-
-        public boolean isUsed(){
-            return isUsed;
-        }
-
-    }*/
 }
