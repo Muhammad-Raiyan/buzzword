@@ -85,4 +85,8 @@ public class Populate {
     public HashMap<Integer, String> getMap() {
         return map;
     }
+
+    public Trie getTrie() {
+        return trie;
+    }
 }

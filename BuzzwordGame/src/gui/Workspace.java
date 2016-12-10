@@ -37,6 +37,8 @@ public class Workspace extends JFLAGWorkspaceComponent{
         buzzwordObserver = new BuzzwordObserver(app);
         homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
         homeSceneSingleton.addObserver(buzzwordObserver);
+        GridSolutionSingleton gridSolutionSingleton = GridSolutionSingleton.getSingleton();
+        gridSolutionSingleton.init(gui.getPrimaryStage());
         setBuzzwordGrid();
     }
 

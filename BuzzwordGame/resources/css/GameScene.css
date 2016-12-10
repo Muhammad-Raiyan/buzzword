@@ -1,6 +1,7 @@
 .root {
     -fx-padding: 10;
     -fx-background-insets: 10;
+    -fx-background-color: darkslategrey;
 }
 .label{
     -fx-font-size: 12px;
@@ -69,6 +70,7 @@
     -fx-background-insets: 0;
     -fx-border-color: black;
     -fx-border-style: dashed;
+    -fx-text-fill: ghostwhite;
 }
 
 .table-column {
@@ -86,4 +88,20 @@
     -fx-background-color: darkgrey;
     -fx-padding: 0;
     -fx-background-insets: 0;
+}
+
+.list-view {
+    -fx-background-color: grey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: black;
+}
+
+.list-cell {
+    -fx-background-color: grey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: black;
+    -fx-border-style: dashed;
+    -fx-text-fill: ghostwhite;
 }
