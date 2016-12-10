@@ -57,3 +57,33 @@
     -fx-effect: dropshadow( three-pass-box , yellow , 8, 0.4 , 0 , 0 );
 }
 
+.table-view {
+    -fx-background-color: grey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: black;
+}
+.table-view .table-cell {
+    -fx-background-color: grey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: black;
+    -fx-border-style: dashed;
+}
+
+.table-column {
+    -fx-alignment: center;
+}
+/*.table-row-cell {
+    -fx-background-color: grey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: black;
+    -fx-border-style: dashed;
+}*/
+
+.table-row-cell :odd {
+    -fx-background-color: darkgrey;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}

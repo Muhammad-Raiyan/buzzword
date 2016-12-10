@@ -6,11 +6,16 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
@@ -29,11 +34,11 @@ import java.util.HashMap;
 
 /**
  * Created by ishmam on 10/30/2016.
+ * @author ishmam
  */
 public class BuzzwordPane extends JFLAGScene{
 
     private String mode;
-    //private StringBuffer dynamicWord;
     private int level;
     private BorderPane primaryPane;
     private BorderPane topPane;
@@ -45,11 +50,12 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private int sec = 10;
+    private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
-    //private ArrayList<Line> lineList;
     private IntegerProperty targetScore;
     private Pane linePane;
+    private ObservableList<WordPair> tableData;
 
     public BuzzwordPane() {
         this("Dictionary Words", 1);
@@ -57,11 +63,12 @@ public class BuzzwordPane extends JFLAGScene{
 
     public BuzzwordPane(String mode, int level) {
         this.mode = mode;
-        //this.dynamicWord = new StringBuffer();
         this.level = (level);
         this.levelLabel = new Label("LEVEL " + level);
+        sumOfScore = new SimpleIntegerProperty(0);
         buttonList = new ArrayList<>();
         draggedPath = new ArrayList<>();
+        tableData = FXCollections.observableArrayList();
         layout();
         initializeHandlers();
         initializeStyle();
@@ -93,7 +100,6 @@ public class BuzzwordPane extends JFLAGScene{
         seconds.textProperty().bind(secProperty.asString());
         HBox box = new HBox(remainingTime, seconds, new Label(" seconds"));
         box.setPadding(new Insets(0));
-        //box.setMinWidth(200);
         box.setId("timer");
         Region leftRegion = new Region();
         leftRegion.setPrefWidth(50);
@@ -107,10 +113,40 @@ public class BuzzwordPane extends JFLAGScene{
         rightPane = new VBox(10);
         rightPane.setId("rightPane");
         currentGuess = new Label("");
-        //currentGuess.textProperty().bind(Bindings.format("%s", dynamicWord));
         currentGuess.setPrefWidth(200);
 
-        HBox progress = new HBox();
+        TableView scoreTable = new TableView();
+        scoreTable.setPrefWidth(200);
+        scoreTable.setEditable(false);
+        //scoreTable.setId("progressBox");
+
+        TableColumn wordsColumn = new TableColumn("Guessed words");
+        wordsColumn.setPrefWidth(120);
+        wordsColumn.setCellValueFactory(
+                new PropertyValueFactory<WordPair, String>("word")
+        );
+        TableColumn scoreColumn = new TableColumn("Points");
+        scoreColumn.setCellValueFactory(
+                new PropertyValueFactory<WordPair, Integer>( "score")
+        );
+        //scoreTable.getColumns().addAll(wordsColumn, scoreColumn);
+
+        scoreTable.setItems(tableData);
+        scoreTable.getColumns().addAll(wordsColumn, scoreColumn);
+
+       /* TableView sumTable = new TableView();
+        sumTable.setPrefWidth(120);
+        sumTable.setPrefHeight(90);
+        sumTable.setEditable(false);
+
+        TableColumn totalScore = new TableColumn("Total Score");
+        totalScore.setPrefWidth(120);
+        TableColumn sum = new TableColumn();
+        sumTable.getColumns().addAll(totalScore, sum);
+        sumTable.*/
+
+
+        /*HBox progress = new HBox();
         progress.setId("progressBox");
         progress.setMinWidth(200);
 
@@ -127,18 +163,24 @@ public class BuzzwordPane extends JFLAGScene{
         Label totalScore = new Label("30");
         scoreProgress.setBottom(totalScore);
 
-        progress.getChildren().addAll(wordProgress, scoreProgress);
+        progress.getChildren().addAll(wordProgress, scoreProgress);*/
+        HBox sumBox = new HBox();
+        sumBox.setPrefWidth(200);
+        Label totalScoreLabel = new Label("Total Score: ");
+        Label sumLabel = new Label();
+        sumLabel.textProperty().bind(sumOfScore.asString());
+        sumBox.getChildren().addAll(totalScoreLabel, sumLabel);
 
         VBox targetBox = new VBox();
         targetBox.setId("targetBox");
         Label target = new Label("TARGET: ");
         target.setStyle("-fx-underline: true");
-        //target.setMinWidth(150);
         Label points = new Label(targetScore.getValue().toString());
         points.setMinWidth(80);
         targetBox.getChildren().addAll(target, points);
 
-        rightPane.getChildren().addAll(currentGuess, progress, targetBox);
+        rightPane.setPadding(new Insets(0));
+        rightPane.getChildren().addAll(currentGuess, scoreTable, sumBox, targetBox);
     }
 
     private void centerLayout() {
@@ -156,7 +198,6 @@ public class BuzzwordPane extends JFLAGScene{
         levelLabel.setStyle("-fx-text-fill: white");
         gridStack = new StackPane();
         gridStack.getChildren().addAll(buttonGrid);
-        //gridStack.getChildren().addAll(lineList);
         Region r = new Region();
         r.setPrefHeight(30);
         linePane = new Pane();
@@ -181,7 +222,6 @@ public class BuzzwordPane extends JFLAGScene{
                 Button gameButton = new Button(c);
                 gameButton.setShape(new Circle(70, Color.DARKSLATEGREY));
                 gameButton.setPrefSize(45, 45);
-                //System.out.println(gameButton.getPrefHeight() + " " + gameButton.getPrefWidth());
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
                 //gameButton.setId("gameButton");
                 setupHandler(gameButton);
@@ -192,13 +232,6 @@ public class BuzzwordPane extends JFLAGScene{
         }
     }
 
-
-    /*public void link(Node from, Node to){
-        Line l = new Line(from.getLayoutX(), from.getLayoutY(), to.getLayoutX(), to.getLayoutY());
-        //System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
-        lineList.add(l);
-    }*/
-
     @Override
     public void initializeHandlers() {
         play.setOnAction(event -> {
@@ -208,34 +241,16 @@ public class BuzzwordPane extends JFLAGScene{
             if(timeLine == null) {
                 timeLine = new Timeline(new KeyFrame(
                         Duration.seconds(sec),
-                        //ae -> System.out.println("Hello"),
                         new KeyValue(secProperty, 0)
                 ));
             }
-           /* timeLine.play();
-            buttonList.forEach(node ->{
-                if(!node.isVisible())node.setVisible(true);
-            });*/
            playGame();
         });
 
         pause.setOnAction(event -> {
             centerPane.getChildren().set(3, play);
-            /*timeLine.pause();
-            buttonList.forEach(node ->{
-                if(node.isVisible())node.setVisible(false);
-            });*/
             pauseTime();
         });
-        /*buttonGrid.setOnDragDetected(event -> {
-            System.out.println("Hello");
-        });*/
-        /*for(Button btn : buttonList){
-            btn.setOnMouseDragged(event -> {
-                System.out.println(event.getX());
-            });
-        }
-        */
 
         for(int i=0; i<buttonList.size(); i++){
             Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
@@ -267,11 +282,29 @@ public class BuzzwordPane extends JFLAGScene{
                     node.setEffect(null);
                     node.setDisable(false);
                 });
+                updateScore();
                 linePane.getChildren().clear();
                 currentGuess.setText("");
                 draggedPath.clear();
             });
         }
+    }
+
+    private void updateScore() {
+        String word = currentGuess.getText();
+        if(isValid(word)){
+            tableData.add(new WordPair(word, getScore(word)));
+            sumOfScore.setValue(sumOfScore.getValue() + getScore(word));
+        }
+    }
+
+    private int getScore(String word) {
+        return 20;
+    }
+
+
+    private boolean isValid(String word) {
+        return true;
     }
 
     private void dynamicDisable(Button btn, int index) {
@@ -374,5 +407,32 @@ public class BuzzwordPane extends JFLAGScene{
                 if(!node.isVisible())node.setVisible(true);
             });
         }
+    }
+
+    public static class WordPair {
+        String word;
+        int score;
+
+        public WordPair(String word, int score) {
+            this.word = word;
+            this.score = score;
+        }
+
+        public String getWord() {
+            return word;
+        }
+
+        public void setWord(String word) {
+            this.word = word;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
+
     }
 }
