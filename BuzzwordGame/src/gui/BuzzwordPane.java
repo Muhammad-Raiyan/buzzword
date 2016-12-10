@@ -6,26 +6,20 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import state.ButtonState;
 import ui.JFLAGScene;
@@ -46,13 +40,13 @@ public class BuzzwordPane extends JFLAGScene{
     private Button play, pause;
     private GridPane buttonGrid;
     public StackPane gridStack;
-    public Pane linePane;
+    public Pane buttonPane;
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private int sec = 10;
     private Label levelLabel;
     private SimpleIntegerProperty secProperty;
-    private ArrayList<Line> lineList;
+    //private ArrayList<Line> lineList;
     private IntegerProperty targetScore;
 
     public BuzzwordPane() {
@@ -161,9 +155,10 @@ public class BuzzwordPane extends JFLAGScene{
         //gridStack.getChildren().addAll(lineList);
         Region r = new Region();
         r.setPrefHeight(30);
-        linePane = new Pane();
-        linePane.getChildren().add(gridStack);
-        centerPane.getChildren().addAll(linePane, r, levelLabel, play);
+        //line
+        buttonPane = new StackPane();
+        buttonPane.getChildren().add(gridStack);
+        centerPane.getChildren().addAll(buttonPane, r, levelLabel, play);
     }
 
     private void buildGrid() {
@@ -177,7 +172,6 @@ public class BuzzwordPane extends JFLAGScene{
         int pos = 0;
         for(int i = 0; i< 4; i++){
             for(int j = 0; j<4; j++){
-                //Random r = new Random();
                 String c = alphabets.get(pos);
                 pos++;
                 Button gameButton = new Button(c);
@@ -186,39 +180,20 @@ public class BuzzwordPane extends JFLAGScene{
                 //System.out.println(gameButton.getPrefHeight() + " " + gameButton.getPrefWidth());
                 gameButton.setStyle("-fx-padding: 0; -fx-background-insets: 0");
                 //gameButton.setId("gameButton");
-                gameButton.setOnMousePressed(event -> {
-                    gameButton.setEffect(new Glow(0.8));
-                });
-                /*gameButton.setOnDragDetected(event -> {
-                    System.out.println("Drag");
-                });*/
                 setupHandler(gameButton);
                 gameButton.setVisible(false);
                 buttonGrid.add(gameButton, i, j);
                 buttonList.add(gameButton);
             }
         }
-        /*//buildPath();
-        ObservableList<Button> list = FXCollections.observableArrayList(buttonList);
-        for (Button btn : list){
-            //btn.setOnDragDetected(event -> System.out.println("Drag"));
-        }*/
     }
 
-    public void buildPath(){
-        buttonList.forEach(node ->{
-            buttonList.stream().filter(target -> target != node).forEachOrdered(target -> {
-                int diff = Math.abs(buttonList.indexOf(target) - buttonList.indexOf(node));
-                if (diff == 1 || diff == 4) link(node, target);
-            });
-        });
-    }
 
-    public void link(Node from, Node to){
+    /*public void link(Node from, Node to){
         Line l = new Line(from.getLayoutX(), from.getLayoutY(), to.getLayoutX(), to.getLayoutY());
         //System.out.println(from.getLayoutX() + " " + from.getLayoutY() + " " + to.getLayoutX()+ " " + to.getLayoutY());
         lineList.add(l);
-    }
+    }*/
 
     @Override
     public void initializeHandlers() {
@@ -257,24 +232,118 @@ public class BuzzwordPane extends JFLAGScene{
             });
         }
         */
-        for(Button btn : buttonList){
-            //System.out.println(btn.getBoundsInParent());
-            Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0);
+
+        for(int i=0; i<buttonList.size(); i++){
+            Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
+            Button btn = buttonList.get(i);
+            final int index = i;
             btn.setOnDragDetected(event -> {
                 btn.startFullDrag();
+                //btn.setStyle("dropshadow( three-pass-box , yellow , 10, 0.8 , 0 , 0 )");
+                dynamicDisable(btn, index);
                 btn.setEffect(dragShadow);
                 addToPath(btn);
+
+            });
+
+            btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
+
+            btn.setOnMouseDragOver(event -> {
+                {
+                    btn.setEffect(dragShadow);
+                    //btn.setStyle("-fx-background-color: BLUE");
+                    dynamicDisable(btn, index);
+                    //btn.setStyle("dropshadow( three-pass-box , yellow , 10, 0.8 , 0 , 0 )");
+
+                    //btn.setEffect(dragShadow);
+                    addToPath(btn);
+                }
+            });
+
+            btn.setOnMouseReleased(event -> {
+                buttonList.forEach(node -> {
+                    node.setStyle(null);
+                    node.setEffect(null);
+                    node.setDisable(false);
+                });
+                draggedPath.clear();
+            });
+        }
+
+        /*for(Button btn : buttonList){
+            Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0);
+            System.out.println(btn.getText());
+            btn.setOnDragDetected(event -> {
+                btn.startFullDrag();
+                dynamicDisable(btn);
+                //btn.setEffect(dragShadow);
+                addToPath(btn);
+
             });
             btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
             btn.setOnMouseDragOver(event -> {
-                btn.setEffect(dragShadow);
-                addToPath(btn);
+                if(!btn.isDisable()){
+                    btn.setEffect(dragShadow);
+                    addToPath(btn);
+                }
             });
             btn.setOnMouseReleased(event -> {
                 buttonList.forEach(node -> node.setEffect(null));
             });
             //btn.setOnDragEntered(event -> btn.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .5, 0, 0)));
+        }*/
+    }
+
+    private void dynamicDisable(Button btn, int index) {
+        /*int neighbour[] = new int[]{
+                -5, -1, +3, -4, 0, +4, -3, +1, +5
+        };*/
+        if(draggedPath.contains(btn)) return;
+        int neighbours[][] = new int[][]{
+                {0, 1, 4, 5},                           // 0
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 1
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 2
+                {-1, 0, 3, 4},                          // 3
+                {-4, -3, 0, +1, +4, +5},                // 4
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 5
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 6
+                {-5, -4, -1, 0, +3, +4},                // 7
+                {-4, -3, 0, +1, +4, +5},                // 8
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 9
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 10
+                {-5, -4, -1, 0, +3, +4},                // 11
+                {-4, -3, 0, +1},                        // 12
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 13
+                {-5, -1, +3, -4, 0, +4, -3, +1, +5},    // 14
+                {-5, -4, -1, 0}                         // 15
+
+        };
+        for(int i=0; i<buttonList.size(); i++){
+            Button current = buttonList.get(i);
+            if(!draggedPath.contains(current)) current.setDisable(true);
+            for(int k=0; k<neighbours[i].length; k++){
+                if((index-i) == neighbours[i][k])
+                    current.setDisable(false);
+            }
+            /*for(int j = 0; j<neighbours.length; j++){
+
+            }*/
         }
+        /*for(int i=0; i<buttonList.size(); i++){
+            if(!draggedPath.contains(buttonList.get(i)))buttonList.get(i).setDisable(true);
+            for(int j = 0; j<neighbour.length; j++){
+                if(index + neighbour[j] >=0 && Math.abs(index-i) == neighbour[j]) {
+                    //System.out.println(index + " " + i + " " + neighbour[j]);
+                    buttonList.get(i).setDisable(false);
+                }
+            }
+        }*/
+       /* for(int i=0; i<neighbour.length; i++){
+            if(index + neighbour[i] >= 0) {
+
+            }
+        }*/
+
     }
 
     private void addToPath(Button btn) {
@@ -284,7 +353,7 @@ public class BuzzwordPane extends JFLAGScene{
             Button endTarget = btn;
             double offset = 20;
             Line link = new Line(startTarget.getLayoutX() + offset, startTarget.getLayoutY() + offset, endTarget.getLayoutX() + offset, endTarget.getLayoutY() + offset);
-            linePane.getChildren().add(link);
+            buttonPane.getChildren().add(link);
         }
         draggedPath.add(btn);
         /*for(int i=1; i< draggedPath.size(); i++){
@@ -341,4 +410,21 @@ public class BuzzwordPane extends JFLAGScene{
             });
         }
     }
+
+   /* public class GameButton extends Button{
+        boolean isUsed = false;
+
+        public GameButton(String title) {
+            super(title);
+        }
+
+        public void makeUsed(){
+            this.isUsed = true;
+        }
+
+        public boolean isUsed(){
+            return isUsed;
+        }
+
+    }*/
 }
