@@ -52,7 +52,7 @@ public class BuzzwordPane extends JFLAGScene{
     public Pane buttonPane;
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
-    private int sec;
+    private int sec, baseTime = 45;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -79,11 +79,6 @@ public class BuzzwordPane extends JFLAGScene{
         layout();
         initializeHandlers();
         initializeStyle();
-    }
-
-    private int getTime(int level) {
-        int base = 25;
-        return base -5*level;
     }
 
     @Override
@@ -226,6 +221,10 @@ public class BuzzwordPane extends JFLAGScene{
         GridSolutionSingleton gridSolutionSingleton = GridSolutionSingleton.getSingleton();
         gridSolutionSingleton.setSolutionList(solution);
         gridSolutionSingleton.show(mode);
+    }
+
+    private int getTime(int level) {
+        return baseTime -5*level;
     }
 
     @Override
