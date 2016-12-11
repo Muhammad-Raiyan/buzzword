@@ -92,12 +92,6 @@ public class Populate {
         place++;
     }
 
-    public int getTargetScore(){
-        Random r = new Random();
-        int num = r.nextInt(6)*5+50;
-        return num;
-    }
-
     public HashMap<Integer, String> getMap() {
         return map;
     }

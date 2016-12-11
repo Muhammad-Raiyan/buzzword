@@ -131,7 +131,9 @@ public class HomeSceneSingleton extends Observable{
     }
 
     public void startGame(){
-        gamePane = new BuzzwordPane(selectMode.getValue(), lp.getSelectedLevel());
+        do {
+            gamePane = new BuzzwordPane(selectMode.getValue(), lp.getSelectedLevel());
+        }while(gamePane.getSolution().size()<40);
         currentLevel = lp.getSelectedLevel();
         currentMode = selectMode.getValue();
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
@@ -142,15 +144,15 @@ public class HomeSceneSingleton extends Observable{
         currentMode = data.getCurrentMode();
         do {
             gamePane = new BuzzwordPane(data.getCurrentMode(), data.getCurrentLevel());
-        }while(gamePane.getSolution().size()<50);
+        }while(gamePane.getSolution().size()<40);
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
 
     public void restartGame(){
-        gamePane = new BuzzwordPane(currentMode, currentLevel);
-        while(gamePane.getSolution().size()<100){
+        do {
             gamePane = new BuzzwordPane(currentMode, currentLevel);
         }
+        while(gamePane.getSolution().size()<40);
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
 
