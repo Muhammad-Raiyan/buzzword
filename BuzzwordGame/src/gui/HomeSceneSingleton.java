@@ -146,6 +146,9 @@ public class HomeSceneSingleton extends Observable{
 
     public void restartGame(){
         gamePane = new BuzzwordPane(currentMode, currentLevel);
+        while(gamePane.getSolution().size()<100){
+            gamePane = new BuzzwordPane(currentMode, currentLevel);
+        }
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
 

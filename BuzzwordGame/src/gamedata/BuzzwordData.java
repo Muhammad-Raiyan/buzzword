@@ -47,7 +47,7 @@ public class BuzzwordData implements JFLAGDataComponent {
         progress.get("Famous").add(0);
 
         trie = new Trie();
-        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\science"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\science.txt"))){
             String line;
             while( (line = br.readLine()) != null){
                 trie.insert(line);

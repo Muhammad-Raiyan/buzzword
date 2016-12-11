@@ -27,7 +27,7 @@ public class Populate {
         list = new ArrayList<>();
         map = new HashMap<>();
         list.ensureCapacity(16);
-        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\science"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\science.txt"))){
             String line;
             while( (line = br.readLine()) != null){
                 if(line.length()<=7)trie.insert(line);

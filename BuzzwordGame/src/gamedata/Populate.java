@@ -20,12 +20,14 @@ public class Populate {
     Trie trie;
     HashMap<Integer, String> map;
     static int place;
+    String mode;
 
-    public Populate() {
+    public Populate(String mode) {
+        this.mode = mode;
         trie = new Trie();
         map = new HashMap<>();
         place = 0;
-        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\dictionary.txt"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("BuzzwordGame\\resources\\words\\" + getFile(mode) + ".txt"))){
             String line;
             while( (line = br.readLine()) != null){
                 if(line.length()>= 3 && line.length()<=7)trie.insert(line);
@@ -45,6 +47,18 @@ public class Populate {
             }
         }
         //System.out.println(map);
+    }
+
+    private String getFile(String mode) {
+        switch(mode){
+            case "Famous":
+                return "names";
+            case "Dictionary Words":
+                return "dictionary";
+            case "Science":
+                return "science";
+        }
+        return mode;
     }
 
     private void generateList() {

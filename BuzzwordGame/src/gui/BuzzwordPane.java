@@ -52,7 +52,7 @@ public class BuzzwordPane extends JFLAGScene{
     public Pane buttonPane;
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
-    private int sec, baseTime = 45;
+    private int sec, baseTime = 25;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -188,7 +188,7 @@ public class BuzzwordPane extends JFLAGScene{
         buttonGrid.setAlignment(Pos.CENTER);
         buttonGrid.setVgap(25);
         buttonGrid.setHgap(25);
-        Populate populate = new Populate();
+        Populate populate = new Populate(mode);
         targetScore= new SimpleIntegerProperty(populate.getTargetScore());
         HashMap<Integer, String> alphabets = populate.getMap();
         int pos = 0;
@@ -429,6 +429,9 @@ public class BuzzwordPane extends JFLAGScene{
 
     }
 
+    public ArrayList<String> getSolution() {
+        return solution;
+    }
 
     public void reset() {
         sumOfScore = new SimpleIntegerProperty(0);
