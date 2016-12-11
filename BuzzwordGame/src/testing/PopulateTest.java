@@ -15,14 +15,14 @@ import java.util.Random;
  *
  * @author ishmam
  */
-public class Populate {
+public class PopulateTest {
 
     Trie trie;
     ArrayList<String> list;
     HashMap<Integer, String> map;
     static int place=0;
 
-    public Populate() {
+    public PopulateTest() {
         trie = new Trie();
         list = new ArrayList<>();
         map = new HashMap<>();

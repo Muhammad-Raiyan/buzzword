@@ -125,7 +125,6 @@ public class BuzzwordPane extends JFLAGScene{
         TableView scoreTable = new TableView();
         scoreTable.setPrefWidth(200);
         scoreTable.setEditable(false);
-        //scoreTable.setId("progressBox");
 
         TableColumn wordsColumn = new TableColumn("Guessed words");
         wordsColumn.setPrefWidth(120);
@@ -136,7 +135,6 @@ public class BuzzwordPane extends JFLAGScene{
         scoreColumn.setCellValueFactory(
                 new PropertyValueFactory<WordPair, Integer>( "score")
         );
-        //scoreTable.getColumns().addAll(wordsColumn, scoreColumn);
 
         scoreTable.setItems(tableData);
         scoreTable.getColumns().addAll(wordsColumn, scoreColumn);
@@ -189,7 +187,7 @@ public class BuzzwordPane extends JFLAGScene{
         buttonGrid.setVgap(25);
         buttonGrid.setHgap(25);
         Populate populate = new Populate(mode);
-        targetScore= new SimpleIntegerProperty(populate.getTargetScore());
+
         HashMap<Integer, String> alphabets = populate.getMap();
         int pos = 0;
         for(int i = 0; i< 4; i++){
@@ -209,6 +207,7 @@ public class BuzzwordPane extends JFLAGScene{
         }
 
         findSolution(populate);
+        targetScore= new SimpleIntegerProperty(calculateTargetScore());
     }
 
     private void findSolution(Populate populate) {
@@ -246,8 +245,6 @@ public class BuzzwordPane extends JFLAGScene{
            playGame();
         });
 
-
-
         pause.setOnAction(event -> {
             centerPane.getChildren().set(3, play);
             pauseTime();
@@ -260,7 +257,6 @@ public class BuzzwordPane extends JFLAGScene{
             final int index = i;
             btn.setOnDragDetected(event -> {
                 btn.startFullDrag();
-                //btn.setStyle("dropshadow( three-pass-box , yellow , 10, 0.8 , 0 , 0 )");
                 dynamicDisable(btn, index);
                 btn.setEffect(dragShadow);
                 addToPath(btn);
@@ -270,11 +266,7 @@ public class BuzzwordPane extends JFLAGScene{
             btn.setOnMouseDragged(event -> btn.setEffect(dragShadow));
             btn.setOnMouseDragOver(event -> {
                     btn.setEffect(dragShadow);
-                    //btn.setStyle("-fx-background-color: BLUE");
                     dynamicDisable(btn, index);
-                    //btn.setStyle("dropshadow( three-pass-box , yellow , 10, 0.8 , 0 , 0 )");
-
-                    //btn.setEffect(dragShadow);
                     addToPath(btn);
             });
 
@@ -304,7 +296,6 @@ public class BuzzwordPane extends JFLAGScene{
                 showSolution();
             }
         });
-        //showSolution();
     }
 
     public void pauseTime() {
@@ -439,6 +430,15 @@ public class BuzzwordPane extends JFLAGScene{
         draggedPath = new ArrayList<>();
         guessedWords = new HashSet<>();
         tableData = FXCollections.observableArrayList();
+    }
+
+    public int calculateTargetScore() {
+        int sum = 0;
+        for(String word: solution){
+            sum += getScore(word);
+        }
+        double[] levelPerc = new double[]{.15, .20, .25, .30, .35, .40, .45, .50};
+        return (int) (sum * levelPerc[level]);
     }
 
     public static class WordPair {

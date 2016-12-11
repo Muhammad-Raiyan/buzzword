@@ -51,6 +51,8 @@ public class Populate {
 
     private String getFile(String mode) {
         switch(mode){
+            case "Famous People":
+                return "names";
             case "Famous":
                 return "names";
             case "Dictionary Words":
