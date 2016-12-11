@@ -1,8 +1,8 @@
 package testing;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,11 +13,15 @@ import java.util.stream.Collectors;
  */
 public class WordTest {
     public static void main(String[] args) {
-        ArrayList<String> names = new ArrayList<>();
+        HashSet<String> names = new HashSet<>();
         try(BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ishmam\\Documents\\Programming\\CSE219\\BuzzwordProject\\BuzzwordGame\\src\\testing\\name.txt"))){
             String line;
             while( (line = br.readLine()) != null){
-                if(line.length() >= 3 && line.length()<=7)names.add(line);
+                    String temp[] = line.split("\\s+");
+                    for(String s : temp){
+                        if(s.length()>=3 && s.chars().allMatch(Character::isLetter))names.add(s);
+                    }
+                //if(line.length() >= 3 && line.length()<=7)names.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();

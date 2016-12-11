@@ -52,7 +52,7 @@ public class BuzzwordPane extends JFLAGScene{
     public Pane buttonPane;
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
-    private int sec, baseTime = 25;
+    private int sec, baseTime = 45;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -61,6 +61,7 @@ public class BuzzwordPane extends JFLAGScene{
     private ObservableList<WordPair> tableData;
     private HashSet<String> guessedWords;
     private ArrayList<String> solution;
+    private Populate populate;
 
     public BuzzwordPane() {
         this("Dictionary Words", 1);
@@ -186,7 +187,7 @@ public class BuzzwordPane extends JFLAGScene{
         buttonGrid.setAlignment(Pos.CENTER);
         buttonGrid.setVgap(25);
         buttonGrid.setHgap(25);
-        Populate populate = new Populate(mode);
+        populate = new Populate(mode);
 
         HashMap<Integer, String> alphabets = populate.getMap();
         int pos = 0;
@@ -333,7 +334,7 @@ public class BuzzwordPane extends JFLAGScene{
 
 
     private boolean isValid(String word) {
-        return word.length()>2 && !guessedWords.contains(word);
+        return word.length()>2 && !guessedWords.contains(word) && populate.getTrie().search(word);
     }
 
     private void dynamicDisable(Button btn, int index) {
@@ -437,7 +438,8 @@ public class BuzzwordPane extends JFLAGScene{
         for(String word: solution){
             sum += getScore(word);
         }
-        double[] levelPerc = new double[]{.15, .20, .25, .30, .35, .40, .45, .50};
+        if(sum>1000) sum-=800;
+        double[] levelPerc = new double[]{.6, .8, .10, .12, .14, .16, .18, .20};
         return (int) (sum * levelPerc[level]);
     }
 

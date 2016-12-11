@@ -22,6 +22,7 @@ import java.util.Observable;
  */
 public class HomeSceneSingleton extends Observable{
 
+    private final static int minWords = 20;
     private Workspace workspace;
     private static HomeSceneSingleton homeSceneSingleton;
 
@@ -133,7 +134,7 @@ public class HomeSceneSingleton extends Observable{
     public void startGame(){
         do {
             gamePane = new BuzzwordPane(selectMode.getValue(), lp.getSelectedLevel());
-        }while(gamePane.getSolution().size()<40);
+        }while(gamePane.getSolution().size()<minWords);
         currentLevel = lp.getSelectedLevel();
         currentMode = selectMode.getValue();
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
@@ -144,7 +145,7 @@ public class HomeSceneSingleton extends Observable{
         currentMode = data.getCurrentMode();
         do {
             gamePane = new BuzzwordPane(data.getCurrentMode(), data.getCurrentLevel());
-        }while(gamePane.getSolution().size()<40);
+        }while(gamePane.getSolution().size()<minWords);
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
 
@@ -152,7 +153,7 @@ public class HomeSceneSingleton extends Observable{
         do {
             gamePane = new BuzzwordPane(currentMode, currentLevel);
         }
-        while(gamePane.getSolution().size()<40);
+        while(gamePane.getSolution().size()<minWords);
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
 
