@@ -4,6 +4,7 @@ import gamedata.Populate;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -51,7 +52,7 @@ public class BuzzwordPane extends JFLAGScene{
     public Pane buttonPane;
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
-    private int sec = 10;
+    private int sec;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -70,6 +71,7 @@ public class BuzzwordPane extends JFLAGScene{
         this.level = (level);
         this.levelLabel = new Label("LEVEL " + level);
         sumOfScore = new SimpleIntegerProperty(0);
+        sec = getTime(level);
         buttonList = new ArrayList<>();
         draggedPath = new ArrayList<>();
         guessedWords = new HashSet<>();
@@ -77,6 +79,11 @@ public class BuzzwordPane extends JFLAGScene{
         layout();
         initializeHandlers();
         initializeStyle();
+    }
+
+    private int getTime(int level) {
+        int base = 25;
+        return base -5*level;
     }
 
     @Override
@@ -232,14 +239,20 @@ public class BuzzwordPane extends JFLAGScene{
                         Duration.seconds(sec),
                         new KeyValue(secProperty, 0)
                 ));
+
+                timeLine.setOnFinished(event2 -> {
+                    stopBuzzword();
+                });
             }
            playGame();
         });
 
+
+
         pause.setOnAction(event -> {
             centerPane.getChildren().set(3, play);
             pauseTime();
-            showSolution();
+
         });
 
         for(int i=0; i<buttonList.size(); i++){
@@ -278,6 +291,21 @@ public class BuzzwordPane extends JFLAGScene{
                 draggedPath.clear();
             });
         }
+    }
+
+    private void stopBuzzword() {
+        play.setDisable(true);
+        pause.setDisable(true);
+        buttonList.forEach(node -> {
+            node.setDisable(true);
+        });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showSolution();
+            }
+        });
+        //showSolution();
     }
 
     public void pauseTime() {

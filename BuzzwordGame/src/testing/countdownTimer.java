@@ -1,4 +1,4 @@
-package gui;
+package testing;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,9 +19,12 @@ public class countdownTimer implements Runnable {
     private final int delay = 100;
     static Timeline timer;
     public countdownTimer(int sec){
+
         duration = sec*100;
         currentTime = new SimpleIntegerProperty(duration);
-        timer = new Timeline(new KeyFrame(Duration.seconds(sec), ae -> reduce()));
+        timer = new Timeline(new KeyFrame(Duration.seconds(sec), ae -> {
+            reduce();
+        }));
 
         remainingTime.setText("Remaining Time: ");
         seconds.textProperty().bind(currentTime.divide(100).asString());
@@ -37,6 +40,7 @@ public class countdownTimer implements Runnable {
     @Override
     public void run() {
         timer.play();
+        if(getDuration() == 0) System.out.println("End");
     }
 
     public int getDuration() {
