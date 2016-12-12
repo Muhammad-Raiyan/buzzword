@@ -4,9 +4,19 @@
     "password" : "eBVpbsvxyW5olLd5RW0zDg==",
     "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/asd.json"
   },
+  "zxc" : {
+    "userName" : "zxc",
+    "password" : "ICy5YqxZB1uWSwcVLSNLcA==",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/zxc.json"
+  },
   "qwe" : {
     "userName" : "qwe",
     "password" : "dtgCJGEfyRml1U8P+fukRg==",
     "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/qwe.json"
+  },
+  "ish" : {
+    "userName" : "ish",
+    "password" : "g2e9tuuc2HJdZYyTlRqzcQ==",
+    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/ish.json"
   }
 }

@@ -92,9 +92,6 @@ public class ProfileManager implements JFLAGFileComponent{
 
             if (JsonToken.FIELD_NAME.equals(token)) {
                 switch (jsonParser.getCurrentName()) {
-                    case "START_OBJECT":
-
-                        break;
                     case USERNAME:
                         data = new UserData();
                         jsonParser.nextToken();
