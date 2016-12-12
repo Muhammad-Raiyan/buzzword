@@ -76,7 +76,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private ArrayList<ArrayList<Integer>> pressedPath;
-    private int sec, baseTime = 35;
+    private int sec, baseTime = 85;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -592,8 +592,8 @@ public class BuzzwordPane extends JFLAGScene{
         }
 
         double[] levelPerc = new double[]{.4, .6, .8, .10, .12, .14, .16, .18};
-        //return (int) (sum * levelPerc[level-1]);
-        return 20;
+        return (int) (sum * levelPerc[level-1]);
+        //return 20;
     }
 
     public static class WordPair {
