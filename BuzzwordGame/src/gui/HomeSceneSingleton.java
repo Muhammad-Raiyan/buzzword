@@ -122,7 +122,7 @@ public class HomeSceneSingleton extends Observable{
             switchToStartButton();
         });
         user.setOnAction(event -> {
-            userPane = new UserPane();
+            userPane = new UserPane(workspace);
             rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
 

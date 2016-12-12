@@ -1,0 +1,673 @@
+1
+Software Requirement Specification
+for
+!BuzzWord!
+Version 1.0
+Prepared by:
+Ritwik Banerjee
+Professaur Inc.
+Oct 18, 2016
+Based on IEEE Std 830-1998(R2009)
+© 2016 Professaur Inc.
+This document or any portion thereof may not be reproduced or used in any manner whatsoever
+without the express written permission of the author.
+2
+1 Introduction
+Professaur Inc. provides custom software development approved by the professor, incorporating the
+developmental aspects of approved software projects including specification, design, implementation,
+and testing. At Professaur Inc., we strive to build applications that exercise the mind while still allowing
+enough room for relaxation. In particular, our focus is on educational games.
+Educational games should be easy to learn, easy to play, and yet not too easy to master. The mechanics
+of the gameplay should be simple, so that the player is only required to perform very simple actions –
+a usability aspect that is becoming increasingly important in today’s world of touch screen mobile
+devices where most actions should not require more than taps or swipes. In spite of the simplicity of
+actions, a game can remain interesting to a player if the intellectual difficulty required to master it is
+gradually increased. This is a strategy where players compete with their own past selves. Of course,
+intellectual competition can also be introduced in other ways, such as having multiplayer modes.
+The primary objective is, however, to make the learning process casual and fun so that players learn
+even without consciously realizing it. BuzzWord, a generalization of the popular word game
+“Boggle”, aims to fulfil exactly that goal while helping players build up their vocabulary.
+Much like Boggle, BuzzWord is a game where players are given a network of connected letters, and
+they aim to identify as many words as possible, within a limited amount of time. As players get
+promoted from one level to the next, the promotion criteria to get into the subsequent levels become
+progressively more difficult. Oh, and the game may ask the player to explain what the word means …
+if they want the points, that is.
+1.1 Purpose
+This document specifies how our BuzzWord game (version 1.0) should look like, and what the
+gameplay must entail. It serves as a contract among all members involved in the development of this
+product about the construction and the appearance of the game, thus comprising the game mechanics
+from an operational perspective as well as the game esthetics from the end users’ perspective.
+The intended audience of this software requirement specification (SRS) document is the entire
+development team, including game designers, artists, software engineers and sales and marketing
+representatives who will ultimately reach out to the consumers.
+1.2 Product Scope
+For Professaur Inc., a company that is fully intent on capturing the educational games market,
+BuzzWord is the first of a many more word-games to come. Therefore, it is crucial to make design 
+3
+decisions that will lead to reusable components. This paves the way for framework(s) to be designed
+and constructed such that they can be employed for similar other word-games in future. Likewise, this
+document describes a Java Framework for Language Applications and Games (JFLAG) that
+provides the foundational building blocks for the development of such games. JFLAG, however, is
+specific to word-games, and is not meant to be used as a general purpose framework for the
+development of all kinds of educational games.
+1.3 Definitions, Acronyms, and Abbreviations
+1. Educational games are games that are designed to help people to learn about certain
+subjects, expand concepts, reinforce development, understand an historical event or culture,
+or assist them in learning a skill as they play.
+2. Word games are games that involve making, guessing, or selecting words.
+3. IEEE (Institute of Electrical and Electronics Engineers), pronounced “I triple E”, is the
+world’s largest association of technical professionals. Its objectives are educational and
+technical advancement of electrical and electronic engineering, telecommunications, computer
+engineering, and their allied disciplines.
+4. A framework is an abstraction in which software providing generic functionality can be
+selectively used by additional user-written code, thus providing application-specific software.
+In case of Java, a framework typically takes the form of a collection of classes and interfaces
+that can play such a foundational role.
+5. A graphical user interface (GUI) is a type of user interface that allows users to interact with
+electronic devices through graphical icons and visual indicators such as secondary notation,
+instead of text-based user interfaces, typed command labels or text navigation.
+6. Unified Modeling Language (UML) is a standard set of document formats for designing
+software graphically.
+7. A use case diagram is a UML document format that specifies how a user will interact with a
+system. They do not include technical details, and are instead fed as input to the design stage
+where the appropriate software designs are constructed based in part on the use cases specified
+in the SRS.
+1.4 References
+1. IEEE (1998). IEEE Recommended Practice for Software Requirements Specifications. IEEE Std. 830-1998.
+4
+1.5 Overview
+This SRS consists of the esthetic and operational description of BuzzWord. It does not include a
+software design description, and therefore, explains what to do, but not how to build the appropriate
+technologies. The rest of this document is divided into two main components: section 2 specifies the
+conceptual design, including game rules and parameters, and section 3 presents the game interface
+layout and the related functionalities.
+2 Overall Description
+How good are you at identifying words, or perhaps even guessing words? In BuzzWord, the player
+will be given a graph of letters, and s/he has to identify words that can be formed by connecting the
+nodes in this graph. The longer the word, the higher its score! But of course, we don’t want people to
+get points for randomly typing things, so the game may ask the player to identify the correct meaning
+of the word. Failure to do so may carry a harsh punishment! As players get promoted to higher levels,
+the graphs get more complex, and the players are forced to guess longer words. As with most games,
+BuzzWord can be played with friends (or enemies) in a two-player mode, where players take turns to
+display their linguistic prowess.
+2.1 Product Perspective
+BuzzWord is an independent and stand-alone educational game. It should be a game that starts easy,
+but gradually increases in difficulty. The gameplay itself should be simple, with actions required being
+no more complex than clicks, drags, and/or simple keystrokes. As an educational game, it should
+cultivate a player’s language skills and reward a player with more advanced and challenging levels.
+Balancing the difficulty with intellectual pleasure is often a difficult line to walk.
+2.1.1 System Interfaces
+BuzzWord will need a splash screen as the application home where a player begins, a level selection
+mechanism, a game selection mechanism (e.g., to starts a new game or load a previously saved game),
+a game mode selection mechanism (e.g., single player or multi-player), and some obvious way of
+accessing the help section of the game.
+2.1.2 User Interfaces
+As with many simple games intended for younger users, we want to develop BuzzWord and other
+educational games in a manner that makes easily portable to mobile platforms. Thus, the controls need 
+5
+to be simple and primarily based on mouse-clicks. However, we would also like to have keyboard
+shortcuts so that PC users can also play with ease.
+In the remainder of this document, a “click” will always refer to a left-click, unless otherwise stated.
+Similarly, “drag” will always refer to a mouse drag with the press of the left mouse button. Table 2.1
+lists the various screens in BuzzWord, and Table 2.2 enumerates the player interactions with it.
+TABLE 2.1
+Game Screens • Home
+• Help
+• Level Selection
+• Gameplay
+• Profile Settings
+TABLE 2.2
+USE CASE SCREEN
+1 Create Profile Home
+2 Login/Logout Home
+3 Start Playing Home
+4 Select Level Level Selection
+5 Select Game Mode Home
+6 View Help Home
+7 Quit Application Home, Level Selection, Gameplay, Help, Profile Settings
+8 Return to Home Screen Level Selection, Help, Profile Settings, Gameplay
+9 Pause/Resume Game Gameplay
+10 Select word by mouse drag Gameplay
+11 Select word by typing Gameplay
+12 Replay Level Gameplay
+13 Start Next Level Gameplay
+14 Save Progress Gameplay
+15 Close “Personal Best” Dialog Gameplay
+16 Scroll Through Help Help
+17 View/Edit Profile Profile Settings
+18 Level Gameplay Ends Gameplay
+6
+Use Case 1: Create Profile
+1. Goal: Player wishes to create a new profile.
+2. Preconditions: The application has been started, and the user is viewing the home screen.
+3. Trigger: User clicks the “Create New Profile” button.
+4. Key Shortcut: Ctrl + Shift + P
+5. Scenario:
+5.1. Player starts the application, which loads the home screen (a splash screen with multiple
+options, one of which is to create a new player profile.
+5.2. Player wants to create a new profile, so clicks the “Create New Profile” button.
+5.3. Player is taken to the profile settings screen, where s/he can create and save the new profile.
+5.3.1. The location and format of the stored profile information remains hidden from the
+player.
+6. Exceptions: Creating a new profile is enabled only when the user is not logged in.
+7. Priority: Essential
+8. Open Issues: Size, location and style of button should be finalized by UI designer. The location
+and format of profile-related information and how it is packaged in the application code is a
+decision left to the software engineer(s).
+Use Case 2: Login/Logout
+1. Goal: If player is logged in, log out. Else, allow player to log in.
+2. Preconditions: The application has been started, and the user is viewing the home screen.
+3. Trigger: User clicks the login/logout button, which is a toggle button (i.e., if logged in, the current
+user gets to log out, otherwise s/he gets to log in).
+4. Key Shortcut: Ctrl + L
+5. Scenario:
+5.1. Player is viewing the home screen. At this point, player may wish to log in with a previously
+created profile, and thus clicks the login button, or the player was already logged in and now
+wishes to log out.
+5.2. Upon clicking the toggle button, a pop-up appears that allows the player to enter the profile
+name and password if logging in. If the button is clicked while player was already logged in,
+then the pop-up asks the player to confirm logging out.
+7
+5.3. When credentials are correctly entered in step 5.2, all profile information including all prior
+progress of this profile are loaded into the application, even though this progress information
+is not visible on the home screen.
+5.4. The home screen shows the profile name after login.
+5.5. The home screen shows no profile name after logout.
+6. Priority: Essential
+7. Open Issues: Size, location and style of button should be finalized by UI designer.
+Use Case 3: Start Playing
+1. Goal: Start playing BuzzWord.
+2. Preconditions: The application has been started, and the player is currently logged in. At this
+stage, the home screen has enabled the option to start playing a new game.
+3. Trigger: Player clicks the “Start Playing” button.
+4. Key Shortcut: Ctrl + P
+5. Scenario:
+5.1. If the player is logged in, s/he is allowed to click the “Start Playing” button on the home
+screen.
+5.2. Player wants to start playing, and thus clicks the “Start Playing” button.
+5.3. After clicking the button, the home screen is replaced by the level selection screen, which
+continues to display the profile name, and correctly displays all past progress made by this
+player.
+6. Priority: Essential
+7. Open Issues: Size, location and style of button should be finalized by UI designer.
+Use Case 4: Select Level
+1. Goal: Allow player to select any level that has been unlocked based on past progress.
+2. Precondition: Having chosen to start playing, player is viewing the level selection screen. The
+level selection screen displays all the levels of BuzzWord, but only the unlocked levels are clickable.
+More advanced levels remain disabled.
+3. Trigger: Player clicks one of the unlocked levels.
+4. Scenario:
+4.1. Player has chosen to start playing, and is currently viewing the level selection screen.
+4.2. Player clicks a level from this screen. If the level is unlocked, the gameplay screen is loaded
+for that level. Otherwise (i.e., player clicks a level not yet unlocked) nothing happens.
+8
+5. Priority: Essential
+6. Open Issues: The layout of the level selection screen, including the design of individual level
+buttons, should be finalized by the UI designer.
+Use Case 5: Select Game Mode
+1. Goal: Select a particular game mode, as determined by the player.
+2. Precondition: Player is logged in, and is viewing the home screen. One of the options on this
+screen is to choose a game mode.
+3. Trigger: Player clicks the button to select the game mode.
+4. Scenario:
+4.1. Player has already logged in, and wants to play BuzzWord in one of the many modes available
+(e.g., “Places”, “Animal”, “Dictionary Words”).
+4.2. Player clicks the button to select the game mode.
+4.3. Player then chooses a particular mode. Note that choice of mode affects the level selection.
+A player may have advanced to higher levels in one mode, but only just beginning in a
+different mode.
+5. Priority: Essential
+6. Open Issues: The method of selecting the game mode should be finalized by the UI designer
+(e.g., provide the various modes in a drop-down menu).
+Use Case 6: View Help
+1. Goal: Switch to the help screen.
+2. Precondition: The application has been started and the user is viewing the home screen. One of
+the options on the home screen is to view the help for this application.
+3. Trigger: Player clicks the “Help” button.
+4. Scenario:
+4.1. Application has been started, and the user is viewing the home screen. One option on the
+home screen the “Help” button.
+4.2. User presses the “Help” button.
+4.3. Application loads the help screen.
+5. Priority: Essential
+6. Open Issues: Size, location and style of the help button should be finalized by UI designer.
+Use Case 7: Quit Application
+1. Goal: Quit and close BuzzWord
+9
+2. Precondition: The application is running, and is on any one of the screens.
+3. Trigger: User clicks the “X” button (there should only be one).
+4. Key Shortcut: Ctrl + Q
+5. Scenario:
+5.1. User is viewing any one of the screens (see Table 2.1).
+5.2. User clicks the “X” button on the top-left (or top-right, as it may be) corner of the game
+application.
+5.3. The application provides a pop-up asking for confirmation about quitting.
+5.4. BuzzWord does not save partial progress within a level. However, if any new level has been
+cleared by the user between the last save and this point of time, that progress must be autosaved
+before the application quits.
+5.5. If user confirms, the application quits.
+6. Exceptions: This button must always remain enabled.
+7. Priority: Essential
+8. Open Issues: Size, location and style of the help button should be finalized by UI designer.
+Use Case 8: Return to Home Screen
+1. Goal: From any screen other than the home screen itself (see Table 2.1), pressing the home button
+makes the player return to the home screen.
+2. Preconditions: User is viewing any of the screens other than the home screen.
+3. Trigger: User clicks the “Home” button.
+4. Key Shortcut: Ctrl + H
+5. Scenario:
+5.1. User is viewing any of the screens other than the home screen, and clicks the home button.
+5.2. The application jumps back to the home screen.
+5.3. If the home button is clicked while in the middle of active gameplay, the gameplay is paused
+and a pop-up asking for confirmation appears.
+5.3.1.If the player confirms return to home screen, the in-play level is discarded and the
+application returns to the home screen.
+6. Priority: Essential
+7. Open Issues: Size, location and style of the help button should be finalized by UI designer.
+Use Case 9: Pause/Resume Game
+1. Goal: If a game is being played, then pause it. Otherwise, resume the game that has been paused.
+10
+2. Preconditions: The player is actively playing a level of the game on the gameplay screen.
+3. Trigger: Player toggles pause/resume.
+4. Scenario:
+4.1. Player is playing a level of BuzzWord, busy trying to guess words within a limited time. Due
+to the time-sensitive nature of the gameplay, the player should have the ability to pause the
+game if need be (and of course, resume a paused game).
+4.2. Player toggles the pause/resume button.
+4.3. An ongoing game is paused. A paused game is resumed.
+4.3.1. Players should not be able to “cheat” by getting extra time to observe the letter grid.
+Therefore, a paused game must render the grid invisible.
+4.3.2. When a paused game resumes, the grid must become visible again, in the exact same
+state in which the game was paused.
+5. Priority: Non-essential, but helpful.
+6. Open Issues: Size, location and style of the toggle should be finalized by the UI designer.
+Use Case 10: Select Word by Mouse Drag
+1. Goal: While a game is being played, player can press the left-button of the mouse on a node in
+the letter grid, and drag it over other nodes one by one, thus forming a path in the grid. The path
+– nodes as well as edges – should be highlighted during dragging. Any path that does not form a
+cycle should be considered valid for this case, even if it does not form a valid word.
+2. Preconditions: Active play is in progress at some level on the gameplay screen.
+3. Key Shortcut: N/A.
+4. Trigger: Player presses the mouse button on a node in the letter grid.
+5. Scenario:
+5.1. Player is actively playing a level on the gameplay screen.
+5.2. Player presses mouse button on a node in the letter grid.
+5.3. Player drags mouse button over other nodes before finally releasing it.
+5.4. As the mouse is dragged, a text area in the gameplay screen displays the word formed by the
+dragging action. This display is dynamically updated as the dragging action continues.
+5.5. Game logic forms a word comprising the letters on the path over which mouse was dragged,
+and takes action depending on whether or not the path resulted in a valid word.
+6. Exceptions:
+6.1. The path must be a simple path, i.e., it should not form (or include) cycles.
+11
+6.2. The mouse drag must be approximated well. In a time-sensitive game, players may get
+frustrated if quick but slightly inaccurate dragging actions are not accurately corrected.
+7. Priority: Essential
+8. Open Issues: Highlighting effects of the path and the text area design must be finalized by the
+UI designer.
+Use Case 11: Select Word by Typing
+1. Goal: While a game is being played, player can simply type a sequence of letters instead of using
+the mouse. In this case, ALL paths satisfying the sequence of typed letters (in the order in which
+they are typed) must be treated as potential candidates, as long as they are acyclic paths in the letter
+grid. As in Use Case 11, the paths should be highlighted, and this should be dynamic (i.e., as the
+player types). Any sequence of characters that appear as a valid path in the letter grid should remain
+under consideration, even if the word formed by that path is not a valid word.
+2. Precondition: Active play in progress at some level on the gameplay screen.
+3. Trigger: Player types an alphabetic character during active gameplay. Note that this could signal
+the beginning of a new word being guessed, or a letter being added to a partially-formed word.
+4. Scenario:
+4.1. Player is actively playing a level on the gameplay screen.
+4.2. Player types a letter (i.e., anything from ‘a’ through ‘z’).
+4.3. If the letter is the first letter of a new word being guessed, EVERY occurrence of that letter
+in the grid is highlighted. Otherwise, only those paths in the grid that can be extended by
+appending a node containing the letter are highlighted.
+4.4. As the typing continues, the text area in the gameplay screen displays the word formed by the
+typing. This display, just like the path highlighting, is dynamically updated as the typing
+continues.
+4.5. Player hits the return key.
+4.6. Game logic forms a word comprising the letter-sequence, and takes action depending on
+whether or not it is a valid word.
+4.6.1. If there are multiple paths in the grid corresponding to the word, the game should still
+treat it as a single guess.
+5. Priority: Essential
+6. Constraint: The path highlighting and text area display esthetics must be identical to the design
+and esthetics of Use Case 11: Select Word by Mouse Drag.
+12
+7. Open Issues: Highlighting effects of the path(s) and the text area design must be finalized by the
+UI designer.
+Use Case 12: Replay Level
+1. Goal: While a game is being played, a player may realize that s/he is not going to succeed in the
+current attempt at a certain level. In such a situation, the game provides the player with the option
+to immediately restart the current level instead of waiting for the clock to run out. The goal is to
+allow the player to successfully restart the current level at any point during active play. The player
+must also be allowed to restart the level after playing (successfully or not) a level completely.
+2. Preconditions: Player is viewing the gameplay screen, and active play is in progress (or has
+finished) at some level on the gameplay screen.
+3. Key Shortcut: Ctrl + R
+4. Trigger: Player clicks the “Restart Level” button.
+5. Scenario:
+5.1. Player is actively playing, or has finished playing, a level on the gameplay screen.
+5.2. There are no popups (e.g., a popup appearing after the player has successfully finished playing
+a level).
+5.3. Player clicks the “Restart Level” button.
+5.4. The level restarts.
+5.4.1. A new letter grid is created upon restart.
+5.4.2. The game timer is reset.
+6. Priority: Essential
+7. Open Issues: Size, location and style of the restart button should be finalized by the UI designer.
+Use Case 13: Start Next Level
+1. Goal: Start the game play for the subsequent level in the same game mode, once the player has
+successfully completed the current level.
+2. Preconditions: Player is viewing the gameplay screen, and has successfully completed current
+level.
+3. Key Shortcut: Ctrl + >
+4. Trigger: Player clicks the “Play Next Level” button.
+5. Scenario:
+5.1. Player has successfully completed a level on the gameplay screen.
+5.2. Player has closed any popups that may have appeared.
+13
+5.3. The “Play Next Level” button is enabled.
+5.4. Player clicks “Play Next Level” button.
+5.5. Gameplay screen displays the next level.
+6. Exceptions: The “Play Next Level” button should not be rendered (or enabled) unless and until
+the player has successfully completed the current level. Unsuccessful attempts at the current level
+implies the subsequent levels remain locked, unless the player profile indicates that higher levels
+were already unlocked by a previous successful attempt at the current level.
+7. Priority: Essential
+8. Open Issues: Size, location and style of the button should be finalized by the UI designer.
+Whether the play starts immediately once the next level is displayed, or the player has to provide
+an action (e.g., mouse click or key stroke) to begin the play at the next level is also a decision left
+to the designer.
+Use Case 14: Save Progress
+1. Goal: Save all the progress made by the current player. In BuzzWord, partially played levels cannot
+be saved. Successfully completing a new level, however, unlocks higher levels, thereby changing
+the game state. Any successful completion, therefore, must be allowed to be saved.
+2. Preconditions: For the first time, player has successfully completed the current level in this
+particular game mode.
+3. Key Shortcut: Ctrl + S
+4. Trigger: No separate trigger required, other than clearing a new level.
+5. Scenario:
+5.1. Player has successfully completed a level on the gameplay screen.
+5.2. This level had never before been cleared by this player on this mode of the game.
+5.3. Player has cleared at least one new level in some game mode since the last time this player’s
+progress was saved.
+5.4. The “Save Progress” button is enabled.
+5.5. Player clicks the “Save Progress” button.
+5.5.1. Progress is saved automatically. Player does not get explicit access to where or how
+progress information is saved.
+5.6. “Save Progress” button returns to disabled state.
+6. Exceptions: The “Save Progress” button should only be enabled if 4.3 holds true.
+7. Priority: Essential
+14
+8. Open Issues: Size, location and style of the restart button should be finalized by the UI designer.
+The location and format of progress-related information and how it is packaged in the application
+code is a decision left to the software engineer(s).
+Use Case 15: Close “Personal Best” Dialog
+1. Goal: Notify the player that his/her latest attempt at the current level in this mode of gameplay
+was his/her personal best so far.
+2. Preconditions:
+2.1. Player is viewing the gameplay screen, and has finished playing a level in a certain game mode.
+2.2. Whether or not player was successful in clearing this level, this attempt was his/her best
+attempt so far (i.e., in the complete history of the profile).
+3. Scenario:
+3.1. Player finished playing a level in a certain game mode.
+3.2. A popup informs the player that this was his/her best attempt at this level in this mode.
+3.3. The popup has a single “Close” button.
+3.4. Player clicks the popup’s “Close” button.
+3.5. Popup closes and player is viewing the gameplay screen at the end of a level’s play.
+4. Priority: Essential
+5. Open Issues: Style of the popup should be finalized by the UI designer.
+Use Case 16: Scroll Through Help
+1. Goal: Scroll up and down the help screen.
+2. Preconditions: Player is viewing the help screen.
+3. Trigger: Mouse scroll or up/down arrow key press.
+4. Scenario: Player is viewing the help screen, and is pressing the key up/down buttons or using
+the mouse scroll.
+5. Priority: Essential.
+Use Case 18: Level Gameplay Ends
+1. Goal: Display the complete “solution” to the current level’s letter grid when the time runs out.
+2. Preconditions: Player is viewing the gameplay screen, and has exhausted the time limit for the
+current level.
+3. Trigger: N/A.
+4. Scenario:
+4.1. Player has run out of time while playing at the current level.
+15
+4.2. Player has not been successful in clearing the current level.
+4.3. The gameplay screen displays all valid words that could have been extracted from the letter
+grid in the “Guessed Words” display area.
+4.3.1. The “Guessed Words” display area must provide an obvious visual distinction between
+the words that were guessed by the player and the words that remained unguessed.
+5. Priority: Essential
+6. Open Issues: The esthetics and styles of the display area should be finalized by the UI designer.
+2.1.3 Operations
+A. Goals
+In BuzzWord, the goal is start easy, and get gradually more difficult as the player gets into higher
+levels. Section 3.1.2 provides an example of the layout of the level selection screen.
+B. Game Mode Selection
+This game offers multiple modes (e.g., normal dictionary words, famous people, etc.). Game mode
+selection can be done from the home screen. This is shown in Section 3.1.1.
+C. Game Play Logic
+The game play consists of a target score that the player must reach at each level, and a time limit within
+which the player must do so. The exact time limit and target scores are decisions left to the game
+developers. While playing, the words guessed by the player are shown in a display, along with their
+scores. The total score is also displayed so that the player knows how far away s/he is from salvation!
+The details of the user interface are provided in Section 3.1.3. A few additional things to note:
+1) During gameplay, the player should have some option to restart the game (with a newly generated
+grid) without waiting for time to run out. The external interface decisions (e.g., an additional restart
+button) about this are left to the game developers.
+2) When a game ends (at some level):
+a) All words that could have been guessed by the player, but weren’t, must be added to the display
+in a visually distinct manner (similar to how unguessed letters in the target word were displayed
+in Hangman in the second homework).
+b) The total possible score at that level should also be displayed. The idea is that the player should.
+c) The play button should get enabled again. This is how the player replay the same level after
+s/he fails to clear the level.
+d) An additional button must appear, clicking which should allow the player to move back to the
+level selection screen directly without going to the home screen.
+16
+2.1.4 Hardware Interfaces
+The application should be runnable on any platform with Java, but required a keyboard and mouse.
+2.1.5 Software Interfaces
+BuzzWord will be developed as a JavaFX application. In addition to the application itself, we want
+to develop a simple framework that allows for easier development of similar word games using
+JavaFX. This interface must provide general methods of
+1) Playing games inside an environment with a countdown timer.
+2) Creating grids of different types of objects.
+3) Creating dynamically updatable scoring mechanisms.
+4) Any other functionality that you may think is general enough (i.e., applicable to other word games,
+not just BuzzWord).
+For this interface, you can use the JFXFramework as a starting point, but you can also start based off
+JavaFX directly.
+2.1.6 Communications Interfaces
+BuzzWord is a local game, with no network requirements.
+2.2 Product Functions
+N/A
+2.3 User Characteristics
+The game should be as intuitive and user-friendly as possible. Use good UI design principles and
+fool proof designing to achieve this aim.
+2.4 Constraints
+N/A
+2.5 Assumptions & Dependencies
+N/A
+2.6 Apportioning of Dependencies
+N/A
+3 Specific Requirements
+The GUI controls should be neatly drawn, and carefully aligned and spaced.
+17
+3.1 External Interfaces
+The GUI renderings provided in this section are approximate suggestions. The precise size, position
+and layout may be modified and refined by the developers during the implementation process.
+3.1.1 Home Screen
+Fig. 3.1: The home screen immediately after
+the application has started running. At this
+point, the user has not logged in, and
+therefore, s/he cannot start playing a game
+immediately.
+Fig. 3.2: The home screen after player has
+logged in using the credentials for an existing
+player profile. Here, the “Create New Profile”
+button is no longer present, and two new
+buttons have appeared
+1. to select the game mode, and
+2. to start playing the game.
+Fig. 3.3: The game offers multiple modes of
+play such as English dictionary words, or
+specialized domains like scientific terms,
+names of places or famous people. Before
+starting to play, the player may not actively
+choose a game mode. Then, the mode in
+which the player was playing before exiting
+the application during the previous login will
+be implicitly selected. If the player is new, the
+English dictionary mode will be implicitly
+selected.
+18
+As you can see, in all three scenarios, the home screen always provides the user with the simple option
+of quitting the application by clicking on the cross on the top-right corner. In addition to clicking
+buttons that make the player move away from the home screen, there is one special scenario where
+the home screen is visible, but inactive. This is when the user clicks on the login button.
+Fig. 3.4: User has clicked the login button,
+and the login screen pops up, disabling the
+home screen that is visible behind. At this
+stage, a simple key shortcut like Esc should
+remove the login screen (in case user does not
+want to log in after clicking the button) and
+return to the initial active home screen. Upon
+successful login, the home screen should be
+as shown in Fig. 3.2. An unsuccessful attempt
+should provide a useful message to the user
+and ask the user to enter the credentials again.
+Note that in Fig. 3.4., even the cross on the top-right of the background screen should not be active.
+The only options for the user are to either enter the credentials successfully, or press Esc to remove
+the login screen popup.
+3.1.2 Level Selection Screen
+Fig. 3.5: The level selection screen for player
+who has not yet cleared level 4 in the
+“Famous People” game mode. This screen
+must display the locked and unlocked levels
+with some visual distinction. Only the
+unlocked levels must be clickable. It will
+usually be the case that a player has cleared
+different levels in different game modes. The
+level selection screen should use saved profile
+data to correctly display this screen.
+Note that player can logout, go back to the home
+screen, or quit the application from this screen.
+Once the player clicks the button to start play, s/he is taken to the level selection screen. This screen
+displays all the levels in the game (for the game mode chosen, even if the choice was implicit). Here,
+the developer must take care to ensure that the player does not have access to higher levels without
+having cleared the lower levels first. For example, if X has only cleared levels 1, 2 and 3, then only the 
+19
+levels 1, 2, 3, and 4 are accessible. Levels 5 and above should be locked or disabled in some other
+manner. The display choices are left to the designer. Fig. 3.5 shows how this may be done.
+In Fig. 3.5, when a player clicks an unlocked level, s/he is immediately taken to the gameplay screen.
+This is where the action happens! Keep in mind that the player may choose to practice on easier levels
+s/he has successfully completed before, which is why levels 1, 2 and 3 are also accessible in the level
+selection screen.
+3.1.3 Gameplay Screen
+Fig. 3.6: The gameplay screen shown here during active play. The player has guessed a
+few words already, as shown on the right, along with the scores. The total score is also
+displayed. Currently, with the countdown timer showing 40 seconds left, the player
+needs 35 more points to clear this fourth level. S/he is attempting to guess a word
+starting with “BU”. This is dynamically reflected in the letter grid as the player types.
+Note that ALL paths are reflected in the grid. Finally, the play button at the bottom is
+disabled during gameplay. It was initially enabled. The player clicked the button and the
+countdown timer started.
+Every level requires the player to identify valid words in the letter grid. That is, words that can be
+formed by connecting the letter nodes in an acyclic path. The minimum word length is 3 letters, and
+there is no maximum limit. The game has a scoring mechanism as described under “Operations”.
+3.2 Functions
+A. Validity Check: The application shall check for validity of profile credentials before allowing a
+user to start game play of any sort.
+20
+B. Sequence of Gameplay: The application shall not allow users to access unlocked levels in any
+format of the game.
+C. Abnormal Situations: The application shall interpret a sudden attempt to quit while in active
+game as a mistake, and ask for confirmation from the user. Any other similar potentially errant
+behavior shall also be treated in a similar manner.
+D. Feedback: The application shall provide appropriate feedback to the user. The exact nature of
+the feedback shall depend on the context, but typically this will be in the form of visual cues or
+sound, provided with the intention of making the application more enjoyable for the end user.
+3.3 Performance Requirements
+N/A
+3.4 Logical Database Requirements
+N/A
+3.5 Design Constraints
+A primary constraint in this application is fast rendering and dynamic update of several elements in
+the GUI. The program should run at high frame rates because higher frame rates mean that the player
+will feel the changes are instantaneous, thus improving gameplay experience.
+3.6 Software System Attributes
+At Professaur Inc., we are dedicated to the production of robust software meeting, and then exceeding,
+the client’s expectations. To achieve this goal, our applications are built with the following
+characteristics in mind:
+3.6.1 Reliability
+The program should be carefully planned, constructed and tested such that it behaves flawlessly for
+the end user. Bugs, including rendering problems, are unacceptable. In order to minimize these
+problems, all software will be carefully designed using UML diagrams and a Design to Test approach
+should be used for the Implementation Stage.
+3.6.2 Availability
+The games should be freely downloadable. Education already costs a lot. Having fun while trying to
+get a better education – that should remain free.
+3.6.3 Security
+Since this game requires user profiles, which may have sensitive personal information like email
+address, the design decisions should take extra care to ensure such information remains protected.
+21
+3.6.4 Extensibility
+It is crucial that more levels, modes and play formats (e.g. multiplayer competitive formats) can be
+added to such applications. Data format decisions should carefully consider this aspect.
+3.6.5 Portability
+The game will target desktop Java applications.
+3.6.6 Maintainability
+N/A
+3.7 Organizing the Specific Requirements
+The application we are developing is simple enough to avoid using any special arrangement for
+organizing specific requirements, which already fit into the sections covered in this document, as per
+the IEEE-recommended SRS format.
+3.8 Additional Comments
+UI designers and software engineers should work to keep the visual esthetics of the application above
+and beyond what clients generally expect. In short, strive to make your applications look and feel great!
+Details of designing the interface controls, their layout, etc. are left to them.
+4 Supporting Information
+This document serves as a reference to the future design and development for the application. We
+present the table of contents below for quick access to the foundational aspects of these processes:
+4.1 Table of Contents
+1. Introduction
+1.1. Purpose
+1.2. Product Scope
+1.3. Definitions, Acronyms and Abbreviations
+1.4. References
+1.5. Overview
+2. Overall Description
+2.1. Product Perspective
+2.1.1. System Interfaces
+2.1.2. User Interfaces
+2.1.3. Operations
+22
+2.1.4. Hardware Interfaces
+2.1.5. Software Interfaces
+2.1.6. Communications Interfaces
+2.2. Product Functions
+2.3. User Characteristics
+2.4. Constraints
+2.5. Assumptions and Dependencies
+2.6. Apportioning of Dependencies
+3. Specific Requirements
+3.1. External Interfaces
+3.1.1. Home Screen
+3.1.2. Level Selection Screen
+3.1.3. Gameplay Screen
+3.2. Functions
+3.3. Performance Requirements
+3.4. Logical Database Requirements
+3.5. Design Constraints
+3.6. Software System Attributes
+3.6.1. Reliability
+3.6.2. Availability
+3.6.3. Security
+3.6.4. Extensibility
+3.6.5. Portability
+3.6.6. Maintainability
+3.7. Organizing the Specific Requirements
+3.8. Additional Comments
+4. Supporting Information
+4.1. Table of Contents

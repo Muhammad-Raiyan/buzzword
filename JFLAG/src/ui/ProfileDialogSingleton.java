@@ -105,6 +105,11 @@ public class ProfileDialogSingleton extends JFLAGScene{
         grid.add(buttonHolder, 1, 2);
     }
 
+    public void disableUserNameEntry(String name){
+        userName.setText(name);
+        userName.setDisable(true);
+    }
+
     public Scene getScene() {
         return primaryScene;
     }
@@ -120,6 +125,7 @@ public class ProfileDialogSingleton extends JFLAGScene{
     public void close(){
         userName.clear();
         password.clear();
+        if(userName.isDisable()) userName.setDisable(false);
         primaryStage.close();
     }
 

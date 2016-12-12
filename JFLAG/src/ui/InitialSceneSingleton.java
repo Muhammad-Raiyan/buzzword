@@ -22,7 +22,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     private BorderPane pane;
     private Button createProfile, login, help, exit, logout;
     private ButtonState buttonState;
-    private VBox rightBar;
+    private Pane rightBar;
 
     private InitialSceneSingleton(){
         layout();
@@ -62,7 +62,7 @@ public class InitialSceneSingleton extends JFLAGScene{
 
         Region r = new Region();
         r.setPrefHeight(150);
-        rightBar.getChildren().addAll(createTopPane(), r);
+        rightBar.getChildren().addAll(createTopPane(), r, new VBox());
 
         pane.setCenter(rightBar);
         pane.setLeft(leftBar);
@@ -89,7 +89,7 @@ public class InitialSceneSingleton extends JFLAGScene{
     }
 
     public void setRightPane(Pane pane){
-        rightBar.getChildren().add(pane);
+        rightBar.getChildren().set(2, pane);
     }
 
     @Override
@@ -104,7 +104,10 @@ public class InitialSceneSingleton extends JFLAGScene{
             setChanged();
             notifyObservers();
         });
-        //help.setOnAction(event -> System.out.println("Help"));
+        help.setOnAction(event -> {
+            HelpPane helpPane = new HelpPane();
+            setRightPane(helpPane.getPane());
+        });
         logout.setOnAction(event -> {
             AppGUI.buttonState = ButtonState.LOGOUT;
             setChanged();

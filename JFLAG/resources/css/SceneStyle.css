@@ -50,3 +50,11 @@
 #right-bar {
     -fx-background-color: #A9A9A9;
 }
+ .text-area {
+     -fx-background-color: gray;
+ }
+
+ .text-area .content {
+     -fx-text-fill: ghostwhite;
+     -fx-background-color: gray;
+ }

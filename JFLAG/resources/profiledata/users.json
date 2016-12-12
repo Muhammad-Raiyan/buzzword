@@ -1,12 +1,7 @@
 {
-  "asd" : {
-    "userName" : "ish",
-    "password" : "g2e9tuuc2HJdZYyTlRqzcQ==",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/ish.json"
-  },
   "ish" : {
     "userName" : "ish",
-    "password" : "g2e9tuuc2HJdZYyTlRqzcQ==",
+    "password" : "dtgCJGEfyRml1U8P+fukRg==",
     "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/ish.json"
   }
 }

@@ -66,7 +66,7 @@ public class AppGUI implements JFLAGStyleArbiter{
     }
 
     /*public Pane getAppPane(){
-        return pane;
+        return scrollPane;
     }*/
 
     /*public void addScene(SceneTracker sceneID, Scene scene){
