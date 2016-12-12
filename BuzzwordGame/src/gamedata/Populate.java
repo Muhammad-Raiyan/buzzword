@@ -59,6 +59,8 @@ public class Populate {
                 return "dictionary";
             case "Science":
                 return "science";
+            case "Places":
+                return "dictionary";
         }
         return mode;
     }

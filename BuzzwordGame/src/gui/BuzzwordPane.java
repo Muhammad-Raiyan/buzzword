@@ -585,9 +585,13 @@ public class BuzzwordPane extends JFLAGScene{
         for(String word: solution){
             sum += getScore(word);
         }
-        if(sum>1000) sum-=800;
-        double[] levelPerc = new double[]{.6, .8, .10, .12, .14, .16, .18, .20};
-        return (int) (sum * levelPerc[level]);
+        if(sum>500){
+            sum *= .10;
+            System.out.println(sum);
+        }
+
+        double[] levelPerc = new double[]{.4, .6, .8, .10, .12, .14, .16, .18};
+        return (int) (sum * levelPerc[level-1]);
     }
 
     public static class WordPair {
