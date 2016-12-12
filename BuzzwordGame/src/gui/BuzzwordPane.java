@@ -309,21 +309,26 @@ public class BuzzwordPane extends JFLAGScene{
             if(centerPane.getChildren().get(3) == pause){
                 if(event.getCode() == KeyCode.ENTER){
                     pressedPath.clear();
+                    pressedButtons.clear();
                     clearHighlight();
                     clearPath();
                 }
                 else {
                     ArrayList<Integer> pos = findButtonPositions(event.getText());
                     if(pos.size()==0) {
+                        pressedPath.clear();
                         clearHighlight();
+                        linePane.getChildren().clear();
+                        currentGuess.setText("");
+                        pressedButtons.clear();
+                        return;
                     }
                     else {
                         currentGuess.setText(currentGuess.getText() + event.getText());
                     }
 
                     pressedPath.add(pos);
-                    /*if(pressedPath.size()<=1) currentGuess.setText(event.getText());
-                    else*/ if(pressedPath.size()>1)trim(pressedPath.size());
+                    if(pressedPath.size()>1)trim(pressedPath.size());
                 }
                 highlight();
             }
@@ -398,7 +403,8 @@ public class BuzzwordPane extends JFLAGScene{
     private ArrayList<Integer> findButtonPositions(String text) {
         ArrayList<Integer> temp = new ArrayList<>();
         for(int i=0; i<buttonList.size(); i++){
-            if(buttonList.get(i).getText().equals(text) && isPressValid(i)){
+            if(buttonList.get(i).getText().equals(text) && isPressValid(i) && !pressedButtons.contains(buttonList.get(i))){
+                pressedButtons.add(buttonList.get(i));
                 temp.add(i);
             }
         }
