@@ -62,6 +62,8 @@ public class BuzzwordPane extends JFLAGScene{
 
     };
 
+    Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
+
     private String mode;
     private int level;
     private BorderPane primaryPane;
@@ -302,7 +304,6 @@ public class BuzzwordPane extends JFLAGScene{
         Scene primaryScene = HomeSceneSingleton.getHomeSceneSingleton().getScene();
 
         primaryScene.setOnKeyPressed(event -> {
-            ArrayList<Integer> selectedButtons = new ArrayList<>();
             if(centerPane.getChildren().get(3) == pause){
                 if(event.getCode() == KeyCode.ENTER){
                     pressedPath.clear();
@@ -314,19 +315,8 @@ public class BuzzwordPane extends JFLAGScene{
                     pressedPath.add(pos);
                     if(pressedPath.size()>1)trim(pressedPath.size());
                 }
-                //clearHighlight();
                 highlight();
-                /*for(int i=0; i<buttonList.size(); i++){
-                    Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
-                    Button btn = buttonList.get(i);
-                    if(isPressValid(i) && btn.getText().equals(event.getText())){
-                        btn.setEffect(dragShadow);
-                    }
-                }*/
             }
-            //clearPath();
-
-
         });
     }
 
@@ -335,6 +325,7 @@ public class BuzzwordPane extends JFLAGScene{
             node.setStyle(null);
             node.setEffect(null);
         });
+        linePane.getChildren().clear();
     }
 
     private void trim(int cap) {
@@ -353,8 +344,27 @@ public class BuzzwordPane extends JFLAGScene{
         }
         bad.forEach(node ->{
             oldPath.remove(node);
+
         });
         trim(cap-1);
+    }
+
+    private void drawPath(int pos, int pp){
+        for(int i = 0; i<pressedPath.get(pp).size(); i++){
+            for(int k=0; k<neighbours[pos].length; k++){
+                if(pos+neighbours[pos][k] == pressedPath.get(pp).get(i))
+                    link(pressedPath.get(pp).get(i), pos);
+            }
+        }
+    }
+
+    private void link(int from, int to) {
+        Button startTarget = buttonList.get(from);
+        Button endTarget = buttonList.get(to);
+        double offset = 20;
+        Line link = new Line(startTarget.getLayoutX() + offset, startTarget.getLayoutY() + offset, endTarget.getLayoutX() + offset, endTarget.getLayoutY() + offset);
+        link.setEffect(dragShadow);
+        linePane.getChildren().add(link);
     }
 
     private void highlight() {
@@ -365,8 +375,10 @@ public class BuzzwordPane extends JFLAGScene{
         for(int i=0; i<pressedPath.size(); i++){
             for (Integer pos : pressedPath.get(i)){
                 buttonList.get(pos).setEffect(dragShadow);
+                if(i>0)drawPath(pos, i-1);
             }
         }
+
     }
 
     private ArrayList<Integer> findButtonPositions(String text) {
