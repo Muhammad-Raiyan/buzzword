@@ -32,7 +32,7 @@ public class HomeSceneSingleton extends Observable{
     private static Scene primaryScene;
     private BorderPane pane;
     private GridPane buttonGrid;
-    private Button startPlaying, selectLevel, home, user, restartGame;
+    private Button startPlaying, selectLevel, home, user, restartGame, nextLevel;
     private ChoiceBox<String> selectMode;
 
     private BuzzwordPane gamePane;
@@ -78,6 +78,7 @@ public class HomeSceneSingleton extends Observable{
         restartGame = new Button("Restart Level");
         selectLevel = new Button("Select Level");
         home = new Button("Home");
+        nextLevel = new Button("Next Level");
         user = new Button(userName);
         selectMode = new ChoiceBox<>();
         selectMode.getStylesheets().add("css/ChoiceBoxStyle.css");
@@ -126,6 +127,10 @@ public class HomeSceneSingleton extends Observable{
             rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
 
+        nextLevel.setOnAction(event -> {
+            startGame(++currentLevel);
+        });
+
 
         try {
             primaryScene.getAccelerators().put(
@@ -146,10 +151,14 @@ public class HomeSceneSingleton extends Observable{
     }
 
     public void startGame(){
+        startGame(lp.getSelectedLevel());
+    }
+
+    public void startGame(int level){
         do {
-            gamePane = new BuzzwordPane(selectMode.getValue(), lp.getSelectedLevel());
+            gamePane = new BuzzwordPane(selectMode.getValue(), level);
         }while(gamePane.getSolution().size()<minWords);
-        currentLevel = lp.getSelectedLevel();
+        currentLevel = level;
         currentMode = selectMode.getValue();
         rightBar.getChildren().set(1, gamePane.getPrimaryPane());
     }
@@ -249,5 +258,9 @@ public class HomeSceneSingleton extends Observable{
     public void playGame() {
         if(gamePane!= null)
             gamePane.playGame();
+    }
+
+    public Button getNextLevelButton() {
+        return nextLevel;
     }
 }

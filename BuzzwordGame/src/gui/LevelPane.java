@@ -111,4 +111,8 @@ public class LevelPane extends JFLAGScene {
     public ArrayList<Button> getButtonArrayList() {
         return buttonArrayList;
     }
+
+    public void setSelectedLevel(int selectedLevel) {
+        this.selectedLevel = selectedLevel;
+    }
 }

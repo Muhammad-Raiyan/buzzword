@@ -198,6 +198,7 @@ public class BuzzwordPane extends JFLAGScene{
         Image pauseImage = new Image(getClass().getClassLoader().getResourceAsStream("images/PauseIcon.png"));
         pause.setGraphic(new ImageView(pauseImage));
 
+
         levelLabel.setStyle("-fx-text-fill: white");
         gridStack = new StackPane();
         gridStack.getChildren().addAll(buttonGrid);
@@ -278,7 +279,6 @@ public class BuzzwordPane extends JFLAGScene{
             pauseTime();
 
         });
-
 
 
         for(int i=0; i<buttonList.size(); i++){
@@ -452,10 +452,15 @@ public class BuzzwordPane extends JFLAGScene{
         buttonList.forEach(node -> {
             node.setDisable(true);
         });
+
+        /*if(sumOfScore.getValue() >= targetScore.get()){
+            centerPane.getChildren().set(3, HomeSceneSingleton.getHomeSceneSingleton().getNextLevelButton());
+        }*/
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 showSolution();
+                centerPane.getChildren().set(3, HomeSceneSingleton.getHomeSceneSingleton().getNextLevelButton());
             }
         });
     }
