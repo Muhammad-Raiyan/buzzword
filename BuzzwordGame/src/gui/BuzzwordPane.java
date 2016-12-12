@@ -76,7 +76,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private ArrayList<ArrayList<Integer>> pressedPath;
-    private int sec, baseTime = 70;
+    private int sec, baseTime = 85;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
