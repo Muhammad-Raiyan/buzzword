@@ -87,7 +87,7 @@ public class BuzzwordPane extends JFLAGScene{
     private HashSet<Button> pressedButtons;
     private ArrayList<String> solution;
     private Populate populate;
-
+    private boolean success;
     public BuzzwordPane() {
         this("Dictionary Words", 1);
     }
@@ -449,18 +449,17 @@ public class BuzzwordPane extends JFLAGScene{
     private void stopBuzzword() {
         play.setDisable(true);
         pause.setDisable(true);
+        if(sumOfScore.getValue() >= calculateTargetScore()){
+            centerPane.getChildren().set(3, HomeSceneSingleton.getHomeSceneSingleton().getNextLevelButton());
+        }
         buttonList.forEach(node -> {
             node.setDisable(true);
         });
 
-        /*if(sumOfScore.getValue() >= targetScore.get()){
-            centerPane.getChildren().set(3, HomeSceneSingleton.getHomeSceneSingleton().getNextLevelButton());
-        }*/
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 showSolution();
-                centerPane.getChildren().set(3, HomeSceneSingleton.getHomeSceneSingleton().getNextLevelButton());
             }
         });
     }
