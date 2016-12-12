@@ -115,19 +115,25 @@ public class HomeSceneSingleton extends Observable{
         restartGame.setOnAction(event -> {
             restartGame();
         });
-        selectLevel.setOnAction(event -> levelSelection());
+        selectLevel.setOnAction(event -> {
+            if(gamePane!=null) gamePane.stopTimer();
+            levelSelection();
+        });
 
         selectMode.setOnAction(event -> levelSelection());
         home.setOnAction(event -> {
+            if(gamePane!=null) gamePane.stopTimer();
             rightBar.getChildren().set(1, new VBox(r, buttonGrid));
             switchToStartButton();
         });
         user.setOnAction(event -> {
+            if(gamePane!=null) gamePane.stopTimer();
             userPane = new UserPane(workspace);
             rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
 
         nextLevel.setOnAction(event -> {
+            if(gamePane!=null) gamePane.stopTimer();
             startGame(++currentLevel);
         });
 

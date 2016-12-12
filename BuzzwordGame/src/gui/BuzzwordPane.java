@@ -626,4 +626,8 @@ public class BuzzwordPane extends JFLAGScene{
     public int getScore(){
         return sumOfScore.getValue();
     }
+
+    public void stopTimer(){
+        if(this.timeLine != null || (this.timeLine.getStatus() == Timeline.Status.RUNNING))timeLine.stop();
+    }
 }
