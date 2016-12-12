@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -118,11 +121,22 @@ public class HomeSceneSingleton extends Observable{
             rightBar.getChildren().set(1, new VBox(r, buttonGrid));
             switchToStartButton();
         });
-
         user.setOnAction(event -> {
             userPane = new UserPane();
             rightBar.getChildren().set(1, userPane.getPrimaryPane());
         });
+
+
+        try {
+            primaryScene.getAccelerators().put(
+                    new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN),
+                    () -> startPlaying.fire());
+            primaryScene.getAccelerators().put(
+                    new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN),
+                    () -> restartGame.fire());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void levelSelection() {

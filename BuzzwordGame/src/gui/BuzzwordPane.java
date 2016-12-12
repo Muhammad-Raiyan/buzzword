@@ -279,6 +279,8 @@ public class BuzzwordPane extends JFLAGScene{
 
         });
 
+
+
         for(int i=0; i<buttonList.size(); i++){
             Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
             Button btn = buttonList.get(i);
