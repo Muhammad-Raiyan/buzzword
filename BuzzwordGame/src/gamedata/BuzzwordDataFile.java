@@ -1,11 +1,15 @@
 package gamedata;
 
 import app.JFLAGApplication;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import components.JFLAGDataComponent;
 import data.ProfileManager;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +25,19 @@ public class BuzzwordDataFile extends ProfileManager {
     }
 
     public void saveProgress(JFLAGDataComponent data, Path filePath) throws IOException {
-
+        BuzzwordData gameData = (BuzzwordData) data;
+        ObjectMapper mapper = new ObjectMapper();
+        try (OutputStream out = new FileOutputStream(filePath.toFile())){
+            JsonGenerator generator = mapper.getFactory().createGenerator(out);
+            generator.setPrettyPrinter(new DefaultPrettyPrinter());
+            //generator.writeStartObject();
+            mapper.writeValue(filePath.toFile(), gameData);
+            /*generator.writeEndObject();
+            generator.close();*/
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void loadGameData(JFLAGDataComponent data, Path filePath) throws IOException {

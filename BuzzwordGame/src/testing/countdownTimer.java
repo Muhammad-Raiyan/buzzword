@@ -40,7 +40,7 @@ public class countdownTimer implements Runnable {
     @Override
     public void run() {
         timer.play();
-        if(getDuration() == 0) System.out.println("End");
+        //if(getDuration() == 0) System.out.println("End");
     }
 
     public int getDuration() {

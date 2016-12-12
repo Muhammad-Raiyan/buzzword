@@ -32,13 +32,13 @@ public class UserData implements JFLAGDataComponent{
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         try {
             assert md != null;
             md.update(input.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         byte raw[] = md.digest();
         return (new BASE64Encoder()).encode(raw);

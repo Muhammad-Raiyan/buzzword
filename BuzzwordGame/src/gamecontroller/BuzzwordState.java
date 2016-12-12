@@ -5,5 +5,6 @@ package gamecontroller;
  */
 public enum BuzzwordState {
     HOME,
+    SAVE,
     START
 }

@@ -17,6 +17,8 @@ public class BuzzwordController extends AppFileController{
 
     private Workspace workspace;
     private JFLAGApplication appTemplate;
+    private BuzzwordData gameData;
+    private BuzzwordDataFile gameFile;
     /**
      * Constructor to just store the reference to the application.
      *
@@ -30,13 +32,14 @@ public class BuzzwordController extends AppFileController{
 
     public void handleSignInRequest() throws IOException {
         Boolean success = false;
-        BuzzwordDataFile gameFile = (BuzzwordDataFile) appTemplate.getFileComponent();
-        BuzzwordData gameData = (BuzzwordData) appTemplate.getDataComponent();
+        gameFile = (BuzzwordDataFile) appTemplate.getFileComponent();
+        gameData = (BuzzwordData) appTemplate.getDataComponent();
         while(!success){
             try{
                 super.handleSignInRequest();
                 success = true;
                 gameFile.loadGameData(gameData, appTemplate.getCurrentUser().getJsonFile());
+                appTemplate.setData(gameData);
             }
             catch (Exception e){
                 //e.printStackTrace();    //TODO : remove this before submission
@@ -49,6 +52,14 @@ public class BuzzwordController extends AppFileController{
         }
     }
 
+    public void handleSaveRequest(){
+        try {
+            //gameData.setLevelScore(HomeSceneSingleton.getHomeSceneSingleton().getScore(), "", 0);
+            gameFile.saveProgress(gameData, appTemplate.getCurrentUser().getJsonFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void handleExitRequest() {
         HomeSceneSingleton singleton = HomeSceneSingleton.getHomeSceneSingleton();
@@ -59,8 +70,6 @@ public class BuzzwordController extends AppFileController{
 
     public void handleStartRequest(){
         HomeSceneSingleton homeSceneSingleton = HomeSceneSingleton.getHomeSceneSingleton();
-        BuzzwordData gameData = (BuzzwordData) appTemplate.getDataComponent();
-
         homeSceneSingleton.startGame(gameData);
     }
 }

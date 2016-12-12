@@ -83,8 +83,8 @@ public class HomeSceneSingleton extends Observable{
         selectMode = new ChoiceBox<>();
         selectMode.getStylesheets().add("css/ChoiceBoxStyle.css");
         selectMode.setTooltip(new Tooltip("Select Game Mode"));
-        selectMode.setValue("Dictionary Words");
-        selectMode.getItems().addAll("Dictionary Words", "Famous People", "Places", "Science");
+        selectMode.setValue("Dictionary");
+        selectMode.getItems().addAll("Dictionary", "Famous", "Places", "Science");
 
 
         leftBar.getChildren().addAll(filler, startPlaying, selectMode, selectLevel, home, user);
@@ -140,7 +140,7 @@ public class HomeSceneSingleton extends Observable{
                     new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN),
                     () -> restartGame.fire());
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -262,5 +262,16 @@ public class HomeSceneSingleton extends Observable{
 
     public Button getNextLevelButton() {
         return nextLevel;
+    }
+
+    public void saveProgress(int levelScore, int level, String mode) {
+        workspace.getBuzzwordData().setLevelScore(levelScore, level, mode);
+        workspace.gameState = BuzzwordState.SAVE;
+        setChanged();
+        notifyObservers();
+    }
+
+    public int getScore(){
+        return gamePane.getScore();
     }
 }

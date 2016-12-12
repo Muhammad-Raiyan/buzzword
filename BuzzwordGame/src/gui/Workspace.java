@@ -77,4 +77,8 @@ public class Workspace extends JFLAGWorkspaceComponent{
         return data.getUnlockedLevels(mode);
 
     }
+
+    public BuzzwordData getBuzzwordData(){
+        return (BuzzwordData) application.getDataComponent();
+    }
 }

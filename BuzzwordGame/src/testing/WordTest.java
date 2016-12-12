@@ -24,7 +24,7 @@ public class WordTest {
                 //if(line.length() >= 3 && line.length()<=7)names.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         List<String> names2 = names.stream()
@@ -37,13 +37,13 @@ public class WordTest {
                 try {
                     bw.write(node.toString() + "\n");
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             });
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

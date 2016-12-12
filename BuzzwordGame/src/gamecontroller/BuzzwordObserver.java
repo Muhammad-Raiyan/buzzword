@@ -29,6 +29,9 @@ public class BuzzwordObserver implements Observer {
             case "START" :
                 fileController.handleStartRequest();
                 break;
+            case "SAVE" :
+                fileController.handleSaveRequest();
+                break;
             default:
                 //System.out.println("hello from buzzword");
         }

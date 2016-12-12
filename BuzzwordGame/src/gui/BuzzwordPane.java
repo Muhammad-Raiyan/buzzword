@@ -76,7 +76,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private ArrayList<ArrayList<Integer>> pressedPath;
-    private int sec, baseTime = 85;
+    private int sec, baseTime = 35;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -89,7 +89,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Populate populate;
     private boolean success;
     public BuzzwordPane() {
-        this("Dictionary Words", 1);
+        this("Dictionary", 1);
     }
 
     public BuzzwordPane(String mode, int level) {
@@ -450,6 +450,7 @@ public class BuzzwordPane extends JFLAGScene{
         play.setDisable(true);
         pause.setDisable(true);
         if(sumOfScore.getValue() >= calculateTargetScore()){
+            HomeSceneSingleton.getHomeSceneSingleton().saveProgress(sumOfScore.getValue(), level, mode);
             centerPane.getChildren().set(3, HomeSceneSingleton.getHomeSceneSingleton().getNextLevelButton());
         }
         buttonList.forEach(node -> {
@@ -486,12 +487,12 @@ public class BuzzwordPane extends JFLAGScene{
         String word = currentGuess.getText();
         if(isValid(word)){
             guessedWords.add(word);
-            tableData.add(new WordPair(word, getScore(word)));
-            sumOfScore.setValue(sumOfScore.getValue() + getScore(word));
+            tableData.add(new WordPair(word, getWordScore(word)));
+            sumOfScore.setValue(sumOfScore.getValue() + getWordScore(word));
         }
     }
 
-    private int getScore(String word) {
+    private int getWordScore(String word) {
         int base = 10, increment = 5;
 
         return base + (word.length()-3)*increment;
@@ -583,15 +584,16 @@ public class BuzzwordPane extends JFLAGScene{
     public int calculateTargetScore() {
         int sum = 0;
         for(String word: solution){
-            sum += getScore(word);
+            sum += getWordScore(word);
         }
         if(sum>500){
             sum *= .10;
-            System.out.println(sum);
+            //System.out.println(sum);
         }
 
         double[] levelPerc = new double[]{.4, .6, .8, .10, .12, .14, .16, .18};
-        return (int) (sum * levelPerc[level-1]);
+        //return (int) (sum * levelPerc[level-1]);
+        return 20;
     }
 
     public static class WordPair {
@@ -619,5 +621,9 @@ public class BuzzwordPane extends JFLAGScene{
             this.score = score;
         }
 
+    }
+
+    public int getScore(){
+        return sumOfScore.getValue();
     }
 }
