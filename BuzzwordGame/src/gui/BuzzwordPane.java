@@ -312,7 +312,7 @@ public class BuzzwordPane extends JFLAGScene{
                     ArrayList<Integer> pos = findButtonPositions(event.getText());
                     if(pos.size()==0) clearHighlight();
                     pressedPath.add(pos);
-                    if(pressedPath.size()>1)trim();
+                    if(pressedPath.size()>1)trim(pressedPath.size());
                 }
                 //clearHighlight();
                 highlight();
@@ -337,9 +337,10 @@ public class BuzzwordPane extends JFLAGScene{
         });
     }
 
-    private void trim() {
-        ArrayList<Integer> oldPath = pressedPath.get(pressedPath.size()-2);
-        ArrayList<Integer> newPath = pressedPath.get(pressedPath.size()-1);
+    private void trim(int cap) {
+        if(cap == 1) return;
+        ArrayList<Integer> oldPath = pressedPath.get(cap-2);
+        ArrayList<Integer> newPath = pressedPath.get(cap-1);
         HashSet<Integer> bad = new HashSet<>();
         for(Integer i : oldPath){
             boolean isSafe = false;
@@ -350,11 +351,10 @@ public class BuzzwordPane extends JFLAGScene{
             }
             if(!isSafe) bad.add(i);
         }
-        System.out.println(bad);
         bad.forEach(node ->{
-            //buttonList.get(oldPath.get(node));
             oldPath.remove(node);
         });
+        trim(cap-1);
     }
 
     private void highlight() {
