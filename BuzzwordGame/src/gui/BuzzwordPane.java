@@ -76,7 +76,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Timeline timeLine;
     private ArrayList<Button> buttonList, draggedPath;
     private ArrayList<ArrayList<Integer>> pressedPath;
-    private int sec, baseTime = 14500;
+    private int sec, baseTime = 70;
     private IntegerProperty sumOfScore;
     private Label levelLabel, currentGuess;
     private SimpleIntegerProperty secProperty;
@@ -84,6 +84,7 @@ public class BuzzwordPane extends JFLAGScene{
     private Pane linePane;
     private ObservableList<WordPair> tableData;
     private HashSet<String> guessedWords;
+    private HashSet<Button> pressedButtons;
     private ArrayList<String> solution;
     private Populate populate;
 
@@ -101,6 +102,7 @@ public class BuzzwordPane extends JFLAGScene{
         draggedPath = new ArrayList<>();
         pressedPath = new ArrayList<>();
         guessedWords = new HashSet<>();
+        pressedButtons = new HashSet<>();
         tableData = FXCollections.observableArrayList();
         layout();
         initializeHandlers();
@@ -308,12 +310,20 @@ public class BuzzwordPane extends JFLAGScene{
                 if(event.getCode() == KeyCode.ENTER){
                     pressedPath.clear();
                     clearHighlight();
+                    clearPath();
                 }
                 else {
                     ArrayList<Integer> pos = findButtonPositions(event.getText());
-                    if(pos.size()==0) clearHighlight();
+                    if(pos.size()==0) {
+                        clearHighlight();
+                    }
+                    else {
+                        currentGuess.setText(currentGuess.getText() + event.getText());
+                    }
+
                     pressedPath.add(pos);
-                    if(pressedPath.size()>1)trim(pressedPath.size());
+                    /*if(pressedPath.size()<=1) currentGuess.setText(event.getText());
+                    else*/ if(pressedPath.size()>1)trim(pressedPath.size());
                 }
                 highlight();
             }
@@ -321,6 +331,7 @@ public class BuzzwordPane extends JFLAGScene{
     }
 
     private void clearHighlight() {
+        pressedPath.clear();
         buttonList.forEach(node -> {
             node.setStyle(null);
             node.setEffect(null);
@@ -344,7 +355,6 @@ public class BuzzwordPane extends JFLAGScene{
         }
         bad.forEach(node ->{
             oldPath.remove(node);
-
         });
         trim(cap-1);
     }
@@ -369,13 +379,17 @@ public class BuzzwordPane extends JFLAGScene{
 
     private void highlight() {
         Effect dragShadow = new DropShadow(BlurType.THREE_PASS_BOX, Color.YELLOW, 10, .8, 0, 0);
+        linePane.getChildren().clear();
         for (Button button : buttonList) {
             button.setEffect(null);
         }
         for(int i=0; i<pressedPath.size(); i++){
             for (Integer pos : pressedPath.get(i)){
-                buttonList.get(pos).setEffect(dragShadow);
-                if(i>0)drawPath(pos, i-1);
+                if(true){
+                    buttonList.get(pos).setEffect(dragShadow);
+                    if(i>0)drawPath(pos, i-1);
+                }
+
             }
         }
 
@@ -395,9 +409,16 @@ public class BuzzwordPane extends JFLAGScene{
         if(pressedPath.size() == 0) return true;
         else {
             ArrayList<Integer> previous = pressedPath.get(pressedPath.size()-1);
+            boolean isSame = false;
             for(Integer matchAgainst : previous){
                 for(int j = 0; j<neighbours[i].length; j++){
-                    if(neighbours[i][j]+i == matchAgainst) return true;
+                    if(neighbours[i][j]+i == matchAgainst){
+                        /*if(!isSame) {
+                            currentGuess.setText(currentGuess.getText()+buttonList.get(i).getText());
+                            isSame = true;
+                        }*/
+                        return true;
+                    }
                 }
             }
 
