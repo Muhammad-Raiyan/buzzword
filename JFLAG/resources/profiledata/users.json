@@ -1,22 +1,22 @@
 {
   "asd" : {
     "userName" : "asd",
-    "password" : "eBVpbsvxyW5olLd5RW0zDg==",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/asd.json"
+    "password" : "ICy5YqxZB1uWSwcVLSNLcA==",
+    "jsonFile" : "file:///C:/Users/raiya/IdeaProjects/buzzword/BuzzwordGame/resources/profiledata/asd.json"
   },
   "zxc" : {
     "userName" : "zxc",
     "password" : "X6cjWPC0+08sXX3oyaQYRg==",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/zxc.json"
+    "jsonFile" : "file:///C:/Users/raiya/IdeaProjects/buzzword/BuzzwordGame/resources/profiledata/zxc.json"
   },
   "qwe" : {
     "userName" : "qwe",
     "password" : "dtgCJGEfyRml1U8P+fukRg==",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/qwe.json"
+    "jsonFile" : "file:///C:/Users/raiya/IdeaProjects/buzzword/BuzzwordGame/resources/profiledata/qwe.json"
   },
   "ish" : {
     "userName" : "ish",
     "password" : "g2e9tuuc2HJdZYyTlRqzcQ==",
-    "jsonFile" : "file:///C:/Users/ishmam/Documents/Programming/CSE219/BuzzwordProject/BuzzwordGame/resources/profiledata/ish.json"
+    "jsonFile" : "file:///C:/Users/raiya/IdeaProjects/buzzword/BuzzwordGame/resources/profiledata/ish.json"
   }
 }

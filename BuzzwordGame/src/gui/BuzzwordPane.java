@@ -1,6 +1,7 @@
 package gui;
 
 import gamedata.Populate;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -261,6 +262,9 @@ public class BuzzwordPane extends JFLAGScene{
             centerPane.getChildren().set(3, pause);
             VBox temp = HomeSceneSingleton.getHomeSceneSingleton().getLeftBar();
             HomeSceneSingleton.getHomeSceneSingleton().switchToRestartButton();
+            if(timeLine!= null && timeLine.getStatus() == Animation.Status.RUNNING){
+                timeLine.stop();
+            }
             if(timeLine == null) {
                 timeLine = new Timeline(new KeyFrame(
                         Duration.seconds(sec),
