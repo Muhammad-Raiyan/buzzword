@@ -24,7 +24,7 @@ public class BuzzwordDataFile extends ProfileManager {
         this.app = app;
     }
 
-    public void saveProgress(JFLAGDataComponent data, Path filePath) throws IOException {
+    public void saveProgress(BuzzwordData data, Path filePath) throws IOException {
         BuzzwordData gameData = (BuzzwordData) data;
         ObjectMapper mapper = new ObjectMapper();
         try (OutputStream out = new FileOutputStream(filePath.toFile())){

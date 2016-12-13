@@ -4,10 +4,8 @@ import app.JFLAGApplication;
 import components.JFLAGStyleArbiter;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import observer.ButtonObserver;
 import state.ButtonState;
-import javafx.scene.layout.*;
 
 import java.util.HashMap;
 

@@ -122,7 +122,7 @@ public class BuzzwordData implements JFLAGDataComponent {
         this.currentMode = mode;
         this.currentLevel = level;
         scores = progress.get(currentMode);
-        scores.set(scores.size()-1, levelScore);
-        scores.add(0);
+        scores.set(level-1, levelScore);
+        if(scores.get(scores.size()-1)!=0)scores.add(0);
     }
 }

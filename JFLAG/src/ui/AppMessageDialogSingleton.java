@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import settings.InitializationParameters;
 
 //import static settings.InitializationParameters.ERROR_DIALOG_BUTTON_LABEL;
@@ -69,7 +70,9 @@ public class AppMessageDialogSingleton extends Stage {
         messagePane.setSpacing(20);
 
         Scene messageScene = new Scene(messagePane);
+        messageScene.getStylesheets().add("css/DialogStyle.css");
         this.setScene(messageScene);
+        this.initStyle(StageStyle.UNDECORATED);
     }
 
     /**

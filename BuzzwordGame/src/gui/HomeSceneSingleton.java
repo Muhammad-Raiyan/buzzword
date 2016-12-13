@@ -3,6 +3,7 @@ package gui;
 import components.JFLAGWorkspaceComponent;
 import gamecontroller.BuzzwordState;
 import gamedata.BuzzwordData;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import ui.AppMessageDialogSingleton;
 import ui.InitialSceneSingleton;
 
 import java.util.Observable;
@@ -271,7 +273,20 @@ public class HomeSceneSingleton extends Observable{
     }
 
     public void saveProgress(int levelScore, int level, String mode) {
-        workspace.getBuzzwordData().setLevelScore(levelScore, level, mode);
+        BuzzwordData gameData = workspace.getBuzzwordData();
+        int oldScore = gameData.getProgress().get(mode).get(level-1);
+        if(oldScore != 0 && levelScore > oldScore){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    AppMessageDialogSingleton appMessageDialogSingleton = AppMessageDialogSingleton.getSingleton();
+                    appMessageDialogSingleton.setMessageLabel( levelScore + " is your highest score.");
+                    appMessageDialogSingleton.showAndWait();
+                }
+            });
+
+        }
+        gameData.setLevelScore(levelScore, level, mode);
         workspace.gameState = BuzzwordState.SAVE;
         setChanged();
         notifyObservers();

@@ -39,7 +39,8 @@ public class BuzzwordController extends AppFileController{
                 super.handleSignInRequest();
                 success = true;
                 gameFile.loadGameData(gameData, appTemplate.getCurrentUser().getJsonFile());
-                appTemplate.setData(gameData);
+                gameData = (BuzzwordData) appTemplate.getDataComponent();
+                //appTemplate.setData(gameData);
             }
             catch (Exception e){
                 //e.printStackTrace();    //TODO : remove this before submission
