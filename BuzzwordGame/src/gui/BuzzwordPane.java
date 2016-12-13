@@ -628,6 +628,6 @@ public class BuzzwordPane extends JFLAGScene{
     }
 
     public void stopTimer(){
-        if(this.timeLine != null || (this.timeLine.getStatus() == Timeline.Status.RUNNING))timeLine.stop();
+        if(this.timeLine != null)timeLine.stop();
     }
 }
