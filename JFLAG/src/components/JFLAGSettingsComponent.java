@@ -1,6 +1,5 @@
 package components;
 
-import propertymanager.PropertyManager;
 import settings.InitializationParameters;
 
 /**

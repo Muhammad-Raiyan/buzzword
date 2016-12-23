@@ -396,10 +396,8 @@ public class BuzzwordPane extends JFLAGScene{
         }
         for(int i=0; i<pressedPath.size(); i++){
             for (Integer pos : pressedPath.get(i)){
-                if(true){
-                    buttonList.get(pos).setEffect(dragShadow);
-                    if(i>0)drawPath(pos, i-1);
-                }
+                buttonList.get(pos).setEffect(dragShadow);
+                if(i>0)drawPath(pos, i-1);
 
             }
         }
@@ -461,12 +459,7 @@ public class BuzzwordPane extends JFLAGScene{
             node.setDisable(true);
         });
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                showSolution();
-            }
-        });
+        Platform.runLater(() -> showSolution());
     }
 
     public void pauseTime() {

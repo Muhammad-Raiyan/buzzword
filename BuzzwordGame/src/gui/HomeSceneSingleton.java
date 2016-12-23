@@ -276,13 +276,10 @@ public class HomeSceneSingleton extends Observable{
         BuzzwordData gameData = workspace.getBuzzwordData();
         int oldScore = gameData.getProgress().get(mode).get(level-1);
         if(oldScore != 0 && levelScore > oldScore){
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    AppMessageDialogSingleton appMessageDialogSingleton = AppMessageDialogSingleton.getSingleton();
-                    appMessageDialogSingleton.setMessageLabel( levelScore + " is your highest score.");
-                    appMessageDialogSingleton.showAndWait();
-                }
+            Platform.runLater(() -> {
+                AppMessageDialogSingleton appMessageDialogSingleton = AppMessageDialogSingleton.getSingleton();
+                appMessageDialogSingleton.setMessageLabel( levelScore + " is your highest score.");
+                appMessageDialogSingleton.showAndWait();
             });
 
         }

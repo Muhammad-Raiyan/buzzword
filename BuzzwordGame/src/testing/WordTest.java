@@ -35,13 +35,11 @@ public class WordTest {
         try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\ishmam\\Documents\\Programming\\CSE219\\BuzzwordProject\\BuzzwordGame\\src\\testing\\names2.txt")))){
             names2.forEach(node ->{
                 try {
-                    bw.write(node.toString() + "\n");
+                    bw.write(node + "\n");
                 } catch (IOException e) {
                     //e.printStackTrace();
                 }
             });
-        } catch (FileNotFoundException e) {
-            //e.printStackTrace();
         } catch (IOException e) {
             //e.printStackTrace();
         }

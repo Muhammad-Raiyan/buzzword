@@ -25,7 +25,7 @@ public class BuzzwordDataFile extends ProfileManager {
     }
 
     public void saveProgress(BuzzwordData data, Path filePath) throws IOException {
-        BuzzwordData gameData = (BuzzwordData) data;
+        BuzzwordData gameData = data;
         ObjectMapper mapper = new ObjectMapper();
         try (OutputStream out = new FileOutputStream(filePath.toFile())){
             JsonGenerator generator = mapper.getFactory().createGenerator(out);

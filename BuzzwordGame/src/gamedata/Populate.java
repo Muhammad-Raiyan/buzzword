@@ -75,7 +75,7 @@ public class Populate {
         }while(tNode==null);
         map.put(place, ""+c);
         place++;
-        fillNext((TrieNode) tNode);
+        fillNext(tNode);
     }
 
     public void fillNext(TrieNode root){
@@ -83,7 +83,7 @@ public class Populate {
         ArrayList value = new ArrayList<>(root.children.values());
         Collections.shuffle(value);
         while(value.size()!=0) {
-            insert(String.valueOf((TrieNode) value.get(0)));
+            insert(String.valueOf(value.get(0)));
             fillNext((TrieNode) value.remove(0));
         }
     }

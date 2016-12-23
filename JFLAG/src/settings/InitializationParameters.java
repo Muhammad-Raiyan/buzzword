@@ -1,7 +1,5 @@
 package settings;
 
-import controller.FileController;
-
 /**
  * @author Ritwik Banerjee
  */
