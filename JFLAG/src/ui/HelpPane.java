@@ -31,7 +31,7 @@ public class HelpPane {
     }
 
     public void readDcox(){
-        try(BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ishmam\\Documents\\Programming\\CSE219\\BuzzwordProject\\BuzzwordGame\\resources\\properties\\help.txt"))) {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\raiya\\IdeaProjects\\buzzword\\BuzzwordGame\\resources\\properties\\help.txt"))) {
             String line;
             while ((line = br.readLine()) != null){
                 textArea.appendText(line + "\n");
